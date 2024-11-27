@@ -26,6 +26,7 @@ class ArtificialBeeColony():
         self.employed_bees   = None
         self.onlooker_bees   = None
         self.optimal_source  = None
+        self.optimal_source_history = []
      
     def optimize(self):
         
@@ -39,6 +40,7 @@ class ArtificialBeeColony():
             self.send_employees_()
             self.send_onlookers_()
             self.send_scouts_()
+            self.optimal_source_history.append(max(self.employed_bees,key=lambda bee: bee.fitness).position)
         
         # Store best Solution
         self.optimal_source = (max(self.employed_bees,key=lambda bee: bee.fitness).position, 
