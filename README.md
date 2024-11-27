@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://github.com/giuliofantuzzi/BeeOptimal">
-    <img src="assets/LogoBeeOptimal.png" alt="Logo" width="300" height="300">
+    <img src="assets/LogoBeeOptimal.png" alt="Logo" width="250" height="250">
   </a>
 <h2 align="center">BeeOptimal</h2>
 <h4 align="center">A Python implementation of the Artificial Bee Colony (ABC) optimization algorithm</h4>
