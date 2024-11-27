@@ -4,6 +4,7 @@
 import numpy as np
 import copy
 from .bee import Bee
+from tqdm import trange
 
 #--------------------------------------------------------------------------------
 # Artificial Bee Colony (ABC) class
@@ -34,7 +35,7 @@ class ArtificialBeeColony():
                                   lower_bound = self.lower_bound,
                                   upper_bound = self.upper_bound) for _ in range(self.n_employed_bees) ]
         # Loop
-        for _ in range(self.max_iters):
+        for _ in trange(self.max_iters,desc='Running Optimization'):
             self.send_employees_()
             self.send_onlookers_()
             self.send_scouts_()
