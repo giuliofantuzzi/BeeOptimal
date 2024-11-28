@@ -14,9 +14,9 @@ class ArtificialBeeColony():
     def __init__(self,n_bees,limit,max_iters,function,lower_bound,upper_bound):
         assert (len(lower_bound) == len(upper_bound))
         assert ( n_bees > 1)
-        
+        self.dim             = len(lower_bound)
         self.n_bees          = n_bees
-        self.limit           = limit
+        self.limit           = limit if limit is not None else (self.n_bees //2)* self.dim
         self.max_iters       = max_iters
         self.function        = function
         self.lower_bound     = lower_bound
@@ -27,6 +27,7 @@ class ArtificialBeeColony():
         self.onlooker_bees   = None
         self.optimal_source  = None
         self.optimal_source_history = []
+        self.colony_history = []
      
     def optimize(self):
         
@@ -35,18 +36,20 @@ class ArtificialBeeColony():
                                   function    = self.function,
                                   lower_bound = self.lower_bound,
                                   upper_bound = self.upper_bound) for _ in range(self.n_employed_bees) ]
+        self.optimal_source_history.append(max(self.employed_bees,key=lambda bee: bee.fitness).position)
+        self.colony_history.append([bee.position for bee in self.employed_bees])
         # Loop
         for _ in trange(self.max_iters,desc='Running Optimization'):
             self.send_employees_()
             self.send_onlookers_()
             self.send_scouts_()
             self.optimal_source_history.append(max(self.employed_bees,key=lambda bee: bee.fitness).position)
+            self.colony_history.append([bee.position for bee in self.employed_bees])
         
         # Store best Solution
         self.optimal_source = (max(self.employed_bees,key=lambda bee: bee.fitness).position, 
                                max(self.employed_bees,key=lambda bee: bee.fitness).value)
         
-                
     def send_employees_(self):
         for bee_idx, bee in enumerate(self.employed_bees):
             # Choose Donor Bee
