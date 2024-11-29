@@ -15,32 +15,31 @@ N_BEES      = 50
 LIMIT      = (N_BEES // 2) * 2
 MAX_ITERS   = 50
 
-# functions_info = {'sphere' : {'function' : sphere,
-#                               'lower_bound': [-100,-100], 
-#                               'upper_bound': [100,100],
-#                               'optimal_solution': [0,0],
-#                               'optimal_value': 0
-#                               },
-#                   'rastrigin' : {'function' : rastrigin,
-#                                  'lower_bound': [-5.12,-5.12],
-#                                  'upper_bound': [5.12,5.12],
-#                                  'optimal_solution': [0,0],
-#                                  'optimal_value': 0
-#                                  },
-#                   'ackley' : {'function' : ackley,
-#                               'lower_bound': [-5,-5], 
-#                               'upper_bound': [5,5],
-#                               'optimal_solution': [0,0],
-#                               'optimal_value': 0
-#                               },
-functions_info = {
+functions_info = {'sphere' : {'function' : sphere,
+                              'lower_bound': [-100,-100], 
+                              'upper_bound': [100,100],
+                              'optimal_solution': [0,0],
+                              'optimal_value': 0
+                              },
+                  'rastrigin' : {'function' : rastrigin,
+                                 'lower_bound': [-5.12,-5.12],
+                                 'upper_bound': [5.12,5.12],
+                                 'optimal_solution': [0,0],
+                                 'optimal_value': 0
+                                 },
+                  'ackley' : {'function' : ackley,
+                              'lower_bound': [-5,-5], 
+                              'upper_bound': [5,5],
+                              'optimal_solution': [0,0],
+                              'optimal_value': 0
+                              },
                   'eggholder' : {'function' : eggholder,
                                  'lower_bound': [-512,-512],
                                  'upper_bound': [512,512],
                                  'optimal_solution': [512,404.2319],
                                  'optimal_value': -959.6407
                                 }
-                 }
+                  }
 
 
 #--------------------------------------------------------------------------------

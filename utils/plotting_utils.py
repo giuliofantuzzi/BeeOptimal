@@ -27,10 +27,12 @@ def ContourPlotBee(x,y,Z,bee_colony,title='',marker_path=None,optimal_solution=N
         height=700,
     )
     
+    bee_marker = Image.open(marker_path)
+    
     for bee_x,bee_y in bee_colony:
         fig.add_layout_image(
                     dict(
-                        source=Image.open(marker_path),
+                        source=bee_marker,
                         xref="x",
                         yref="y",
                         xanchor="center",
