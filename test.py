@@ -35,11 +35,10 @@ if __name__ == '__main__':
         
         ABC = ArtificialBeeColony(n_bees      = N_BEES,
                                   limit       = LIMIT,
-                                  max_iters   = MAX_ITERS,
                                   bounds      = function_test.bounds,
                                   function    = function_test.fun
                                 )
-        ABC.optimize()
+        ABC.optimize(max_iters=MAX_ITERS,selection='RouletteWheel')
         
         print(f"Optimal Solution:")
         print(f"\tExpected : {function_test.optimal_solution}")
@@ -72,7 +71,7 @@ if __name__ == '__main__':
             for i, fig in enumerate(plots):
                 # Define the file path
                 file_path = f"{tmpdirname}/frame_{i}.png"
-                fig.write_image(file_path, format="png", scale=2)
+                fig.write_image(file_path, format="png", scale=3)
                 image_files.append(file_path)
 
             # Open images and save as GIF
