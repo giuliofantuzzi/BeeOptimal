@@ -7,19 +7,16 @@ import numpy as np
 # Bee class
 #--------------------------------------------------------------------------------
 class Bee():
-    def __init__(self, position,function,lower_bound,upper_bound):
-        assert(len(lower_bound) == len(upper_bound))
-        
+    def __init__(self, position,function,bounds):
         if position:
-            assert(len(position) == len(lower_bound))
+            assert(len(position) == len(bounds))
             self.position = position
         else:
-            self.position = [np.random.uniform(low=lower_bound[i], high=upper_bound[i]) for i in range(len(lower_bound))]
+            self.position = [np.random.uniform(low=bounds[i][0], high=bounds[i][1]) for i in range(len(bounds))]
         
-        self.function    = function
-        self.lower_bound = lower_bound
-        self.upper_bound = upper_bound
-        self.trial       = 0
+        self.function = function
+        self.bounds   = bounds
+        self.trial    = 0
     
     @property
     def value(self):
