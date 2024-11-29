@@ -13,11 +13,13 @@ This repository contains a Python implementation of the Artificial Bee Colony (A
 - [x] Implement original version of ABC algorithm
 - [x] Tests with some benchmark functions
 - [x] Plots with colony convergence
+- [ ] Look at *Karaboga 2010* for more benchmark functions
 - [ ] Improvements for plotting function:
   - [ ] Add option to plot only optimal bee
   - [ ] Find a way to plot optimal solution in above layer
 - [ ] Refactor ABC code (mainly redundant attributes)
 - [ ] Think about additional termination criteria
+- [ ] Think about different initializations (some hints/implementations in paper *A modified artificial bee colony algorithm, Gao-Liu*)
 - [ ] Try different selection strategies/different configurations and compare
 
 NOTE: instead of comparing ABC with other algorithms (GA,DE,PSO,etc) I think it is more interesting to
