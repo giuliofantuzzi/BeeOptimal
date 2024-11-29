@@ -11,24 +11,26 @@ from tqdm import trange
 #--------------------------------------------------------------------------------
 class ArtificialBeeColony():
     
-    def __init__(self,n_bees,limit,max_iters,function,bounds):
+    def __init__(self,n_bees,limit,function,bounds):
         assert ( n_bees > 1)
-        self.dim             = len(bounds)
-        self.n_bees          = n_bees
-        self.limit           = limit if limit is not None else (self.n_bees //2)* self.dim
-        self.max_iters       = max_iters
-        self.function        = function
-        self.bounds          = bounds
-        self.n_employed_bees = self.n_bees // 2
-        self.n_onlooker_bees = self.n_bees - self.n_employed_bees
-        self.employed_bees   = None
-        self.onlooker_bees   = None
-        self.optimal_source  = None
+        self.dim                    = len(bounds)
+        self.n_bees                 = n_bees
+        self.limit                  = limit if limit is not None else (self.n_bees //2)* self.dim
+        self.function               = function
+        self.bounds                 = bounds
+        self.n_employed_bees        = self.n_bees // 2
+        self.n_onlooker_bees        = self.n_bees - self.n_employed_bees
+        self.max_iters              = None
+        self.selection              = None
+        self.employed_bees          = []
+        self.onlooker_bees          = []
+        self.optimal_source         = ([np.nan for _ in range(self.dim)],np.nan)
         self.optimal_source_history = []
-        self.colony_history = []
+        self.colony_history         = []
      
-    def optimize(self):
-        
+    def optimize(self,max_iters=100,selection='RouletteWheel'):
+        self.max_iters = max_iters
+        self.selection = selection
         # Initialization
         self.employed_bees = [Bee(position = None,
                                   function = self.function,
@@ -54,25 +56,25 @@ class ArtificialBeeColony():
                 k = np.random.randint(0,len(self.employed_bees))
                 if k != bee_idx:
                     break
-            DonorBee = copy.deepcopy(self.employed_bees[k])
+            donor_bee = copy.deepcopy(self.employed_bees[k])
             # Candidate Bee
             j = np.random.randint(0,len(bee.position))
             phi = np.random.uniform(-1,1)
-            CandidateBee = copy.deepcopy(bee)
-            CandidateBee.position[j] = bee.position[j] + phi*(bee.position[j] - DonorBee.position[j])
-            if CandidateBee.position[j] < self.bounds[j][0]:
-                CandidateBee.position[j] = self.bounds[j][0]
-            if CandidateBee.position[j] > self.bounds[j][1]:
-                CandidateBee.position[j] = self.bounds[j][1]
+            candidate_bee = copy.deepcopy(bee)
+            candidate_bee.position[j] = bee.position[j] + phi*(bee.position[j] - donor_bee.position[j])
+            if candidate_bee.position[j] < self.bounds[j][0]:
+                candidate_bee.position[j] = self.bounds[j][0]
+            if candidate_bee.position[j] > self.bounds[j][1]:
+                candidate_bee.position[j] = self.bounds[j][1]
             # Greedy Selection
-            if CandidateBee.fitness >= bee.fitness:
-                self.employed_bees[bee_idx] = CandidateBee
+            if candidate_bee.fitness >= bee.fitness:
+                self.employed_bees[bee_idx] = candidate_bee
             else:
                 bee.trial += 1
                 
-    def waggle_dance_(self,selection='RouletteWheel'):
+    def waggle_dance_(self):
         fitness_values = [bee.fitness for bee in self.employed_bees]
-        if selection == 'RouletteWheel':
+        if self.selection == 'RouletteWheel':
             selection_probabilities  = [fitness/sum(fitness_values) for fitness in fitness_values]
             dance_winners = np.random.choice(range(self.n_employed_bees),size=self.n_onlooker_bees,p=selection_probabilities)
             return dance_winners
@@ -90,20 +92,20 @@ class ArtificialBeeColony():
                 k = np.random.randint(0,len(self.onlooker_bees))
                 if k != bee_idx:
                     break
-            DonorBee = copy.deepcopy(self.onlooker_bees[k])
+            donor_bee = copy.deepcopy(self.onlooker_bees[k])
             # Candidate Bee
             j = np.random.randint(0,len(bee.position))
             phi = np.random.uniform(-1,1)
-            CandidateBee = copy.deepcopy(bee)
-            CandidateBee.position[j] = bee.position[j] + phi*(bee.position[j] - DonorBee.position[j])
-            if CandidateBee.position[j] < self.bounds[j][0]:
-                CandidateBee.position[j] = self.bounds[j][0]
-            if CandidateBee.position[j] > self.bounds[j][1]:
-                CandidateBee.position[j] = self.bounds[j][1]
+            candidate_bee = copy.deepcopy(bee)
+            candidate_bee.position[j] = bee.position[j] + phi*(bee.position[j] - donor_bee.position[j])
+            if candidate_bee.position[j] < self.bounds[j][0]:
+                candidate_bee.position[j] = self.bounds[j][0]
+            if candidate_bee.position[j] > self.bounds[j][1]:
+                candidate_bee.position[j] = self.bounds[j][1]
             
             # Greedy Selection
-            if CandidateBee.fitness >= bee.fitness:
-                self.onlooker_bees[bee_idx] = CandidateBee
+            if candidate_bee.fitness >= bee.fitness:
+                self.onlooker_bees[bee_idx] = candidate_bee
         
         # Update Employed Bees
         for bee_idx, bee in zip(dance_winners,self.onlooker_bees):
