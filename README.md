@@ -19,9 +19,17 @@ This repository contains a Python implementation of the Artificial Bee Colony (A
   - [ ] Find a way to plot optimal solution in above layer
 - [ ] Refactor ABC code (mainly redundant attributes)
 - [ ] Think about additional termination criteria
-- [ ] Think about different initializations (some hints/implementations in paper *A modified artificial bee colony algorithm, Gao-Liu*)
-- [ ] Try different selection strategies/different configurations and compare
+- [ ] Think about different initializations (opposition based initialization) and mutation (ABC/best/1 and ABC/best/2)
+- [ ] Try different selection strategies/different configurations and compare.
+- [ ] Like done in *GlobalBest_2011*, propose a figure comparing iterations of 2 methods (i can use my gif, but also compare plots of cost/fitness vs iterations)
 
 NOTE: instead of comparing ABC with other algorithms (GA,DE,PSO,etc) I think it is more interesting to
-compare different versions of ABC. Why such decision? Implementing other algorithms would be a lot of work, and each technique has its own peculiarities and its own parameters to tune. ABC and its variants
-instead have some common parameters, so we can perform a more fair and consistent comparison
+compare different versions of ABC. Why such decision? Implementing other algorithms would be a lot of work, and each technique has its own peculiarities and its own parameters to tune. ABC and its variants instead have some common parameters, so we can perform a more fair and consistent comparison
+
+
+Recap about algorithm's modifications:
+
+1) Introduction of MR parameter to increase perturbation of mutation (in short, not only one position is updated when exploring a neighbor)
+2) Opposition-based Initialization of employee bees and scouts
+3) Differential Evolution approach for mutation (ABC/best/1 and ABC/best/2)
+4) Directed ABC

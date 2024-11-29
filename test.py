@@ -11,7 +11,7 @@ from PIL import Image
 #--------------------------------------------------------------------------------
 # Global variables and settings
 #--------------------------------------------------------------------------------
-N_BEES      = 50
+N_BEES      = 100
 LIMIT      = (N_BEES // 2) * 2
 MAX_ITERS   = 50
 BENCHMARK_FUNCTIONS = [Sphere,Rastrigin,Ackley,Eggholder]
