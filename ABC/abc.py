@@ -12,7 +12,7 @@ from tqdm import trange
 class ArtificialBeeColony():
     
     def __init__(self,n_bees,limit,function,bounds):
-        assert ( n_bees > 1)
+        assert ( n_bees > 2)
         self.dim                    = len(bounds)
         self.n_bees                 = n_bees
         self.limit                  = limit if limit is not None else (self.n_bees //2)* self.dim
@@ -24,9 +24,9 @@ class ArtificialBeeColony():
         self.selection              = None
         self.employed_bees          = []
         self.onlooker_bees          = []
+        self.colony_history         = []
         self.optimal_source         = ([np.nan for _ in range(self.dim)],np.nan)
         self.optimal_source_history = []
-        self.colony_history         = []
      
     def optimize(self,max_iters=100,selection='RouletteWheel'):
         self.max_iters = max_iters
@@ -62,10 +62,7 @@ class ArtificialBeeColony():
             phi = np.random.uniform(-1,1)
             candidate_bee = copy.deepcopy(bee)
             candidate_bee.position[j] = bee.position[j] + phi*(bee.position[j] - donor_bee.position[j])
-            if candidate_bee.position[j] < self.bounds[j][0]:
-                candidate_bee.position[j] = self.bounds[j][0]
-            if candidate_bee.position[j] > self.bounds[j][1]:
-                candidate_bee.position[j] = self.bounds[j][1]
+            candidate_bee.position[j] = np.clip(candidate_bee.position[j],self.bounds[j][0],self.bounds[j][1])
             # Greedy Selection
             if candidate_bee.fitness >= bee.fitness:
                 self.employed_bees[bee_idx] = candidate_bee
@@ -85,7 +82,6 @@ class ArtificialBeeColony():
                                   function = self.function,
                                   bounds   = self.bounds) for winner_idx in dance_winners
                               ]
-        
         for bee_idx, bee in enumerate(self.onlooker_bees):
             # Choose Donor Bee
             while True:
@@ -98,10 +94,7 @@ class ArtificialBeeColony():
             phi = np.random.uniform(-1,1)
             candidate_bee = copy.deepcopy(bee)
             candidate_bee.position[j] = bee.position[j] + phi*(bee.position[j] - donor_bee.position[j])
-            if candidate_bee.position[j] < self.bounds[j][0]:
-                candidate_bee.position[j] = self.bounds[j][0]
-            if candidate_bee.position[j] > self.bounds[j][1]:
-                candidate_bee.position[j] = self.bounds[j][1]
+            candidate_bee.position[j] = np.clip(candidate_bee.position[j],self.bounds[j][0],self.bounds[j][1])
             
             # Greedy Selection
             if candidate_bee.fitness >= bee.fitness:

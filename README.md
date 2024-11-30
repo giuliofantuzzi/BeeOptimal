@@ -13,7 +13,8 @@ This repository contains a Python implementation of the Artificial Bee Colony (A
 - [x] Implement original version of ABC algorithm
 - [x] Tests with some benchmark functions
 - [x] Plots with colony convergence
-- [ ] Look at *Karaboga 2010* for more benchmark functions
+- [ ] Look at *Karaboga 2010* for more benchmark functions (for the purpose of the project i may use the 8 functions from *DirectedABC*, 
+maybe with a dimension 2 just for plotting...dim 30 for tests. I can motivate this saying that i saw this type of analysis in literature.)
 - [ ] Improvements for plotting function:
   - [ ] Add option to plot only optimal bee
   - [ ] Find a way to plot optimal solution in above layer

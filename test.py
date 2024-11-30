@@ -1,7 +1,7 @@
 #--------------------------------------------------------------------------------
 # Libraries and modules
 #--------------------------------------------------------------------------------
-from ABC.abc import ArtificialBeeColony
+from ABC import ArtificialBeeColony
 import numpy as np
 from utils.benchmark import Sphere,Rastrigin,Ackley,Eggholder
 from utils.plotting_utils import ContourPlotBee
@@ -11,11 +11,11 @@ from PIL import Image
 #--------------------------------------------------------------------------------
 # Global variables and settings
 #--------------------------------------------------------------------------------
-N_BEES      = 100
+N_BEES      = 50
 LIMIT      = (N_BEES // 2) * 2
-MAX_ITERS   = 50
+MAX_ITERS   = 100
 BENCHMARK_FUNCTIONS = [Sphere,Rastrigin,Ackley,Eggholder]
-
+np.random.seed(1234) # Fix NumPy seed for reproducibility
 #--------------------------------------------------------------------------------
 # Tests
 #--------------------------------------------------------------------------------
@@ -33,10 +33,10 @@ if __name__ == '__main__':
         print(f"Function: {function_test.name.upper()}")
         print('-'*100)
         
-        ABC = ArtificialBeeColony(n_bees      = N_BEES,
-                                  limit       = LIMIT,
-                                  bounds      = function_test.bounds,
-                                  function    = function_test.fun
+        ABC = ArtificialBeeColony(n_bees   = N_BEES,
+                                  limit    = LIMIT,
+                                  bounds   = function_test.bounds,
+                                  function = function_test.fun
                                 )
         ABC.optimize(max_iters=MAX_ITERS,selection='RouletteWheel')
         
