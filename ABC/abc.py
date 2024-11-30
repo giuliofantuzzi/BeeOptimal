@@ -51,18 +51,7 @@ class ArtificialBeeColony():
         
     def send_employees_(self):
         for bee_idx, bee in enumerate(self.employed_bees):
-            # Choose Donor Bee
-            while True:
-                k = np.random.randint(0,len(self.employed_bees))
-                if k != bee_idx:
-                    break
-            donor_bee = copy.deepcopy(self.employed_bees[k])
-            # Candidate Bee
-            j = np.random.randint(0,len(bee.position))
-            phi = np.random.uniform(-1,1)
-            candidate_bee = copy.deepcopy(bee)
-            candidate_bee.position[j] = bee.position[j] + phi*(bee.position[j] - donor_bee.position[j])
-            candidate_bee.position[j] = np.clip(candidate_bee.position[j],self.bounds[j][0],self.bounds[j][1])
+            candidate_bee = self.get_candidate_neighbor_(bee=bee,bee_idx=bee_idx,population=self.employed_bees)
             # Greedy Selection
             if candidate_bee.fitness >= bee.fitness:
                 self.employed_bees[bee_idx] = candidate_bee
@@ -83,19 +72,8 @@ class ArtificialBeeColony():
                                   bounds   = self.bounds) for winner_idx in dance_winners
                               ]
         for bee_idx, bee in enumerate(self.onlooker_bees):
-            # Choose Donor Bee
-            while True:
-                k = np.random.randint(0,len(self.onlooker_bees))
-                if k != bee_idx:
-                    break
-            donor_bee = copy.deepcopy(self.onlooker_bees[k])
-            # Candidate Bee
-            j = np.random.randint(0,len(bee.position))
-            phi = np.random.uniform(-1,1)
-            candidate_bee = copy.deepcopy(bee)
-            candidate_bee.position[j] = bee.position[j] + phi*(bee.position[j] - donor_bee.position[j])
-            candidate_bee.position[j] = np.clip(candidate_bee.position[j],self.bounds[j][0],self.bounds[j][1])
-            
+            # Get Candidate Neighbor
+            candidate_bee = self.get_candidate_neighbor_(bee=bee,bee_idx=bee_idx,population=self.onlooker_bees)
             # Greedy Selection
             if candidate_bee.fitness >= bee.fitness:
                 self.onlooker_bees[bee_idx] = candidate_bee
@@ -111,5 +89,23 @@ class ArtificialBeeColony():
                 self.employed_bees[bee_idx] = Bee(position = None,
                                                   function = self.function,
                                                   bounds   = self.bounds)
+                
+    def get_candidate_neighbor_(self,bee,bee_idx,population):
+        # Maybe it will be useful to define separate methods for different mutation (single bit, all bits probabilistically, etc)
+        # And here do a some cases depending on the mutation type -> standard ABC, DE/best/1, DE/best/2, ...
+        # Choose Donor Bee
+        while True:
+            k = np.random.randint(0,len(population))
+            if k != bee_idx:
+                break
+        donor_bee = copy.deepcopy(population[k])
+        # Candidate Bee
+        j = np.random.randint(0,len(bee.position))
+        phi = np.random.uniform(-1,1)
+        candidate_bee = copy.deepcopy(bee)
+        candidate_bee.position[j] = bee.position[j] + phi*(bee.position[j] - donor_bee.position[j])
+        candidate_bee.position[j] = np.clip(candidate_bee.position[j],self.bounds[j][0],self.bounds[j][1])
+        
+        return candidate_bee
 
 #--------------------------------------------------------------------------------

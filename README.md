@@ -34,3 +34,7 @@ Recap about algorithm's modifications:
 2) Opposition-based Initialization of employee bees and scouts
 3) Differential Evolution approach for mutation (ABC/best/1 and ABC/best/2)
 4) Directed ABC
+
+
+
+CAMBIARE CLASSE IN MODO CHE COLONY HISROTY ETC SIANO LISTA DI API, NON DI POSIZIONI ETC....RENDE LE COSE PIU SEMPLICI DA GESTIRE
