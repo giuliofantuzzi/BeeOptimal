@@ -30,7 +30,8 @@ def ContourPlotBee(x,y,Z,bee_colony,title='',marker_path=None,optimal_solution=N
     bee_marker = Image.open(marker_path)
     bee_marker_size = min(x.max()-x.min(), y.max()-y.min()) * 0.05
     
-    for bee_x,bee_y in bee_colony:
+    #for bee_x,bee_y in bee_colony:
+    for bee in bee_colony:
         fig.add_layout_image(
                     dict(
                         source=bee_marker,
@@ -38,8 +39,8 @@ def ContourPlotBee(x,y,Z,bee_colony,title='',marker_path=None,optimal_solution=N
                         yref="y",
                         xanchor="center",
                         yanchor="middle",
-                        x=bee_x,
-                        y=bee_y,
+                        x=bee.position[0],#bee_x,
+                        y=bee.position[1],#bee_y,
                         sizex= bee_marker_size,
                         sizey=bee_marker_size,
                         sizing="contain",

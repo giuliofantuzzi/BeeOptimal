@@ -28,27 +28,29 @@ class ArtificialBeeColony():
         self.optimal_source         = ([np.nan for _ in range(self.dim)],np.nan)
         self.optimal_source_history = []
      
-    def optimize(self,max_iters=100,selection='RouletteWheel'):
+    def optimize(self,max_iters=100,selection='RouletteWheel',verbose=False):
+        
         self.max_iters = max_iters
         self.selection = selection
+        
         # Initialization
         self.employed_bees = [Bee(position = None,
                                   function = self.function,
                                   bounds   = self.bounds) for _ in range(self.n_employed_bees) ]
-        self.optimal_source_history.append(max(self.employed_bees,key=lambda bee: bee.fitness).position)
-        self.colony_history.append([bee.position for bee in self.employed_bees])
+        self.optimal_source_history.append(copy.deepcopy(max(self.employed_bees,key=lambda bee: bee.fitness)))
+        self.colony_history.append(copy.deepcopy(self.employed_bees))
+        
         # Loop
-        for _ in trange(self.max_iters,desc='Running Optimization'):
+        for _ in trange(self.max_iters,desc='Running Optimization',disable= not verbose):
             self.send_employees_()
             self.send_onlookers_()
             self.send_scouts_()
-            self.optimal_source_history.append(max(self.employed_bees,key=lambda bee: bee.fitness).position)
-            self.colony_history.append([bee.position for bee in self.employed_bees])
-        
+            self.optimal_source_history.append(copy.deepcopy(max(self.employed_bees,key=lambda bee: bee.fitness)))
+            self.colony_history.append(copy.deepcopy(self.employed_bees))
+
         # Store best Solution
-        self.optimal_source = (max(self.employed_bees,key=lambda bee: bee.fitness).position, 
-                               max(self.employed_bees,key=lambda bee: bee.fitness).value)
-        
+        self.optimal_source = max(self.employed_bees,key=lambda bee: bee.fitness)
+    
     def send_employees_(self):
         for bee_idx, bee in enumerate(self.employed_bees):
             candidate_bee = self.get_candidate_neighbor_(bee=bee,bee_idx=bee_idx,population=self.employed_bees)
@@ -96,7 +98,7 @@ class ArtificialBeeColony():
         # Choose Donor Bee
         while True:
             k = np.random.randint(0,len(population))
-            if k != bee_idx:
+            if k != bee_idx: #nel caso abbia bisogno di più donor qui potrei usare k_list e mettere condizione aggiuntiva len(k_list)==n_donors
                 break
         donor_bee = copy.deepcopy(population[k])
         # Candidate Bee

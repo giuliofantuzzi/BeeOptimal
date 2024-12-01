@@ -11,9 +11,9 @@ from PIL import Image
 #--------------------------------------------------------------------------------
 # Global variables and settings
 #--------------------------------------------------------------------------------
-N_BEES      = 100
-LIMIT      = (N_BEES // 2) * 2
-MAX_ITERS   = 100
+N_BEES      = 50
+LIMIT       = (N_BEES // 2) * 2
+MAX_ITERS   = 50
 BENCHMARK_FUNCTIONS = [Sphere,Rastrigin,Ackley,Eggholder]
 np.random.seed(1234) # Fix NumPy seed for reproducibility
 #--------------------------------------------------------------------------------
@@ -42,10 +42,10 @@ if __name__ == '__main__':
         
         print(f"Optimal Solution:")
         print(f"\tExpected : {function_test.optimal_solution}")
-        print(f"\tFound    : {ABC.optimal_source[0]}")
+        print(f"\tFound    : {ABC.optimal_source.position}")
         print(f"Optimal Value:")
         print(f"\tExpected : {function_test.optimal_value}")
-        print(f"\tFound    : {ABC.optimal_source[1]}")
+        print(f"\tFound    : {ABC.optimal_source.value}")
         print('-'*100)
         
         # GIF
