@@ -15,14 +15,17 @@ class ArtificialBeeColony():
         assert ( n_bees > 2)
         self.dim                 = len(bounds)
         self.n_bees              = n_bees
-        self.limit               = limit if limit is not None else (self.n_bees //2)* self.dim
-        self.function            = function
-        self.bounds              = bounds
         self.n_employed_bees     = self.n_bees // 2
         self.n_onlooker_bees     = self.n_bees - self.n_employed_bees
+        self.limit               = limit if limit is not None else (0.6 * self.n_employed_bees * self.dim)
+        self.function            = function
+        self.bounds              = bounds
         self.max_iters           = None
         self.selection           = None
         self.mutation            = None
+        self.MR                  = 1.0
+        self.SF                  = 1.0
+        self.SelfAdaptiveSF      = False
         self.employed_bees       = []
         self.onlooker_bees       = []
         self.colony_history      = []
@@ -30,11 +33,15 @@ class ArtificialBeeColony():
         self.optimal_bee_history = []
     
     #------------------------------------------------------------------------------------------------------------------
-    def optimize(self,max_iters=100,selection='RouletteWheel',mutation='StandardABC',verbose=False,random_seed=None):
+    def optimize(self,max_iters=100,selection='RouletteWheel',mutation='StandardABC',verbose=False,random_seed=None,SF=1.0,MR=1.0,SelfAdaptiveSF=False):
         
-        self.max_iters = max_iters
-        self.selection = selection
-        self.mutation  = mutation
+        # Update Attributes basing on the optimization settings
+        self.max_iters      = max_iters
+        self.selection      = selection
+        self.mutation       = mutation
+        self.MR             = MR
+        self.SF             = SF
+        self.SelfAdaptiveSF = SelfAdaptiveSF
         
         # Initialization
         if random_seed:
@@ -58,13 +65,17 @@ class ArtificialBeeColony():
     
     # Helper methods
     def send_employees_(self):
+        succesful_mutations = 0
         for bee_idx, bee in enumerate(self.employed_bees):
             candidate_bee = self.get_candidate_neighbor_(bee=bee,bee_idx=bee_idx,population=self.employed_bees)
             # Greedy Selection
             if candidate_bee.fitness >= bee.fitness:
                 self.employed_bees[bee_idx] = candidate_bee
+                succesful_mutations += 1
             else:
                 bee.trial += 1
+        if self.SelfAdaptiveSF:
+            self.update_SF_(succesful_mutations_ratio= (succesful_mutations / self.n_employed_bees) )
                 
     def waggle_dance_(self):
         fitness_values = [bee.fitness for bee in self.employed_bees]
@@ -79,12 +90,17 @@ class ArtificialBeeColony():
                                   function = self.function,
                                   bounds   = self.bounds) for winner_idx in dance_winners
                               ]
+        succesful_mutations = 0
         for bee_idx, bee in enumerate(self.onlooker_bees):
             # Get Candidate Neighbor
             candidate_bee = self.get_candidate_neighbor_(bee=bee,bee_idx=bee_idx,population=self.onlooker_bees)
             # Greedy Selection
             if candidate_bee.fitness >= bee.fitness:
                 self.onlooker_bees[bee_idx] = candidate_bee
+                succesful_mutations += 1
+        if self.SelfAdaptiveSF:
+            self.update_SF_(succesful_mutations_ratio= (succesful_mutations / self.n_onlooker_bees) )
+        
         # Update Employed Bees
         for bee_idx, bee in zip(dance_winners,self.onlooker_bees):
             if bee.fitness > self.employed_bees[bee_idx].fitness:
@@ -103,20 +119,21 @@ class ArtificialBeeColony():
             # Donor Bee
             donor_bee = self.get_donor_bees_(n_donors=1,bee_idx=bee_idx,population=population)[0]
             # Candidate Bee
-            phi = np.random.uniform(-1,1)
+            phi = np.random.uniform(-self.SF,self.SF)
             candidate_bee = copy.deepcopy(bee)
             
             j = np.random.randint(0,len(bee.position))
             candidate_bee.position[j] = bee.position[j] + phi*(bee.position[j] - donor_bee.position[j])
             candidate_bee.position[j] = np.clip(candidate_bee.position[j],self.bounds[j][0],self.bounds[j][1])
             
-        # Probabilistic mutation still to do (with MR parameter)
+        if self.mutation == 'ModifiedABC':
+            pass
             
         if self.mutation == 'ABC/best/1':
             # 2 Donor Bees
             donor1,donor2 = self.get_donor_bees_(n_donors=2,bee_idx=bee_idx,population=population)
             # Candidate Bee
-            phi = np.random.uniform(-1,1)
+            phi = np.random.uniform(-self.SF,self.SF)
             candidate_bee = copy.deepcopy(bee)
             
             j = np.random.randint(0,len(bee.position))
@@ -127,7 +144,7 @@ class ArtificialBeeColony():
             # 4 Donor Bees
             donor1,donor2,donor3,donor4 = self.get_donor_bees_(n_donors=4,bee_idx=bee_idx,population=population)
             # Candidate Bee
-            phi = np.random.uniform(-1,1)
+            phi = np.random.uniform(-self.SF,self.SF)
             candidate_bee = copy.deepcopy(bee)
             j = np.random.randint(0,len(bee.position))
             candidate_bee.position[j] = self.optimal_bee.position[j] + phi*(donor1.position[j] - donor2.position[j]) + phi*(donor3.position[j] - donor4.position[j])
@@ -139,4 +156,12 @@ class ArtificialBeeColony():
         available_indices = np.delete(np.arange(len(population)), bee_idx)
         k_list = np.random.choice(available_indices,size=n_donors,replace=False)
         return [copy.deepcopy(population[k]) for k in k_list]
+    
+    def update_SF_(self,succesful_mutations_ratio):
+        if succesful_mutations_ratio > 1/5:
+            self.SF = self.SF / 0.85
+        elif succesful_mutations_ratio < 1/5:
+            self.SF = self.SF * 0.85
+        
+        
 #--------------------------------------------------------------------------------
