@@ -20,7 +20,8 @@ maybe with a dimension 2 just for plotting...dim 30 for tests. I can motivate th
   - [ ] Find a way to plot optimal solution in above layer
 - [ ] Refactor ABC code (mainly redundant attributes)
 - [ ] Think about additional termination criteria
-- [ ] Think about different initializations (opposition based initialization) and mutation (ABC/best/1 and ABC/best/2)
+- [ ] Think about different initializations (opposition based initialization)
+- [ ] Implement different mutations (ABC/best/1 and ABC/best/2)
 - [ ] Try different selection strategies/different configurations and compare.
 - [ ] Like done in *GlobalBest_2011*, propose a figure comparing iterations of 2 methods (i can use my gif, but also compare plots of cost/fitness vs iterations)
 

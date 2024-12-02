@@ -28,7 +28,8 @@ class ArtificialBeeColony():
         self.colony_history      = []
         self.optimal_bee         = []
         self.optimal_bee_history = []
-     
+    
+    #------------------------------------------------------------------------------------------------------------------
     def optimize(self,max_iters=100,selection='RouletteWheel',mutation='StandardABC',verbose=False,random_seed=None):
         
         self.max_iters = max_iters
@@ -53,7 +54,9 @@ class ArtificialBeeColony():
             self.colony_history.append(copy.deepcopy(self.employed_bees))
             self.optimal_bee = copy.deepcopy(max(self.employed_bees,key=lambda bee: bee.fitness))
             self.optimal_bee_history.append(copy.deepcopy(self.optimal_bee))
+    #------------------------------------------------------------------------------------------------------------------
     
+    # Helper methods
     def send_employees_(self):
         for bee_idx, bee in enumerate(self.employed_bees):
             candidate_bee = self.get_candidate_neighbor_(bee=bee,bee_idx=bee_idx,population=self.employed_bees)
@@ -100,9 +103,10 @@ class ArtificialBeeColony():
             # Donor Bee
             donor_bee = self.get_donor_bees_(n_donors=1,bee_idx=bee_idx,population=population)[0]
             # Candidate Bee
-            j = np.random.randint(0,len(bee.position))
             phi = np.random.uniform(-1,1)
             candidate_bee = copy.deepcopy(bee)
+            
+            j = np.random.randint(0,len(bee.position))
             candidate_bee.position[j] = bee.position[j] + phi*(bee.position[j] - donor_bee.position[j])
             candidate_bee.position[j] = np.clip(candidate_bee.position[j],self.bounds[j][0],self.bounds[j][1])
             
@@ -112,9 +116,10 @@ class ArtificialBeeColony():
             # 2 Donor Bees
             donor1,donor2 = self.get_donor_bees_(n_donors=2,bee_idx=bee_idx,population=population)
             # Candidate Bee
-            j = np.random.randint(0,len(bee.position))
             phi = np.random.uniform(-1,1)
             candidate_bee = copy.deepcopy(bee)
+            
+            j = np.random.randint(0,len(bee.position))
             candidate_bee.position[j] = self.optimal_bee.position[j] + phi*(donor1.position[j] - donor2.position[j])
             candidate_bee.position[j] = np.clip(candidate_bee.position[j],self.bounds[j][0],self.bounds[j][1])
             
@@ -122,9 +127,9 @@ class ArtificialBeeColony():
             # 4 Donor Bees
             donor1,donor2,donor3,donor4 = self.get_donor_bees_(n_donors=4,bee_idx=bee_idx,population=population)
             # Candidate Bee
-            j = np.random.randint(0,len(bee.position))
             phi = np.random.uniform(-1,1)
             candidate_bee = copy.deepcopy(bee)
+            j = np.random.randint(0,len(bee.position))
             candidate_bee.position[j] = self.optimal_bee.position[j] + phi*(donor1.position[j] - donor2.position[j]) + phi*(donor3.position[j] - donor4.position[j])
             candidate_bee.position[j] = np.clip(candidate_bee.position[j],self.bounds[j][0],self.bounds[j][1])
         
