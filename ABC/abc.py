@@ -11,21 +11,14 @@ from tqdm import trange
 #--------------------------------------------------------------------------------
 class ArtificialBeeColony():
     
-    def __init__(self,n_bees,limit,function,bounds):
+    def __init__(self,n_bees,function,bounds,n_employed_bees=None):
         assert ( n_bees > 2)
         self.dim                 = len(bounds)
         self.n_bees              = n_bees
-        self.n_employed_bees     = self.n_bees // 2
+        self.n_employed_bees     = n_employed_bees if n_employed_bees is not None else (self.n_bees // 2)
         self.n_onlooker_bees     = self.n_bees - self.n_employed_bees
-        self.limit               = limit if limit is not None else (0.6 * self.n_employed_bees * self.dim)
         self.function            = function
         self.bounds              = bounds
-        self.max_iters           = None
-        self.selection           = None
-        self.mutation            = None
-        self.MR                  = 1.0
-        self.SF                  = 1.0
-        self.SelfAdaptiveSF      = False
         self.employed_bees       = []
         self.onlooker_bees       = []
         self.colony_history      = []
@@ -33,15 +26,25 @@ class ArtificialBeeColony():
         self.optimal_bee_history = []
     
     #------------------------------------------------------------------------------------------------------------------
-    def optimize(self,max_iters=100,selection='RouletteWheel',mutation='StandardABC',verbose=False,random_seed=None,SF=1.0,MR=1.0,SelfAdaptiveSF=False):
+    def optimize(self,
+                 max_iters      = 100,
+                 limit          = 'default',
+                 selection      = 'RouletteWheel',
+                 mutation       = 'StandardABC',
+                 SF             = 1.0,
+                 SelfAdaptiveSF = False,
+                 MR             = 0.8,
+                 verbose        = False,
+                 random_seed    = None):
         
-        # Update Attributes basing on the optimization settings
+        # Define optimization attributes
         self.max_iters      = max_iters
+        self.limit          = limit if limit != 'default' else (0.6 * self.n_employed_bees * self.dim)  
         self.selection      = selection
         self.mutation       = mutation
         self.MR             = MR
-        self.SF             = SF
-        self.SelfAdaptiveSF = SelfAdaptiveSF
+        self.SF             = SF 
+        self.SelfAdaptiveSF = SelfAdaptiveSF 
         
         # Initialization
         if random_seed:
@@ -115,28 +118,35 @@ class ArtificialBeeColony():
                 
     def get_candidate_neighbor_(self,bee,bee_idx,population):
         
+        phi = np.random.uniform(-self.SF,self.SF)
+        
         if self.mutation == 'StandardABC':
             # Donor Bee
             donor_bee = self.get_donor_bees_(n_donors=1,bee_idx=bee_idx,population=population)[0]
             # Candidate Bee
-            phi = np.random.uniform(-self.SF,self.SF)
             candidate_bee = copy.deepcopy(bee)
             
-            j = np.random.randint(0,len(bee.position))
+            j = np.random.randint(0,self.dim)
             candidate_bee.position[j] = bee.position[j] + phi*(bee.position[j] - donor_bee.position[j])
             candidate_bee.position[j] = np.clip(candidate_bee.position[j],self.bounds[j][0],self.bounds[j][1])
             
         if self.mutation == 'ModifiedABC':
-            pass
+            # Donor Bee
+            donor_bee = self.get_donor_bees_(n_donors=1,bee_idx=bee_idx,population=population)[0]
+            # Candidate Bee
+            candidate_bee = copy.deepcopy(bee)
+            for j in range(self.dim):
+                if np.random.uniform() <= self.MR:
+                    candidate_bee.position[j] = bee.position[j] + phi*(bee.position[j] - donor_bee.position[j])
+                    candidate_bee.position[j] = np.clip(candidate_bee.position[j],self.bounds[j][0],self.bounds[j][1])
             
         if self.mutation == 'ABC/best/1':
             # 2 Donor Bees
             donor1,donor2 = self.get_donor_bees_(n_donors=2,bee_idx=bee_idx,population=population)
             # Candidate Bee
-            phi = np.random.uniform(-self.SF,self.SF)
             candidate_bee = copy.deepcopy(bee)
             
-            j = np.random.randint(0,len(bee.position))
+            j = np.random.randint(0,self.dim)
             candidate_bee.position[j] = self.optimal_bee.position[j] + phi*(donor1.position[j] - donor2.position[j])
             candidate_bee.position[j] = np.clip(candidate_bee.position[j],self.bounds[j][0],self.bounds[j][1])
             
@@ -144,9 +154,8 @@ class ArtificialBeeColony():
             # 4 Donor Bees
             donor1,donor2,donor3,donor4 = self.get_donor_bees_(n_donors=4,bee_idx=bee_idx,population=population)
             # Candidate Bee
-            phi = np.random.uniform(-self.SF,self.SF)
             candidate_bee = copy.deepcopy(bee)
-            j = np.random.randint(0,len(bee.position))
+            j = np.random.randint(0,self.dim)
             candidate_bee.position[j] = self.optimal_bee.position[j] + phi*(donor1.position[j] - donor2.position[j]) + phi*(donor3.position[j] - donor4.position[j])
             candidate_bee.position[j] = np.clip(candidate_bee.position[j],self.bounds[j][0],self.bounds[j][1])
         
