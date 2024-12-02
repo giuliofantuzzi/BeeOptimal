@@ -63,3 +63,17 @@ Eggholder = BenchmarkFunction(
     bounds=[(-512, 512), (-512, 512)],
     optimal_solution=[512,404.2319]
 )
+
+Sphere30d = BenchmarkFunction(
+    name="Sphere30d",
+    fun=sphere,
+    bounds=[(-5.12, 5.12)]*30,
+    optimal_solution=[0]*30
+)
+
+Rastrigin30d = BenchmarkFunction(
+    name="Rastrigin30d",
+    fun=rastrigin,
+    bounds=[(-5.12, 5.12)]*30,
+    optimal_solution=[0]*30
+)

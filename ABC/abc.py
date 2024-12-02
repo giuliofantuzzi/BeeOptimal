@@ -28,12 +28,14 @@ class ArtificialBeeColony():
         self.optimal_source         = ([np.nan for _ in range(self.dim)],np.nan)
         self.optimal_source_history = []
      
-    def optimize(self,max_iters=100,selection='RouletteWheel',verbose=False):
+    def optimize(self,max_iters=100,selection='RouletteWheel',verbose=False,random_seed=None):
         
         self.max_iters = max_iters
         self.selection = selection
         
         # Initialization
+        if random_seed:
+            np.random.seed(random_seed)
         self.employed_bees = [Bee(position = None,
                                   function = self.function,
                                   bounds   = self.bounds) for _ in range(self.n_employed_bees) ]
