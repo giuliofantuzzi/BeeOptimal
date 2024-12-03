@@ -19,6 +19,8 @@ class ArtificialBeeColony():
         self.n_onlooker_bees     = self.n_bees - self.n_employed_bees
         self.function            = function
         self.bounds              = bounds
+        self.lower_bounds        = np.array([bound[0] for bound in bounds])
+        self.upper_bounds        = np.array([bound[1] for bound in bounds])
         self.employed_bees       = []
         self.onlooker_bees       = []
         self.colony_history      = []
@@ -57,8 +59,22 @@ class ArtificialBeeColony():
                                       function = self.function,
                                       bounds   = self.bounds) for _ in range(self.n_employed_bees) ]
         elif self.initialization == 'cahotic':
-            raise NotImplementedError
+            # Define cahotic map and iterate over it
+            cahotic_map = np.random.rand(self.n_employed_bees,self.dim)
+            for _ in range(300):
+                cahotic_map = np.sin(cahotic_map * np.pi)    
+                
+            cahotic_pop  = [Bee(position = self.lower_bounds + (self.upper_bounds - self.lower_bounds) * cahotic_map[i,:],
+                                function = self.function,
+                                bounds   = self.bounds) for i in range(self.n_employed_bees) ]
+            opposite_pop = [Bee(position = self.lower_bounds + self.upper_bounds - cahotic_pop[i].position,
+                                function = self.function,
+                                bounds   = self.bounds) for i in range(self.n_employed_bees) ]
             
+            self.employed_bees = sorted(cahotic_pop+opposite_pop, key=lambda bee: bee.fitness, reverse=True)[:self.n_employed_bees]
+            
+            
+        
         self.colony_history.append(copy.deepcopy(self.employed_bees))
         self.optimal_bee = copy.deepcopy(max(self.employed_bees,key=lambda bee: bee.fitness))
         self.optimal_bee_history.append(copy.deepcopy(self.optimal_bee))
@@ -124,7 +140,17 @@ class ArtificialBeeColony():
                                                       function = self.function,
                                                       bounds   = self.bounds)
                 elif self.initialization == 'cahotic':
-                    raise NotImplementedError
+                    cahotic_map = np.random.rand(self.n_employed_bees,self.dim)
+                    for _ in range(300):
+                        cahotic_map = np.sin(cahotic_map * np.pi)    
+                    cahotic_pop  = [Bee(position = self.lower_bounds + (self.upper_bounds - self.lower_bounds) * cahotic_map[i,:],
+                                        function = self.function,
+                                        bounds   = self.bounds) for i in range(self.n_employed_bees) ]
+                    opposite_pop = [Bee(position = self.lower_bounds + self.upper_bounds - cahotic_pop[i].position,
+                                        function = self.function,
+                                        bounds   = self.bounds) for i in range(self.n_employed_bees) ]
+            
+                    self.employed_bees = sorted(cahotic_pop+opposite_pop, key=lambda bee: bee.fitness, reverse=True)[:self.n_employed_bees]
                 
     def get_candidate_neighbor_(self,bee,bee_idx,population):
         

@@ -13,11 +13,11 @@ from PIL import Image
 #--------------------------------------------------------------------------------
 N_BEES              = 100
 LIMIT               = 'default'
-MAX_ITERS           = 100
+MAX_ITERS           = 50
 BENCHMARK_FUNCTIONS = [Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Griewank2d,Schwefel2d,Sumsquares2d,Eggholder]
 SELECTION           = 'RouletteWheel'
-MUTATION            = 'ABC/best/2'
-INITIALIZATION      = 'random'
+MUTATION            = 'StandardABC'
+INITIALIZATION      = 'cahotic'
 MR                  = 0.8
 SF                  = 1.0
 SelfAdaptiveSF      = False
