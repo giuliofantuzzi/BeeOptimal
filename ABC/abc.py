@@ -31,6 +31,7 @@ class ArtificialBeeColony():
                  limit          = 'default',
                  selection      = 'RouletteWheel',
                  mutation       = 'StandardABC',
+                 initialization = 'random',
                  SF             = 1.0,
                  SelfAdaptiveSF = False,
                  MR             = 0.8,
@@ -42,6 +43,7 @@ class ArtificialBeeColony():
         self.limit          = limit if limit != 'default' else (0.6 * self.n_employed_bees * self.dim)  
         self.selection      = selection
         self.mutation       = mutation
+        self.initialization = initialization
         self.MR             = MR
         self.SF             = SF 
         self.SelfAdaptiveSF = SelfAdaptiveSF 
@@ -49,9 +51,14 @@ class ArtificialBeeColony():
         # Initialization
         if random_seed:
             np.random.seed(random_seed)
-        self.employed_bees = [Bee(position = 'random',
-                                  function = self.function,
-                                  bounds   = self.bounds) for _ in range(self.n_employed_bees) ]
+            
+        if self.initialization == 'random':
+            self.employed_bees = [Bee(position = [np.random.uniform(bound[0],bound[1]) for bound in self.bounds],
+                                      function = self.function,
+                                      bounds   = self.bounds) for _ in range(self.n_employed_bees) ]
+        elif self.initialization == 'cahotic':
+            raise NotImplementedError
+            
         self.colony_history.append(copy.deepcopy(self.employed_bees))
         self.optimal_bee = copy.deepcopy(max(self.employed_bees,key=lambda bee: bee.fitness))
         self.optimal_bee_history.append(copy.deepcopy(self.optimal_bee))
@@ -112,9 +119,12 @@ class ArtificialBeeColony():
     def send_scouts_(self):
         for bee_idx, bee in enumerate(self.employed_bees):
             if bee.trial > self.limit:
-                self.employed_bees[bee_idx] = Bee(position = 'random',
-                                                  function = self.function,
-                                                  bounds   = self.bounds)
+                if self.initialization == 'random':
+                    self.employed_bees[bee_idx] = Bee(position = [np.random.uniform(bound[0],bound[1]) for bound in self.bounds],
+                                                      function = self.function,
+                                                      bounds   = self.bounds)
+                elif self.initialization == 'cahotic':
+                    raise NotImplementedError
                 
     def get_candidate_neighbor_(self,bee,bee_idx,population):
         

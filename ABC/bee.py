@@ -7,14 +7,9 @@ import numpy as np
 # Bee class
 #--------------------------------------------------------------------------------
 class Bee():
-    def __init__(self,function,bounds,position='random'):
-        if position=='random':
-            self.position = [np.random.uniform(low=bounds[i][0], high=bounds[i][1]) for i in range(len(bounds))]
-        elif position=='cahotic':
-            raise NotImplementedError
-        else:
-            assert(len(position) == len(bounds))
-            self.position = position
+    def __init__(self,position,function,bounds):
+        assert(len(position) == len(bounds))
+        self.position = position
         
         self.function = function
         self.bounds   = bounds

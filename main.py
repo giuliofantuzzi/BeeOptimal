@@ -17,6 +17,7 @@ MAX_ITERS           = 100
 BENCHMARK_FUNCTIONS = [Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Griewank2d,Schwefel2d,Sumsquares2d,Eggholder]
 SELECTION           = 'RouletteWheel'
 MUTATION            = 'ABC/best/2'
+INITIALIZATION      = 'random'
 MR                  = 0.8
 SF                  = 1.0
 SelfAdaptiveSF      = False
@@ -48,6 +49,7 @@ if __name__ == '__main__':
                      limit          = LIMIT,
                      selection      = SELECTION,
                      mutation       = MUTATION,
+                     initialization = INITIALIZATION,
                      SF             = SF,
                      SelfAdaptiveSF = SelfAdaptiveSF,
                      MR             = MR,
