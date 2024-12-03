@@ -39,8 +39,8 @@ if __name__ == '__main__':
         for s in trange(N_SIMULATIONS,desc='Simulations (Standard ABC):'):
             
             ABC = ArtificialBeeColony(n_bees = N_BEES,
-                                    bounds   = function.bounds,
-                                    function = function.fun)
+                                      bounds   = function.bounds,
+                                      function = function.fun)
             ABC.optimize(max_iters=MAX_ITERS,selection='RouletteWheel',mutation='StandardABC',random_seed=None)
 
             fitness_history_StandardABC[s,:] = [best_bee.value for best_bee in ABC.optimal_bee_history]
@@ -57,8 +57,8 @@ if __name__ == '__main__':
         for s in trange(N_SIMULATIONS,desc='Simulations (Modified ABC)'):
             
             ABC = ArtificialBeeColony(n_bees = N_BEES,
-                                    bounds   = function.bounds,
-                                    function = function.fun)
+                                      bounds   = function.bounds,
+                                      function = function.fun)
             ABC.optimize(max_iters=MAX_ITERS,selection='RouletteWheel',mutation='ModifiedABC',random_seed=None)
 
             fitness_history_ModifiedABC[s,:] = [best_bee.value for best_bee in ABC.optimal_bee_history]
@@ -74,8 +74,8 @@ if __name__ == '__main__':
         for s in trange(N_SIMULATIONS,desc='Simulations (ABC with DE/best/1):'):
             
             ABC = ArtificialBeeColony(n_bees = N_BEES,
-                                    bounds   = function.bounds,
-                                    function = function.fun)
+                                      bounds   = function.bounds,
+                                      function = function.fun)
             ABC.optimize(max_iters=MAX_ITERS,selection='RouletteWheel',mutation='ABC/best/1',random_seed=None)
 
             fitness_history_ABCbest1[s,:] = [best_bee.value for best_bee in ABC.optimal_bee_history]
@@ -92,8 +92,8 @@ if __name__ == '__main__':
         for s in trange(N_SIMULATIONS,desc='Simulations (ABC with DE/best/2)'):
             
             ABC = ArtificialBeeColony(n_bees = N_BEES,
-                                    bounds   = function.bounds,
-                                    function = function.fun)
+                                      bounds   = function.bounds,
+                                      function = function.fun)
             ABC.optimize(max_iters=MAX_ITERS,selection='RouletteWheel',mutation='ABC/best/2',random_seed=None)
 
             fitness_history_ABCbest2[s,:] = [best_bee.value for best_bee in ABC.optimal_bee_history]

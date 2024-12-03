@@ -10,7 +10,7 @@ class Bee():
     def __init__(self,function,bounds,position='random'):
         if position=='random':
             self.position = [np.random.uniform(low=bounds[i][0], high=bounds[i][1]) for i in range(len(bounds))]
-        if position=='cahotic':
+        elif position=='cahotic':
             raise NotImplementedError
         else:
             assert(len(position) == len(bounds))
