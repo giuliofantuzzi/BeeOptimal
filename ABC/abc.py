@@ -49,7 +49,7 @@ class ArtificialBeeColony():
         # Initialization
         if random_seed:
             np.random.seed(random_seed)
-        self.employed_bees = [Bee(position = None,
+        self.employed_bees = [Bee(position = 'random',
                                   function = self.function,
                                   bounds   = self.bounds) for _ in range(self.n_employed_bees) ]
         self.colony_history.append(copy.deepcopy(self.employed_bees))
@@ -112,7 +112,7 @@ class ArtificialBeeColony():
     def send_scouts_(self):
         for bee_idx, bee in enumerate(self.employed_bees):
             if bee.trial > self.limit:
-                self.employed_bees[bee_idx] = Bee(position = None,
+                self.employed_bees[bee_idx] = Bee(position = 'random',
                                                   function = self.function,
                                                   bounds   = self.bounds)
                 
