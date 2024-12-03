@@ -3,7 +3,7 @@
 #--------------------------------------------------------------------------------
 from ABC import ArtificialBeeColony
 import numpy as np
-from utils.benchmark import Sphere,Rastrigin,Ackley,Eggholder
+from benchmark import *
 from utils.plotting_utils import ContourPlotBee
 import tempfile
 from PIL import Image
@@ -13,16 +13,16 @@ from PIL import Image
 #--------------------------------------------------------------------------------
 N_BEES              = 100
 LIMIT               = 'default'
-MAX_ITERS           = 50
-BENCHMARK_FUNCTIONS = [Sphere,Rastrigin,Ackley,Eggholder]
+MAX_ITERS           = 100
+BENCHMARK_FUNCTIONS = [Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Griewank2d,Schwefel2d,Sumsquares2d,Eggholder]
 SELECTION           = 'RouletteWheel'
-MUTATION            = 'ABC/best/1'
+MUTATION            = 'StandardABC'
 MR                  = 0.8
 SF                  = 1.0
-SelfAdaptiveSF      = True
+SelfAdaptiveSF      = False
 verbose             = False
 random_seed         = 1234
-GIF_PATH            = 'images/ABCbest2/'
+GIF_PATH            = 'images/StandardABC/'
 #--------------------------------------------------------------------------------
 # Tests
 #--------------------------------------------------------------------------------
@@ -51,7 +51,7 @@ if __name__ == '__main__':
                      SF             = SF,
                      SelfAdaptiveSF = SelfAdaptiveSF,
                      MR             = MR,
-                     verbose        = False,
+                     verbose        = verbose,
                      random_seed    = random_seed)
         
         print(f"Optimal Solution:")
@@ -74,9 +74,10 @@ if __name__ == '__main__':
         Z = np.array([function_test.evaluate(p) for p in points]).reshape(X.shape)
         
         plots = []
-        for iteration,bee_colony in enumerate(ABC.colony_history):
-            plots.append(ContourPlotBee(x=x,y=y,Z=Z,bee_colony=bee_colony,
-                                        title=f"Iteration {iteration+1} / {ABC.max_iters}",
+        #for iteration,bee_colony in enumerate(ABC.colony_history[::2]):
+        for iteration in range(0,ABC.max_iters,2):
+            plots.append(ContourPlotBee(x=x,y=y,Z=Z,bee_colony=ABC.colony_history[iteration],
+                                        title=f"Optimization of function {function_test.name.upper()} [Iter {iteration+1} / {ABC.max_iters}]",
                                         marker_path='assets/BeeMarker.png',
                                         optimal_solution=function_test.optimal_solution))
             
