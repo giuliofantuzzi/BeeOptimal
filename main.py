@@ -16,13 +16,13 @@ LIMIT               = 'default'
 MAX_ITERS           = 100
 BENCHMARK_FUNCTIONS = [Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Griewank2d,Schwefel2d,Sumsquares2d,Eggholder]
 SELECTION           = 'RouletteWheel'
-MUTATION            = 'StandardABC'
+MUTATION            = 'ABC/best/2'
 MR                  = 0.8
 SF                  = 1.0
 SelfAdaptiveSF      = False
 verbose             = False
 random_seed         = 1234
-GIF_PATH            = 'images/StandardABC/'
+GIF_PATH            = 'images/ABCbest2/'
 #--------------------------------------------------------------------------------
 # Tests
 #--------------------------------------------------------------------------------
