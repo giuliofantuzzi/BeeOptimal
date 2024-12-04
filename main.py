@@ -5,7 +5,7 @@
 from beeoptimal import ArtificialBeeColony
 import numpy as np
 from beeoptimal.benchmarks import *
-from beeoptimal.plots import ContourPlotBee
+from beeoptimal.plotting import ContourPlotBee
 import tempfile
 from PIL import Image
 
