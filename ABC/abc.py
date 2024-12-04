@@ -41,7 +41,8 @@ class ArtificialBeeColony():
                  SelfAdaptiveSF = False,
                  MR             = 0.8,
                  verbose        = False,
-                 random_seed    = None):
+                 random_seed    = None,
+                 stagnation_tol = np.NINF):
         
         # Define optimization attributes
         self.max_iters      = max_iters
@@ -52,6 +53,7 @@ class ArtificialBeeColony():
         self.MR             = MR
         self.SF             = SF 
         self.SelfAdaptiveSF = SelfAdaptiveSF 
+        self.stagnation_tol = stagnation_tol
         
         # Initialization
         if random_seed:
@@ -83,13 +85,20 @@ class ArtificialBeeColony():
         self.optimal_bee_history.append(copy.deepcopy(self.optimal_bee))
         
         # Loop
-        for _ in trange(self.max_iters,desc='Running Optimization',disable= not verbose):
+        for iter in trange(self.max_iters,desc='Running Optimization',disable= not verbose):
             self.send_employees_()
             self.send_onlookers_()
             self.send_scouts_()
             self.colony_history.append(copy.deepcopy(self.employed_bees))
             self.optimal_bee = copy.deepcopy(max(self.employed_bees,key=lambda bee: bee.fitness))
             self.optimal_bee_history.append(copy.deepcopy(self.optimal_bee))
+            # Stagnation
+            if (np.std([bee.fitness for bee in self.employed_bees]) < self.stagnation_tol):
+                if verbose:
+                    print(f"Early termination: Optimization stagnated at iteration {iter}")
+                # Break loop to terminate optimization
+                break
+            
     
     #------------------------------------------------------------------------------------------------------------------
     def send_employees_(self):
