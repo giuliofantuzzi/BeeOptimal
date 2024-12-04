@@ -24,7 +24,7 @@ INITIALIZATION      = 'random'
 MR                  = 0.8
 SF                  = 1.0
 SelfAdaptiveSF      = False
-verbose             = True
+verbose             = False
 random_seed         = 1234
 GIF_PATH            = 'tests/'
 
@@ -102,5 +102,5 @@ if __name__ == '__main__':
             images[0].save(gif_path, save_all=True, append_images=images[1:], 
                            duration=300, loop=0)
             print(f"Animated GIF saved in {gif_path}")
-            
+        break
 #--------------------------------------------------------------------------------
