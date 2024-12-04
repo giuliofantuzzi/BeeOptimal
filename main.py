@@ -1,6 +1,7 @@
-#--------------------------------------------------------------------------------
+#++++++++++++++++++++++++++++++++++++
 # Libraries and modules
-#--------------------------------------------------------------------------------
+#++++++++++++++++++++++++++++++++++++
+
 from ABC import ArtificialBeeColony
 import numpy as np
 from benchmark import *
@@ -8,15 +9,16 @@ from utils.plotting_utils import ContourPlotBee
 import tempfile
 from PIL import Image
 
-#--------------------------------------------------------------------------------
+#++++++++++++++++++++++++++++++++++++
 # Global variables and settings
-#--------------------------------------------------------------------------------
+#++++++++++++++++++++++++++++++++++++
+
 N_BEES              = 100
 LIMIT               = 'default'
 MAX_ITERS           = 50
 BENCHMARK_FUNCTIONS = [Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Griewank2d,Schwefel2d,Sumsquares2d,Eggholder]
 SELECTION           = 'RouletteWheel'
-MUTATION            = 'StandardABC'
+MUTATION            = 'ABC/best/2'
 INITIALIZATION      = 'cahotic'
 MR                  = 0.8
 SF                  = 1.0
@@ -24,9 +26,10 @@ SelfAdaptiveSF      = False
 verbose             = False
 random_seed         = 1234
 GIF_PATH            = 'images/ABCbest2/'
-#--------------------------------------------------------------------------------
+
+#++++++++++++++++++++++++++++++++++++
 # Tests
-#--------------------------------------------------------------------------------
+#++++++++++++++++++++++++++++++++++++
 if __name__ == '__main__':
     
     print("/////////////////////////////////////////////////////")
