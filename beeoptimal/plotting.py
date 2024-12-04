@@ -6,7 +6,7 @@ def get_marker_path():
     # Get the directory of the current script (plots.py)
     base_dir = os.path.dirname(os.path.abspath(__file__))
     # Construct the full path to marker.png
-    marker_path = os.path.join(base_dir, "assets", "BeeMarker.png")
+    marker_path = os.path.join(base_dir, "package_assets", "BeeMarker.png")
     if not os.path.exists(marker_path):
         raise FileNotFoundError(f"Marker file not found at: {marker_path}")
     return marker_path

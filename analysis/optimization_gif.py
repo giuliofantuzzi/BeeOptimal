@@ -86,7 +86,7 @@ if __name__ == '__main__':
             plots.append(ContourPlotBee(x=x,y=y,Z=Z,bee_colony=ABC.colony_history[iteration],
                                         title=f"Optimization of function {function_test.name.upper()} [Iter {iteration} / {ABC.actual_iters}]",
                                         optimal_solution=function_test.optimal_solution))
-            
+
         with tempfile.TemporaryDirectory() as tmpdirname:
             image_files = []
             # Save each figure as a separate image file
@@ -102,5 +102,4 @@ if __name__ == '__main__':
             images[0].save(gif_path, save_all=True, append_images=images[1:], 
                            duration=300, loop=0)
             print(f"Animated GIF saved in {gif_path}")
-        break
 #--------------------------------------------------------------------------------

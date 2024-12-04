@@ -13,6 +13,6 @@ setup(
     install_requires=[],         
     include_package_data=True,  # Include non-code files
     package_data={
-        "beeoptimal": ["assets/*.png"],  # Specify the path to include
+        "beeoptimal": ["package_assets/*.png"],  # Specify the path to include
     },
 )
