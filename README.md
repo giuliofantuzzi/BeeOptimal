@@ -32,6 +32,11 @@ pip install .
 After this you can import the package in your Python code using:
 
 ```python
-import bee-optimal
-from bee-optimal import ArtificialBeeColony,Bee
+import beeoptimal
+from beeoptimal import ArtificialBeeColony,Bee
+# or
+from beeoptimal.abc import ArtificialBeeColony
+from beeoptimal.bee import Bee
+from beeoptimal.benchmarks import *
+from beeoptimal.plotting import ContourPlotBee
 ```
