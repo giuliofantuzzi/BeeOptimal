@@ -1,9 +1,18 @@
 import plotly.graph_objects as go
 from PIL import Image
+import os
 
-def ContourPlotBee(x,y,Z,bee_colony,title='',marker_path=None,optimal_solution=None):
-    if not marker_path:
-        raise ValueError('Please provide a path to the marker image')
+def get_marker_path():
+    # Get the directory of the current script (plots.py)
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    # Construct the full path to marker.png
+    marker_path = os.path.join(base_dir, "assets", "BeeMarker.png")
+    if not os.path.exists(marker_path):
+        raise FileNotFoundError(f"Marker file not found at: {marker_path}")
+    return marker_path
+
+def ContourPlotBee(x,y,Z,bee_colony,title='',optimal_solution=None):
+    marker_path = get_marker_path()
     # Create contour plot
     fig = go.Figure(data=go.Contour(
         z=Z,

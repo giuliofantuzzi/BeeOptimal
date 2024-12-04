@@ -18,3 +18,20 @@ This repository contains a Python implementation of the Artificial Bee Colony (A
 - [ ] Directed ABC
 - [ ] Constraint handling
 - [ ] Add arg parser for command line usage
+
+
+
+# Installation
+
+To install the package, you can use the following command:
+
+```bash
+pip install .
+```
+
+After this you can import the package in your Python code using:
+
+```python
+import bee-optimal
+from bee-optimal import ArtificialBeeColony,Bee
+```

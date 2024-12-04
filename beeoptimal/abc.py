@@ -46,6 +46,7 @@ class ArtificialBeeColony():
         
         # Define optimization attributes
         self.max_iters      = max_iters
+        self.actual_iters   = 0
         self.limit          = limit if limit != 'default' else (0.6 * self.n_employed_bees * self.dim)  
         self.selection      = selection
         self.mutation       = mutation
@@ -86,6 +87,7 @@ class ArtificialBeeColony():
         
         # Loop
         for iter in trange(self.max_iters,desc='Running Optimization',disable= not verbose):
+            self.actual_iters += 1
             self.send_employees_()
             self.send_onlookers_()
             self.send_scouts_()
@@ -95,7 +97,7 @@ class ArtificialBeeColony():
             # Stagnation
             if (np.std([bee.fitness for bee in self.employed_bees]) < self.stagnation_tol):
                 if verbose:
-                    print(f"Early termination: Optimization stagnated at iteration {iter}")
+                    print(f"Early termination: Optimization stagnated at iteration {iter+1} / {self.max_iters}")
                 # Break loop to terminate optimization
                 break
             

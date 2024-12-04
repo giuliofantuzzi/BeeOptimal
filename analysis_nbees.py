@@ -2,9 +2,9 @@
 # Libraries and modules
 #++++++++++++++++++++++++++++++++++++
 
-from ABC import ArtificialBeeColony
+from beeoptimal import ArtificialBeeColony
 import numpy as np
-from benchmark import *
+from beeoptimal.benchmarks import *
 import matplotlib.pyplot as plt
 from tqdm import trange
 
