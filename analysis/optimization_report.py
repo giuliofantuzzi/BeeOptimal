@@ -18,12 +18,12 @@ MAX_ITERS           = 500
 BENCHMARK_FUNCTIONS = [Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Griewank2d,Schwefel2d,Sumsquares2d,Eggholder,
                        Sphere30d,Rosenbrock30d,Ackley30d,Rastrigin30d,Griewank30d,Schwefel30d,Sumsquares30d]
 SELECTION           = 'RouletteWheel'
-MUTATIONS           = ['ModifiedABC','ABC/best/1','ABC/best/2']
-INITIALIZATIONS     = ['random','cahotic']
+MUTATIONS           = ['ModifiedABC','ABC/best/1','ABC/best/2'] #['StandardABC']
+INITIALIZATIONS     = ['random','cahotic']                      #['random']
 STAGNATION_TOL      = 1e-6
-random_seed         = 1234
+RANDOM_SEED         = 1234
 N_SIMULATIONS       = 10
-CSV_PATH            = 'opt_report/report.csv'
+CSV_PATH            = 'opt_report/report_VariantsABC.csv'       # 'opt_report/report_StandardABC.csv'
 
 #++++++++++++++++++++++++++++++++++++
 # Main
@@ -31,7 +31,7 @@ CSV_PATH            = 'opt_report/report.csv'
 
 if __name__ == '__main__':
     
-    np.random.seed(random_seed) # Seed for reproducibility
+    np.random.seed(RANDOM_SEED) # Seed for reproducibility
     
     benchmark_df = pd.DataFrame(columns=['Function','Initialization','Mutation','Mean','Median','Std','Best','Worst'])
     for function in BENCHMARK_FUNCTIONS:
@@ -47,14 +47,14 @@ if __name__ == '__main__':
                 for s in trange(N_SIMULATIONS,desc='Simulations'):
                     
                     ABC = ArtificialBeeColony(n_bees = N_BEES,
-                                            bounds   = function.bounds,
-                                            function = function.fun)
+                                              bounds   = function.bounds,
+                                              function = function.fun)
                     ABC.optimize(max_iters     = MAX_ITERS,
                                 selection      = SELECTION,
                                 mutation       = mutation,
                                 initialization = initialization,
                                 stagnation_tol = STAGNATION_TOL,
-                                random_seed    = None)
+                                RANDOM_SEED    = None)
 
                     optimum_series[s] = ABC.optimal_bee.value
                 

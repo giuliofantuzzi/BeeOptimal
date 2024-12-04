@@ -32,17 +32,17 @@ class ArtificialBeeColony():
     
     #------------------------------------------------------------------------------------------------------------------
     def optimize(self,
-                 max_iters      = 100,
-                 limit          = 'default',
-                 selection      = 'RouletteWheel',
-                 mutation       = 'StandardABC',
-                 initialization = 'random',
-                 SF             = 1.0,
-                 SelfAdaptiveSF = False,
-                 MR             = 0.8,
-                 verbose        = False,
-                 random_seed    = None,
-                 stagnation_tol = np.NINF):
+                 max_iters        = 100,
+                 limit            = 'default',
+                 selection        = 'RouletteWheel',
+                 mutation         = 'StandardABC',
+                 initialization   = 'random',
+                 sf               = 1.0,
+                 self_adaptive_sf = False,
+                 mr               = 0.8,
+                 verbose          = False,
+                 random_seed      = None,
+                 stagnation_tol   = np.NINF):
         
         # Define optimization attributes
         self.max_iters      = max_iters
@@ -51,9 +51,9 @@ class ArtificialBeeColony():
         self.selection      = selection
         self.mutation       = mutation
         self.initialization = initialization
-        self.MR             = MR
-        self.SF             = SF 
-        self.SelfAdaptiveSF = SelfAdaptiveSF 
+        self.mr             = mr
+        self.sf             = sf 
+        self.self_adaptive_sf = self_adaptive_sf 
         self.stagnation_tol = stagnation_tol
         
         # Initialization
@@ -113,7 +113,7 @@ class ArtificialBeeColony():
                 succesful_mutations += 1
             else:
                 bee.trial += 1
-        if self.SelfAdaptiveSF:
+        if self.self_adaptive_sf:
             self.update_SF_(succesful_mutations_ratio= (succesful_mutations / self.n_employed_bees) )
     #------------------------------------------------------------------------------------------------------------------            
     def waggle_dance_(self):
@@ -137,7 +137,7 @@ class ArtificialBeeColony():
             if candidate_bee.fitness >= bee.fitness:
                 self.onlooker_bees[bee_idx] = candidate_bee
                 succesful_mutations += 1
-        if self.SelfAdaptiveSF:
+        if self.self_adaptive_sf:
             self.update_SF_(succesful_mutations_ratio= (succesful_mutations / self.n_onlooker_bees) )
         
         # Update Employed Bees
@@ -168,7 +168,7 @@ class ArtificialBeeColony():
     #------------------------------------------------------------------------------------------------------------------            
     def get_candidate_neighbor_(self,bee,bee_idx,population):
         
-        phi = np.random.uniform(-self.SF,self.SF)
+        phi = np.random.uniform(-self.sf,self.sf)
         
         if self.mutation == 'StandardABC':
             donor_bee = self.get_donor_bees_(n_donors=1,bee_idx=bee_idx,population=population)[0]
@@ -181,7 +181,7 @@ class ArtificialBeeColony():
             donor_bee = self.get_donor_bees_(n_donors=1,bee_idx=bee_idx,population=population)[0]
             candidate_bee = copy.deepcopy(bee)
             for j in range(self.dim):
-                if np.random.uniform() <= self.MR:
+                if np.random.uniform() <= self.mr:
                     candidate_bee.position[j] = bee.position[j] + phi*(bee.position[j] - donor_bee.position[j])
                     candidate_bee.position[j] = np.clip(candidate_bee.position[j],self.bounds[j][0],self.bounds[j][1])
             
@@ -209,8 +209,8 @@ class ArtificialBeeColony():
     #------------------------------------------------------------------------------------------------------------------
     def update_SF_(self,succesful_mutations_ratio):
         if succesful_mutations_ratio > 1/5:
-            self.SF = self.SF / 0.85
+            self.sf = self.sf / 0.85
         elif succesful_mutations_ratio < 1/5:
-            self.SF = self.SF * 0.85
+            self.sf = self.sf * 0.85
     #------------------------------------------------------------------------------------------------------------------
         

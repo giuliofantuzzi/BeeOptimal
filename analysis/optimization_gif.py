@@ -23,9 +23,9 @@ MUTATION            = 'StandardABC'
 INITIALIZATION      = 'random'
 MR                  = 0.8
 SF                  = 1.0
-SelfAdaptiveSF      = False
-verbose             = False
-random_seed         = 1234
+SELF_ADAPTIVE_SF    = False
+VERBOSE             = False
+RANDOM_SEED         = 1234
 GIF_PATH            = 'tests/'
 
 #++++++++++++++++++++++++++++++++++++
@@ -49,17 +49,17 @@ if __name__ == '__main__':
                                   bounds   = function_test.bounds,
                                   function = function_test.fun)
 
-        ABC.optimize(max_iters      = MAX_ITERS,
-                     limit          = LIMIT,
-                     selection      = SELECTION,
-                     mutation       = MUTATION,
-                     initialization = INITIALIZATION,
-                     SF             = SF,
-                     SelfAdaptiveSF = SelfAdaptiveSF,
-                     MR             = MR,
-                     stagnation_tol = STAGNATION_TOL,
-                     verbose        = verbose,
-                     random_seed    = random_seed)
+        ABC.optimize(max_iters        = MAX_ITERS,
+                     limit            = LIMIT,
+                     selection        = SELECTION,
+                     mutation         = MUTATION,
+                     initialization   = INITIALIZATION,
+                     sf               = SF,
+                     self_adaptive_sf = SELF_ADAPTIVE_SF,
+                     mr               = MR,
+                     stagnation_tol   = STAGNATION_TOL,
+                     verbose          = VERBOSE,
+                     random_seed      = RANDOM_SEED)
         
         print(f"Optimal Solution:")
         print(f"\tExpected : {function_test.optimal_solution}")
