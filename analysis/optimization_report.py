@@ -14,16 +14,18 @@ import pandas as pd
 #++++++++++++++++++++++++++++++++++++
 N_BEES              = 100
 LIMIT               = 'default'
-MAX_ITERS           = 500
-BENCHMARK_FUNCTIONS = [Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Griewank2d,Schwefel2d,Sumsquares2d,Eggholder,
-                       Sphere30d,Rosenbrock30d,Ackley30d,Rastrigin30d,Griewank30d,Schwefel30d,Sumsquares30d]
+MAX_ITERS           = 1000
+BENCHMARK_FUNCTIONS = [Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Weierstrass2d,Griewank2d,Schwefel2d,Sumsquares2d,Eggholder,
+                       Sphere10d,Rosenbrock10d,Ackley10d,Rastrigin10d,Weierstrass10d,Griewank10d,Schwefel10d,Sumsquares10d,
+                       Sphere30d,Rosenbrock30d,Ackley30d,Rastrigin30d,Weierstrass30d,Griewank30d,Schwefel30d,Sumsquares30d]
 SELECTION           = 'RouletteWheel'
-MUTATIONS           = ['ModifiedABC','ABC/best/1','ABC/best/2'] #['StandardABC']
-INITIALIZATIONS     = ['random','cahotic']                      #['random']
+MUTATIONS           = ['StandardABC','ModifiedABC','ABC/best/1','ABC/best/2']
+INITIALIZATIONS     = ['random','cahotic']                      
 STAGNATION_TOL      = 1e-6
 RANDOM_SEED         = 1234
-N_SIMULATIONS       = 10
-CSV_PATH            = 'opt_report/report_VariantsABC.csv'       # 'opt_report/report_StandardABC.csv'
+N_SIMULATIONS       = 15
+FULL_CSV_PATH       = 'simulations/opt_report_full.csv'      
+STATS_CSV_PATH      = 'simulations/opt_report_stats.csv'
 
 #++++++++++++++++++++++++++++++++++++
 # Main
@@ -31,9 +33,12 @@ CSV_PATH            = 'opt_report/report_VariantsABC.csv'       # 'opt_report/re
 
 if __name__ == '__main__':
     
-    np.random.seed(RANDOM_SEED) # Seed for reproducibility
+    # Seed for reproducibility
+    np.random.seed(RANDOM_SEED) 
     
-    benchmark_df = pd.DataFrame(columns=['Function','Initialization','Mutation','Mean','Median','Std','Best','Worst'])
+    opt_report_full_df  = pd.DataFrame(columns=['Function','Initialization','Mutation','OptValue'])
+    opt_report_stats_df = pd.DataFrame(columns=['Function','Initialization','Mutation','Mean','Std','Median','Best','Worst'])
+    
     for function in BENCHMARK_FUNCTIONS:
         for mutation in MUTATIONS:
             for initialization in INITIALIZATIONS:
@@ -44,27 +49,30 @@ if __name__ == '__main__':
                 
                 optimum_series = np.full(N_SIMULATIONS,np.nan)
                 
-                for s in trange(N_SIMULATIONS,desc='Simulations'):
+                for s in trange(N_SIMULATIONS,desc='Running simulations'):
                     
                     ABC = ArtificialBeeColony(n_bees = N_BEES,
                                               bounds   = function.bounds,
                                               function = function.fun)
-                    ABC.optimize(max_iters     = MAX_ITERS,
-                                selection      = SELECTION,
-                                mutation       = mutation,
-                                initialization = initialization,
-                                stagnation_tol = STAGNATION_TOL,
-                                RANDOM_SEED    = None)
-
-                    optimum_series[s] = ABC.optimal_bee.value
+                    ABC.optimize(max_iters      = MAX_ITERS,
+                                 selection      = SELECTION,
+                                 mutation       = mutation,
+                                 initialization = initialization,
+                                 stagnation_tol = STAGNATION_TOL,
+                                 verbose        = False,
+                                 RANDOM_SEED    = None)
+                    
+                    optimum_series[s] = ABC.optimum_value
+                    
+                    opt_report_full_df.loc[len(opt_report_full_df)] = [function.name,initialization,mutation,ABC.optimum_value]
                 
-                mean_optimum   = np.mean(optimum_series)
-                median_optimum = np.median(optimum_series)
-                std_optimum    = np.std(optimum_series)
-                best_optimum   = np.min(optimum_series)
-                worst_optimum  = np.max(optimum_series)
-                
-                benchmark_df.loc[len(benchmark_df)] = [function.name,initialization,mutation,mean_optimum,median_optimum,std_optimum,best_optimum,worst_optimum]
+                mean   = np.mean(optimum_series)
+                std    = np.std(optimum_series)
+                median = np.median(optimum_series)
+                best   = np.min(optimum_series)
+                worst  = np.max(optimum_series)
+                opt_report_stats_df.loc[len(opt_report_stats_df)] = [function.name,initialization,mutation,mean,std,median,best,worst]
 
-    benchmark_df.to_csv(CSV_PATH,index=False)
+    opt_report_full_df.to_csv(FULL_CSV_PATH,index=False)
+    opt_report_stats_df.to_csv(STATS_CSV_PATH,index=False)
             

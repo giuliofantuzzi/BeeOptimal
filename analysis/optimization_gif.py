@@ -15,11 +15,11 @@ from PIL import Image
 
 N_BEES              = 100
 LIMIT               = 'default'
-MAX_ITERS           = 100
+MAX_ITERS           = 1000
 STAGNATION_TOL      = 1e-6
-BENCHMARK_FUNCTIONS = [Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Griewank2d,Schwefel2d,Sumsquares2d,Eggholder]
+BENCHMARK_FUNCTIONS = [Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Weierstrass2d,Griewank2d,Schwefel2d,Sumsquares2d,Eggholder]
 SELECTION           = 'RouletteWheel'
-MUTATION            = 'StandardABC'
+MUTATION            = 'ABC/best/1'
 INITIALIZATION      = 'random'
 MR                  = 0.8
 SF                  = 1.0
@@ -102,5 +102,6 @@ if __name__ == '__main__':
             images[0].save(gif_path, save_all=True, append_images=images[1:], 
                            duration=300, loop=0)
             print(f"Animated GIF saved in {gif_path}")
+            
         
 #--------------------------------------------------------------------------------
