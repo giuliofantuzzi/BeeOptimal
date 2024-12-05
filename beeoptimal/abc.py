@@ -22,8 +22,8 @@ class ArtificialBeeColony():
         self.n_onlooker_bees     = self.n_bees - self.n_employed_bees
         self.function            = function
         self.bounds              = bounds
-        self.employed_bees       = np.full(self.n_employed_bees,None)
-        self.onlooker_bees       = np.full(self.n_onlooker_bees,None)
+        self.employed_bees       = []
+        self.onlooker_bees       = []
         self.colony_history      = []
         self.optimal_bee         = None
         self.optimal_bee_history = []
@@ -35,24 +35,24 @@ class ArtificialBeeColony():
                  selection        = 'RouletteWheel',
                  mutation         = 'StandardABC',
                  initialization   = 'random',
+                 stagnation_tol   = np.NINF,
                  sf               = 1.0,
                  self_adaptive_sf = False,
                  mr               = 0.8,
                  verbose          = False,
-                 random_seed      = None,
-                 stagnation_tol   = np.NINF):
+                 random_seed      = None):
         
         # Define optimization attributes
-        self.max_iters      = max_iters
-        self.actual_iters   = 0
-        self.limit          = limit if limit != 'default' else (0.6 * self.n_employed_bees * self.dim)  
-        self.selection      = selection
-        self.mutation       = mutation
-        self.initialization = initialization
-        self.mr             = mr
-        self.sf             = sf 
+        self.max_iters        = max_iters
+        self.actual_iters     = 0
+        self.limit            = limit if limit != 'default' else (0.6 * self.n_employed_bees * self.dim)  
+        self.selection        = selection
+        self.mutation         = mutation
+        self.initialization   = initialization
+        self.mr               = mr
+        self.sf               = sf 
         self.self_adaptive_sf = self_adaptive_sf 
-        self.stagnation_tol = stagnation_tol
+        self.stagnation_tol   = stagnation_tol
         
         # Initialization
         if random_seed:

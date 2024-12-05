@@ -21,6 +21,11 @@ def rastrigin(point):
     point = np.array(point)
     return (10*len(point) + np.sum((point**2 - 10*np.cos(2*np.pi*point))))
 
+def weierstrass(point,a=0.5,b=3,k_max=20):
+    point = np.array(point)
+    k = np.arange(k_max+1)
+    return np.sum(np.sum(a**k[:, None] * np.cos(2 * np.pi * b**k[:, None] * (point + 0.5)), axis=0)) - (len(point) * np.sum(a**k * np.cos(2 * np.pi * b**k * 0.5)))
+
 def griewank(point):
     point = np.array(point)
     return 1 + np.sum(point**2)/4000 - np.prod(np.cos(point/np.sqrt(np.arange(1, len(point)+1))))
@@ -99,6 +104,13 @@ Rastrigin2d = BenchmarkFunction(
     optimal_solution = np.zeros(2)
 )
 
+Weierstrass2d = BenchmarkFunction(
+    name             = "Weierstrass-2d",
+    fun              = weierstrass,
+    bounds           = np.array([(-0.5, 0.5)]*2),
+    optimal_solution = np.zeros(2)
+)
+
 Griewank2d = BenchmarkFunction(
     name             = "Griewank-2d",
     fun              = griewank,
@@ -157,6 +169,13 @@ Rastrigin10d = BenchmarkFunction(
     optimal_solution = np.zeros(10)
 )
 
+Weierstrass10d = BenchmarkFunction(
+    name             = "Weierstrass-10d",
+    fun              = weierstrass,
+    bounds           = np.array([(-0.5, 0.5)]*10),
+    optimal_solution = np.zeros(10)
+)
+
 Griewank10d = BenchmarkFunction(
     name             = "Griewank-10d",
     fun              = griewank,
@@ -205,6 +224,13 @@ Rastrigin30d = BenchmarkFunction(
     name             = "Rastrigin-30d",
     fun              = rastrigin,
     bounds           = np.array([(-5.12, 5.12)]*30),
+    optimal_solution = np.zeros(30)
+)
+
+Weierstrass30d = BenchmarkFunction(
+    name             = "Weierstrass-30d",
+    fun              = weierstrass,
+    bounds           = np.array([(-0.5, 0.5)]*30),
     optimal_solution = np.zeros(30)
 )
 
