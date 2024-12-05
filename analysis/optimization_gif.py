@@ -15,18 +15,18 @@ from PIL import Image
 
 N_BEES              = 100
 LIMIT               = 'default'
-MAX_ITERS           = 500
+MAX_ITERS           = 100
 STAGNATION_TOL      = 1e-6
 BENCHMARK_FUNCTIONS = [Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Griewank2d,Schwefel2d,Sumsquares2d,Eggholder]
 SELECTION           = 'RouletteWheel'
-MUTATION            = 'StandardABC'
+MUTATION            = 'DirectedABC'
 INITIALIZATION      = 'random'
 MR                  = 0.8
 SF                  = 1.0
 SELF_ADAPTIVE_SF    = False
-VERBOSE             = False
+VERBOSE             = True
 RANDOM_SEED         = 1234
-GIF_PATH            = 'tests/'
+GIF_PATH            = 'images/DirectedABC/'
 
 #++++++++++++++++++++++++++++++++++++
 # Tests

@@ -51,10 +51,12 @@ class ArtificialBeeColony():
         self.selection      = selection
         self.mutation       = mutation
         self.initialization = initialization
+        self.stagnation_tol = stagnation_tol
         self.mr             = mr
         self.sf             = sf 
         self.self_adaptive_sf = self_adaptive_sf 
-        self.stagnation_tol = stagnation_tol
+        if self.mutation == 'DirectedABC':
+            self.directions = np.zeros((self.n_employed_bees,self.dim))
         
         # Initialization
         if random_seed:
@@ -111,8 +113,12 @@ class ArtificialBeeColony():
             if candidate_bee.fitness >= bee.fitness:
                 self.employed_bees[bee_idx] = candidate_bee
                 succesful_mutations += 1
+                if self.mutation=='DirectedABC':
+                    self.directions[bee_idx,:] = np.sign(np.array(bee.position) - np.array(candidate_bee.position))
             else:
                 bee.trial += 1
+                if self.mutation=='DirectedABC':
+                    self.directions[bee_idx,:] = np.zeros(self.dim)
         if self.self_adaptive_sf:
             self.update_SF_(succesful_mutations_ratio= (succesful_mutations / self.n_employed_bees) )
     #------------------------------------------------------------------------------------------------------------------            
@@ -169,7 +175,7 @@ class ArtificialBeeColony():
     def get_candidate_neighbor_(self,bee,bee_idx,population):
         
         if self.mutation == 'StandardABC':
-            phi = np.random.uniform(-self.sf,self.sf)
+            phi = np.random.uniform(-self.sf,-self.sf)
             donor_bee = self.get_donor_bees_(n_donors=1,bee_idx=bee_idx,population=population)[0]
             candidate_bee = copy.deepcopy(bee)
             j = np.random.randint(0,self.dim)
@@ -201,7 +207,16 @@ class ArtificialBeeColony():
             candidate_bee.position[j] = self.optimal_bee.position[j] + phi*(donor1.position[j] - donor2.position[j]) \
                                         + phi*(donor3.position[j] - donor4.position[j])
             candidate_bee.position[j] = np.clip(candidate_bee.position[j],self.bounds[j][0],self.bounds[j][1])
-        
+    
+        if self.mutation == 'DirectedABC':
+            donor_bee = self.get_donor_bees_(n_donors=1,bee_idx=bee_idx,population=population)[0]
+            directions = self.directions[bee_idx,:]
+            r = ((directions == 0)  * np.random.uniform(-1,1, directions.shape) + \
+                (directions == 1)  * np.random.uniform(0,1, directions.shape) + \
+                (directions == -1) * np.random.uniform(-1,0, directions.shape))
+            candidate_bee = copy.deepcopy(bee)
+            candidate_bee.position = np.array(np.array(bee.position) + r*(np.array(bee.position)-np.array(donor_bee.position))).tolist()
+                
         return candidate_bee
     #------------------------------------------------------------------------------------------------------------------
     def get_donor_bees_(self,n_donors=1,bee_idx=None,population=None):
