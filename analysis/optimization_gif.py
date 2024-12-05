@@ -15,11 +15,11 @@ from PIL import Image
 
 N_BEES              = 100
 LIMIT               = 'default'
-MAX_ITERS           = 100
-STAGNATION_TOL      = 1e-6
+MAX_ITERS           = 500
+STAGNATION_TOL      = np.NINF#1e-6
 BENCHMARK_FUNCTIONS = [Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Griewank2d,Schwefel2d,Sumsquares2d,Eggholder]
 SELECTION           = 'RouletteWheel'
-MUTATION            = 'DirectedABC'
+MUTATION            = 'StandardABC'
 INITIALIZATION      = 'random'
 MR                  = 0.8
 SF                  = 1.0
@@ -69,37 +69,37 @@ if __name__ == '__main__':
         print(f"\tFound    : {ABC.optimal_bee.value}")
         print('-'*100)
         
-        # GIF
-        x = np.linspace(function_test.bounds[0][0]-0.05*np.abs(function_test.bounds[0][0]),
-                        function_test.bounds[0][1]+0.05*np.abs(function_test.bounds[0][1]), 
-                        100)
-        y = np.linspace(function_test.bounds[1][0]-0.05*np.abs(function_test.bounds[1][0]),
-                        function_test.bounds[1][1]+0.05*np.abs(function_test.bounds[1][1]),
-                        100)
-        X, Y = np.meshgrid(x, y)
-        points = np.c_[X.ravel(), Y.ravel()]  
-        Z = np.array([function_test.evaluate(p) for p in points]).reshape(X.shape)
+        # # GIF
+        # x = np.linspace(function_test.bounds[0][0]-0.05*np.abs(function_test.bounds[0][0]),
+        #                 function_test.bounds[0][1]+0.05*np.abs(function_test.bounds[0][1]), 
+        #                 100)
+        # y = np.linspace(function_test.bounds[1][0]-0.05*np.abs(function_test.bounds[1][0]),
+        #                 function_test.bounds[1][1]+0.05*np.abs(function_test.bounds[1][1]),
+        #                 100)
+        # X, Y = np.meshgrid(x, y)
+        # points = np.c_[X.ravel(), Y.ravel()]  
+        # Z = np.array([function_test.evaluate(p) for p in points]).reshape(X.shape)
         
-        plots = []
+        # plots = []
         
-        for iteration in range(0,(ABC.actual_iters+1),2): #NB: actual_iters +1 to include initial population
-            plots.append(ContourPlotBee(x=x,y=y,Z=Z,bee_colony=ABC.colony_history[iteration],
-                                        title=f"Optimization of function {function_test.name.upper()} [Iter {iteration} / {ABC.actual_iters}]",
-                                        optimal_solution=function_test.optimal_solution))
+        # for iteration in range(0,(ABC.actual_iters+1),2): #NB: actual_iters +1 to include initial population
+        #     plots.append(ContourPlotBee(x=x,y=y,Z=Z,bee_colony=ABC.colony_history[iteration],
+        #                                 title=f"Optimization of function {function_test.name.upper()} [Iter {iteration} / {ABC.actual_iters}]",
+        #                                 optimal_solution=function_test.optimal_solution))
 
-        with tempfile.TemporaryDirectory() as tmpdirname:
-            image_files = []
-            # Save each figure as a separate image file
-            for i, fig in enumerate(plots):
-                # Define the file path
-                file_path = f"{tmpdirname}/frame_{i}.png"
-                fig.write_image(file_path, format="png", scale=3)
-                image_files.append(file_path)
+        # with tempfile.TemporaryDirectory() as tmpdirname:
+        #     image_files = []
+        #     # Save each figure as a separate image file
+        #     for i, fig in enumerate(plots):
+        #         # Define the file path
+        #         file_path = f"{tmpdirname}/frame_{i}.png"
+        #         fig.write_image(file_path, format="png", scale=3)
+        #         image_files.append(file_path)
 
-            # Open images and save as GIF
-            images = [Image.open(file) for file in image_files]
-            gif_path = GIF_PATH + f"{function_test.name}_animated_opt.gif"
-            images[0].save(gif_path, save_all=True, append_images=images[1:], 
-                           duration=300, loop=0)
-            print(f"Animated GIF saved in {gif_path}")
+        #     # Open images and save as GIF
+        #     images = [Image.open(file) for file in image_files]
+        #     gif_path = GIF_PATH + f"{function_test.name}_animated_opt.gif"
+        #     images[0].save(gif_path, save_all=True, append_images=images[1:], 
+        #                    duration=300, loop=0)
+        #     print(f"Animated GIF saved in {gif_path}")
 #--------------------------------------------------------------------------------
