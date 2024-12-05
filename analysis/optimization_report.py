@@ -60,11 +60,11 @@ if __name__ == '__main__':
                                  initialization = initialization,
                                  stagnation_tol = STAGNATION_TOL,
                                  verbose        = False,
-                                 RANDOM_SEED    = None)
+                                 random_seed    = None)
                     
-                    optimum_series[s] = ABC.optimum_value
+                    optimum_series[s] = ABC.optimal_bee.value
                     
-                    opt_report_full_df.loc[len(opt_report_full_df)] = [function.name,initialization,mutation,ABC.optimum_value]
+                    opt_report_full_df.loc[len(opt_report_full_df)] = [function.name,initialization,mutation,ABC.optimal_bee.value]
                 
                 mean   = np.mean(optimum_series)
                 std    = np.std(optimum_series)
