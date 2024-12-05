@@ -168,9 +168,8 @@ class ArtificialBeeColony():
     #------------------------------------------------------------------------------------------------------------------            
     def get_candidate_neighbor_(self,bee,bee_idx,population):
         
-        phi = np.random.uniform(-self.sf,self.sf)
-        
         if self.mutation == 'StandardABC':
+            phi = np.random.uniform(-self.sf,self.sf)
             donor_bee = self.get_donor_bees_(n_donors=1,bee_idx=bee_idx,population=population)[0]
             candidate_bee = copy.deepcopy(bee)
             j = np.random.randint(0,self.dim)
@@ -181,11 +180,13 @@ class ArtificialBeeColony():
             donor_bee = self.get_donor_bees_(n_donors=1,bee_idx=bee_idx,population=population)[0]
             candidate_bee = copy.deepcopy(bee)
             for j in range(self.dim):
+                phi = np.random.uniform(-self.sf,self.sf)
                 if np.random.uniform() <= self.mr:
                     candidate_bee.position[j] = bee.position[j] + phi*(bee.position[j] - donor_bee.position[j])
                     candidate_bee.position[j] = np.clip(candidate_bee.position[j],self.bounds[j][0],self.bounds[j][1])
             
         if self.mutation == 'ABC/best/1':
+            phi = np.random.uniform(-self.sf,self.sf)
             donor1,donor2 = self.get_donor_bees_(n_donors=2,bee_idx=bee_idx,population=population)
             candidate_bee = copy.deepcopy(bee)
             j = np.random.randint(0,self.dim)
@@ -193,6 +194,7 @@ class ArtificialBeeColony():
             candidate_bee.position[j] = np.clip(candidate_bee.position[j],self.bounds[j][0],self.bounds[j][1])
             
         if self.mutation == 'ABC/best/2':
+            phi = np.random.uniform(-self.sf,self.sf)
             donor1,donor2,donor3,donor4 = self.get_donor_bees_(n_donors=4,bee_idx=bee_idx,population=population)
             candidate_bee = copy.deepcopy(bee)
             j = np.random.randint(0,self.dim)
