@@ -16,10 +16,10 @@ from PIL import Image
 N_BEES              = 100
 LIMIT               = 'default'
 MAX_ITERS           = 500
-STAGNATION_TOL      = np.NINF#1e-6
+STAGNATION_TOL      = 1e-6
 BENCHMARK_FUNCTIONS = [Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Griewank2d,Schwefel2d,Sumsquares2d,Eggholder]
 SELECTION           = 'RouletteWheel'
-MUTATION            = 'StandardABC'
+MUTATION            = 'ModifiedABC'
 INITIALIZATION      = 'random'
 MR                  = 0.8
 SF                  = 1.0
