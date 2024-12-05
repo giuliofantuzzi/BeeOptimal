@@ -22,12 +22,10 @@ class ArtificialBeeColony():
         self.n_onlooker_bees     = self.n_bees - self.n_employed_bees
         self.function            = function
         self.bounds              = bounds
-        self.lower_bounds        = np.array([bound[0] for bound in bounds])
-        self.upper_bounds        = np.array([bound[1] for bound in bounds])
-        self.employed_bees       = []
-        self.onlooker_bees       = []
+        self.employed_bees       = np.full(self.n_employed_bees,None)
+        self.onlooker_bees       = np.full(self.n_onlooker_bees,None)
         self.colony_history      = []
-        self.optimal_bee         = []
+        self.optimal_bee         = None
         self.optimal_bee_history = []
     
     #------------------------------------------------------------------------------------------------------------------
@@ -61,7 +59,7 @@ class ArtificialBeeColony():
             np.random.seed(random_seed)
             
         if self.initialization == 'random':
-            self.employed_bees = [Bee(position = [np.random.uniform(bound[0],bound[1]) for bound in self.bounds],
+            self.employed_bees = [Bee(position = np.random.uniform(self.bounds[:,0],self.bounds[:,1],self.dim),
                                       function = self.function,
                                       bounds   = self.bounds) for _ in range(self.n_employed_bees) ]
         elif self.initialization == 'cahotic':
@@ -70,10 +68,10 @@ class ArtificialBeeColony():
             for _ in range(300):
                 cahotic_map = np.sin(cahotic_map * np.pi)    
                 
-            cahotic_pop  = [Bee(position = self.lower_bounds + (self.upper_bounds - self.lower_bounds) * cahotic_map[i,:],
+            cahotic_pop  = [Bee(position = self.bounds[:,0] + (self.bounds[:,1] - self.bounds[:,0]) * cahotic_map[i,:],
                                 function = self.function,
                                 bounds   = self.bounds) for i in range(self.n_employed_bees) ]
-            opposite_pop = [Bee(position = self.lower_bounds + self.upper_bounds - cahotic_pop[i].position,
+            opposite_pop = [Bee(position = self.bounds[:,0] + self.bounds[:,1] - cahotic_pop[i].position,
                                 function = self.function,
                                 bounds   = self.bounds) for i in range(self.n_employed_bees) ]
             
@@ -117,49 +115,48 @@ class ArtificialBeeColony():
             self.update_SF_(succesful_mutations_ratio= (succesful_mutations / self.n_employed_bees) )
     #------------------------------------------------------------------------------------------------------------------            
     def waggle_dance_(self):
-        fitness_values = [bee.fitness for bee in self.employed_bees]
+        fitness_values = np.array([bee.fitness for bee in self.employed_bees])
         if self.selection == 'RouletteWheel':
-            selection_probabilities  = [fitness/sum(fitness_values) for fitness in fitness_values]
+            selection_probabilities  = fitness_values / np.sum(fitness_values)
             dance_winners = np.random.choice(range(self.n_employed_bees),size=self.n_onlooker_bees,p=selection_probabilities)
             return dance_winners
     #------------------------------------------------------------------------------------------------------------------    
     def send_onlookers_(self):
         dance_winners = self.waggle_dance_()
+        
         self.onlooker_bees = [Bee(position = self.employed_bees[winner_idx].position,
                                   function = self.function,
                                   bounds   = self.bounds) for winner_idx in dance_winners
                               ]
+        
         succesful_mutations = 0
-        for bee_idx, bee in enumerate(self.onlooker_bees):
+        for bee_idx, winner_idx in enumerate(dance_winners):
+            bee = self.onlooker_bees[bee_idx]
             # Get Candidate Neighbor
             candidate_bee = self.get_candidate_neighbor_(bee=bee,bee_idx=bee_idx,population=self.onlooker_bees)
             # Greedy Selection
             if candidate_bee.fitness >= bee.fitness:
-                self.onlooker_bees[bee_idx] = candidate_bee
+                self.employed_bees[winner_idx] = candidate_bee
                 succesful_mutations += 1
+        
         if self.self_adaptive_sf:
             self.update_SF_(succesful_mutations_ratio= (succesful_mutations / self.n_onlooker_bees) )
-        
-        # Update Employed Bees
-        for bee_idx, bee in zip(dance_winners,self.onlooker_bees):
-            if bee.fitness > self.employed_bees[bee_idx].fitness:
-                self.employed_bees[bee_idx] = bee
     #------------------------------------------------------------------------------------------------------------------
     def send_scouts_(self):
         for bee_idx, bee in enumerate(self.employed_bees):
             if bee.trial > self.limit:
                 if self.initialization == 'random':
-                    self.employed_bees[bee_idx] = Bee(position = [np.random.uniform(bound[0],bound[1]) for bound in self.bounds],
+                    self.employed_bees[bee_idx] = Bee(position = np.random.uniform(self.bounds[:,0],self.bounds[:,1],self.dim),
                                                       function = self.function,
                                                       bounds   = self.bounds)
                 elif self.initialization == 'cahotic':
                     cahotic_map = np.random.rand(self.n_employed_bees,self.dim)
                     for _ in range(300):
                         cahotic_map = np.sin(cahotic_map * np.pi)    
-                    cahotic_pop  = [Bee(position = self.lower_bounds + (self.upper_bounds - self.lower_bounds) * cahotic_map[i,:],
+                    cahotic_pop  = [Bee(position = self.bounds[:,0] + (self.bounds[:,1] - self.bounds[:,0]) * cahotic_map[i,:],
                                         function = self.function,
                                         bounds   = self.bounds) for i in range(self.n_employed_bees) ]
-                    opposite_pop = [Bee(position = self.lower_bounds + self.upper_bounds - cahotic_pop[i].position,
+                    opposite_pop = [Bee(position = self.bounds[:,0] + self.bounds[:,1] - cahotic_pop[i].position,
                                         function = self.function,
                                         bounds   = self.bounds) for i in range(self.n_employed_bees) ]
             
@@ -179,11 +176,15 @@ class ArtificialBeeColony():
         if self.mutation == 'ModifiedABC':
             donor_bee = self.get_donor_bees_(n_donors=1,bee_idx=bee_idx,population=population)[0]
             candidate_bee = copy.deepcopy(bee)
-            for j in range(self.dim):
-                phi = np.random.uniform(-self.sf,self.sf)
-                if np.random.uniform() <= self.mr:
-                    candidate_bee.position[j] = bee.position[j] + phi*(bee.position[j] - donor_bee.position[j])
-                    candidate_bee.position[j] = np.clip(candidate_bee.position[j],self.bounds[j][0],self.bounds[j][1])
+            # for j in range(self.dim):
+            #     phi = np.random.uniform(-self.sf,self.sf)
+            #     if np.random.uniform() <= self.mr:
+            #         candidate_bee.position[j] = bee.position[j] + phi*(bee.position[j] - donor_bee.position[j])
+            #         candidate_bee.position[j] = np.clip(candidate_bee.position[j],self.bounds[j][0],self.bounds[j][1])
+            phi = np.random.uniform(-self.sf,self.sf,self.dim)
+            mask = np.random.uniform(size=self.dim) <= self.mr
+            candidate_bee.position[mask] = bee.position[mask] + phi[mask]* bee.position[mask] - donor_bee.position[mask]
+            candidate_bee.position = np.clip(candidate_bee.position,self.bounds[:,0],self.bounds[:,1])
             
         if self.mutation == 'ABC/best/1':
             phi = np.random.uniform(-self.sf,self.sf)

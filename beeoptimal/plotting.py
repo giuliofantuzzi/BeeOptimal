@@ -57,7 +57,7 @@ def ContourPlotBee(x,y,Z,bee_colony,title='',optimal_solution=None):
                         #layer="above"
                     )
                 )
-    if optimal_solution:
+    if optimal_solution is not None:
         fig.add_trace(go.Scatter(x=[optimal_solution[0]], y=[optimal_solution[1]], mode='markers', marker=dict(size=10, color='red',symbol='x')))
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False)
