@@ -1,10 +1,13 @@
-<div align="center">
+<p align="center">
   <a href="https://github.com/giuliofantuzzi/BeeOptimal">
+    <!-- <img src="https://github.com/giuliofantuzzi/BeeOptimal/raw/main/assets/LogoBeeOptimal.png" alt="Logo" width="250" height="250"> -->
     <img src="assets/LogoBeeOptimal.png" alt="Logo" width="250" height="250">
   </a>
+</p>
 <h2 align="center">BeeOptimal</h2>
 <h4 align="center">A Python implementation of the Artificial Bee Colony (ABC) optimization algorithm</h4>
-</div>
+
+
 
 This repository contains a Python implementation of the Artificial Bee Colony (ABC) optimization algorithm, along with several of its variants. Final project for the *Optimization for Artificial Intelligence* course, MSc's degree in Data Science and Artificial Intelligence @ University of Trieste.
 
@@ -18,6 +21,9 @@ This repository contains a Python implementation of the Artificial Bee Colony (A
 - [ ] Directed ABC
 - [ ] Constraint handling
 - [ ] Add arg parser for command line usage
+- [ ] Add docstrings
+- [ ] Try to practice with docker and create a container for the project
+- [ ] Understand better PyPy packages
 
 
 
