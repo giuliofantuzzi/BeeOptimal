@@ -38,7 +38,7 @@ class ArtificialBeeColony():
                  stagnation_tol   = np.NINF,
                  sf               = 1.0,
                  self_adaptive_sf = False,
-                 mr               = 0.8,
+                 mr               = 0.7,
                  verbose          = False,
                  random_seed      = None):
         
