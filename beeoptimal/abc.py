@@ -153,6 +153,7 @@ class ArtificialBeeColony():
                     cahotic_map = np.random.rand(self.n_employed_bees,self.dim)
                     for _ in range(300):
                         cahotic_map = np.sin(cahotic_map * np.pi)    
+                        
                     cahotic_pop  = [Bee(position = self.bounds[:,0] + (self.bounds[:,1] - self.bounds[:,0]) * cahotic_map[i,:],
                                         function = self.function,
                                         bounds   = self.bounds) for i in range(self.n_employed_bees) ]
@@ -160,8 +161,8 @@ class ArtificialBeeColony():
                                         function = self.function,
                                         bounds   = self.bounds) for i in range(self.n_employed_bees) ]
             
-                    self.employed_bees = sorted(cahotic_pop+opposite_pop, 
-                                                key=lambda bee: bee.fitness, reverse=True)[:self.n_employed_bees]
+                    self.employed_bees[bee_idx] = sorted(cahotic_pop+opposite_pop,
+                                                         key=lambda bee: bee.fitness, reverse=True)[0]
     #------------------------------------------------------------------------------------------------------------------            
     def get_candidate_neighbor_(self,bee,bee_idx,population):
         
@@ -176,11 +177,6 @@ class ArtificialBeeColony():
         if self.mutation == 'ModifiedABC':
             donor_bee = self.get_donor_bees_(n_donors=1,bee_idx=bee_idx,population=population)[0]
             candidate_bee = copy.deepcopy(bee)
-            # for j in range(self.dim):
-            #     phi = np.random.uniform(-self.sf,self.sf)
-            #     if np.random.uniform() <= self.mr:
-            #         candidate_bee.position[j] = bee.position[j] + phi*(bee.position[j] - donor_bee.position[j])
-            #         candidate_bee.position[j] = np.clip(candidate_bee.position[j],self.bounds[j][0],self.bounds[j][1])
             phi = np.random.uniform(-self.sf,self.sf,self.dim)
             mask = np.random.uniform(size=self.dim) <= self.mr
             candidate_bee.position[mask] = bee.position[mask] + phi[mask]* bee.position[mask] - donor_bee.position[mask]
