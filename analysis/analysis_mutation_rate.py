@@ -15,7 +15,7 @@ from tqdm import trange
 N_BEES              = 100
 LIMIT               = 'default'
 MAX_ITERS           = 1000
-BENCHMARK_FUNCTIONS = [Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Weierstrass2d,Griewank2d,Schwefel2d,Sumsquares2d,Eggholder,
+BENCHMARK_FUNCTIONS = [Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Weierstrass2d,Griewank2d,Schwefel2d,Sumsquares2d,
                        Sphere10d,Rosenbrock10d,Ackley10d,Rastrigin10d,Weierstrass10d,Griewank10d,Schwefel10d,Sumsquares10d,
                        Sphere30d,Rosenbrock30d,Ackley30d,Rastrigin30d,Weierstrass30d,Griewank30d,Schwefel30d,Sumsquares30d]
 INITIALIZATION      = 'random'
@@ -23,7 +23,7 @@ SELECTION           = 'RouletteWheel'
 MUTATION            = 'ModifiedABC'
 MUTATION_RATES      = [0.1,0.3,0.5,0.7,0.9]
 RANDOM_SEED         = 1234
-IMG_PATH            = 'images/analysis_mutation/'
+IMG_PATH            = 'images/analysis_mr/'
 STAGNATION_TOL      = np.NINF # No stagnation, we want to see the full optimization process
 N_SIMULATIONS       = 15
 PLOT_COLORS         = ['#2E86C1','#8E44AD','#E74C3C','#F3C40F','#68C73C']
@@ -68,7 +68,7 @@ if __name__ == '__main__':
         
         # Compute statistics
         cost_medians = np.median(cost_history,axis=1)
-        cost_median = np.clip(cost_medians,a_min=10e-20,a_max=None)
+        cost_medians = np.clip(cost_medians,a_min=10e-30,a_max=None)
         #cost_means = np.mean(cost_history,axis=1)
         # cost_stds  = np.std(cost_history,axis=1)
         # cost_lower = cost_means - 1.96*cost_stds/np.sqrt(N_SIMULATIONS)

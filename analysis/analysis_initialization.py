@@ -14,7 +14,7 @@ from tqdm import trange
 
 N_BEES              = 100
 LIMIT               = 'default'
-MAX_ITERS           = 500
+MAX_ITERS           = 1000
 BENCHMARK_FUNCTIONS = [Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Weierstrass2d,Griewank2d,Schwefel2d,Sumsquares2d,Eggholder,
                        Sphere10d,Rosenbrock10d,Ackley10d,Rastrigin10d,Weierstrass10d,Griewank10d,Schwefel10d,Sumsquares10d,
                        Sphere30d,Rosenbrock30d,Ackley30d,Rastrigin30d,Weierstrass30d,Griewank30d,Schwefel30d,Sumsquares30d]
@@ -64,7 +64,7 @@ if __name__ == '__main__':
         
         # Compute statistics
         cost_medians = np.median(cost_history,axis=1)
-        cost_median = np.clip(cost_medians,a_min=10e-20,a_max=None)
+        cost_medians = np.clip(cost_medians,a_min=10e-30,a_max=None)
         
         # Comparison plots
         plt.figure(figsize=(10, 6))

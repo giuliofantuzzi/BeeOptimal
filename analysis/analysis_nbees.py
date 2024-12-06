@@ -12,17 +12,20 @@ from tqdm import trange
 # Global variables and settings
 #++++++++++++++++++++++++++++++++++++
 
-N_BEES              = [25,50,100,250,500]
+N_BEES              = [25,50,100,250]
 LIMIT               = 'default'
 MAX_ITERS           = 1000
-BENCHMARK_FUNCTIONS = [Sphere30d,Rosenbrock30d,Ackley30d,Rastrigin30d,Griewank30d,Schwefel30d,Sumsquares30d]
+BENCHMARK_FUNCTIONS = [Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Weierstrass2d,Griewank2d,Schwefel2d,Sumsquares2d,
+                       Sphere10d,Rosenbrock10d,Ackley10d,Rastrigin10d,Weierstrass10d,Griewank10d,Schwefel10d,Sumsquares10d,
+                       Sphere30d,Rosenbrock30d,Ackley30d,Rastrigin30d,Weierstrass30d,Griewank30d,Schwefel30d,Sumsquares30d]
 SELECTION           = 'RouletteWheel'
 MUTATION            = 'StandardABC'
 INITIALIZATION      = 'random'
+STAGNATION_TOL      = np.NINF 
 RANDOM_SEED         = 1234
-IMG_PATH            = 'images/AnalysisNbees/'
+IMG_PATH            = 'images/analysis_nbees/'
 N_SIMULATIONS       = 15
-PLOT_COLORS         = ['#2E86C1','#8E44AD','#E74C3C','#F3C40F','#68C73C']
+PLOT_COLORS         = ['#2E86C1','#E74C3C','#F3C40F','#68C73C']
 
 
 #++++++++++++++++++++++++++++++++++++
@@ -55,13 +58,14 @@ if __name__ == '__main__':
                             selection      = SELECTION,
                             mutation       = MUTATION,
                             initialization = INITIALIZATION,
+                            stagnation_tol = STAGNATION_TOL,
                             random_seed    = None)
 
                 cost_history[i,s,:]    = [best_bee.value for best_bee in ABC.optimal_bee_history]
         
         # Compute statistics
         cost_medians = np.median(cost_history,axis=1)
-        cost_median = np.clip(cost_medians,a_min=10e-20,a_max=None)
+        cost_medians = np.clip(cost_medians,a_min=10e-30,a_max=None)
         # cost_means = np.mean(cost_history,axis=1)
         # cost_stds  = np.std(cost_history,axis=1)
         # cost_lower = cost_means - 1.96*cost_stds/np.sqrt(N_SIMULATIONS)
