@@ -47,11 +47,11 @@ if __name__ == '__main__':
         cost_history    = np.full((len(MUTATION_RATES),N_SIMULATIONS,MAX_ITERS+1),np.nan)
         #fitness_history = np.full((len(N_BEES),N_SIMULATIONS,MAX_ITERS+1),np.nan)
 
-        for i,n_bees in enumerate(N_BEES):
+        for i,mr in enumerate(MUTATION_RATES):
             # Simulations
-            for s in trange(N_SIMULATIONS,desc=f'Simulations (N_BEES={n_bees})'):
+            for s in trange(N_SIMULATIONS,desc=f'Simulations (MR={mr})'):
 
-                ABC = ArtificialBeeColony(n_bees   = n_bees,
+                ABC = ArtificialBeeColony(n_bees   = N_BEES,
                                           bounds   = function.bounds,
                                           function = function.fun)
                 
@@ -59,6 +59,7 @@ if __name__ == '__main__':
                             limit          = LIMIT,
                             selection      = SELECTION,
                             mutation       = MUTATION,
+                            mr             = mr,
                             initialization = INITIALIZATION,
                             stagnation_tol = STAGNATION_TOL,
                             random_seed    = None)
