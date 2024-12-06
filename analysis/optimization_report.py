@@ -21,6 +21,7 @@ BENCHMARK_FUNCTIONS = [Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Weierstrass2d,
 SELECTION           = 'RouletteWheel'
 MUTATIONS           = ['StandardABC','ModifiedABC','ABC/best/1','ABC/best/2']
 INITIALIZATIONS     = ['random','cahotic']                      
+MR                  = 0.7
 STAGNATION_TOL      = 1e-6
 RANDOM_SEED         = 1234
 N_SIMULATIONS       = 15
@@ -58,6 +59,7 @@ if __name__ == '__main__':
                                  selection      = SELECTION,
                                  mutation       = mutation,
                                  initialization = initialization,
+                                 mr             = MR,   
                                  stagnation_tol = STAGNATION_TOL,
                                  verbose        = False,
                                  random_seed    = None)
