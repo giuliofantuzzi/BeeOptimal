@@ -17,10 +17,10 @@ N_BEES              = 100
 LIMIT               = 'default'
 MAX_ITERS           = 1000
 STAGNATION_TOL      = 1e-6
-BENCHMARK_FUNCTIONS = [Ackley2d,Rastrigin2d,Weierstrass2d,Griewank2d,Schwefel2d,Sumsquares2d,Eggholder] #Sphere2d,Rosenbrock2d
+BENCHMARK_FUNCTIONS = [Eggholder]#[Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Weierstrass2d,Griewank2d,Schwefel2d,Sumsquares2d,Eggholder]
 SELECTION           = 'RouletteWheel'
-MUTATIONS           = ['StandardABC','ModifiedABC','ABC/best/1','ABC/best/2']
-INITIALIZATIONS     = ['random','cahotic']
+MUTATIONS           = ['ABC/best/2']#['StandardABC','ModifiedABC','ABC/best/1','ABC/best/2']
+INITIALIZATIONS     = ['random']#['random','cahotic']
 MR                  = 0.8
 SF                  = 1.0
 SELF_ADAPTIVE_SF    = False
@@ -85,9 +85,11 @@ if __name__ == '__main__':
                 
                 plots = []
                 
-                for iteration in range(0,(ABC.actual_iters+1)): #NB: actual_iters +1 to include initial population
+                # Adaptive step in order to have gifs with same number of frames
+                step = max(1, (ABC.actual_iters+1) // 50) #Note: actual_iters +1 to include initial population
+                for iteration in range(0,(ABC.actual_iters+1),step): 
                     plots.append(ContourPlotBee(x=x,y=y,Z=Z,bee_colony=ABC.colony_history[iteration],
-                                                title=f"Optimization of function {function.name.upper()} [Iter {iteration} / {ABC.actual_iters}]",
+                                                title=f"{function.name.upper()} optimization [Iteration {iteration} / {ABC.actual_iters}]",
                                                 optimal_solution=function.optimal_solution))
 
                 with tempfile.TemporaryDirectory() as tmpdirname:
@@ -103,7 +105,7 @@ if __name__ == '__main__':
                     images = [Image.open(file) for file in image_files]
                     gif_path = GIF_PATH + f"{mutation_name}/{function.name}_{mutation_name}_{initialization}.gif"
                     images[0].save(gif_path, save_all=True, append_images=images[1:], 
-                                duration=150, loop=0)
+                                duration=200, loop=0)
                     print(f"Animated GIF saved in {gif_path}")
             
         
