@@ -5,7 +5,7 @@
 import numpy as np
 import copy
 from .bee import Bee
-from tqdm import trange
+from tqdm import trange,tqdm
 
 #++++++++++++++++++++++++++++++++++++
 # Artificial Bee Colony (ABC) class
@@ -84,7 +84,7 @@ class ArtificialBeeColony():
         self.optimal_bee_history.append(copy.deepcopy(self.optimal_bee))
         
         # Loop
-        for iter in trange(self.max_iters,desc='Running Optimization',disable= not verbose):
+        for _ in trange(self.max_iters,desc='Running Optimization',disable= not verbose,bar_format='{l_bar}{bar}|[{elapsed}<{remaining}]'):
             self.actual_iters += 1
             self.send_employees_()
             self.send_onlookers_()
@@ -95,10 +95,8 @@ class ArtificialBeeColony():
             # Stagnation
             if (np.std([bee.fitness for bee in self.employed_bees]) < self.stagnation_tol):
                 if verbose:
-                    print(f"Early termination: Optimization stagnated at iteration {iter+1} / {self.max_iters}")
-                # Break loop to terminate optimization
+                    tqdm.write(f"Early termination: Optimization stagnated at iteration {self.actual_iters} / {self.max_iters}")
                 break
-            
     
     #------------------------------------------------------------------------------------------------------------------
     def send_employees_(self):
