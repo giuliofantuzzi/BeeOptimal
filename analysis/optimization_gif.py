@@ -48,21 +48,22 @@ if __name__ == '__main__':
                 print(f"Evaluating {function.name.upper()} with {initialization} initialization and {mutation} mutation")
                 print('-'*100)
                 
-                ABC = ArtificialBeeColony(n_bees   = N_BEES,
-                                        bounds   = np.array(function.bounds),
-                                        function = function.fun)
+                ABC = ArtificialBeeColony(n_bees          = N_BEES,
+                                          bounds          = np.array(function.bounds),
+                                          function        = function.fun,
+                                          n_employed_bees = None)
 
                 ABC.optimize(max_iters        = MAX_ITERS,
-                            limit            = LIMIT,
-                            selection        = SELECTION,
-                            mutation         = mutation,
-                            initialization   = initialization,
-                            sf               = SF,
-                            self_adaptive_sf = SELF_ADAPTIVE_SF,
-                            mr               = MR,
-                            stagnation_tol   = STAGNATION_TOL,
-                            verbose          = VERBOSE,
-                            random_seed      = RANDOM_SEED)
+                             limit            = LIMIT,
+                             selection        = SELECTION,
+                             mutation         = mutation,
+                             initialization   = initialization,
+                             sf               = SF,
+                             self_adaptive_sf = SELF_ADAPTIVE_SF,
+                             mr               = MR,
+                             stagnation_tol   = STAGNATION_TOL,
+                             verbose          = VERBOSE,
+                             random_seed      = RANDOM_SEED)
                 
                 print(f"Optimal Solution:")
                 print(f"\tExpected : {function.optimal_solution}")

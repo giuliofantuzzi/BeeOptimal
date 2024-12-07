@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="beeoptimal",              
-    version="0.0.1",                  
+    version="0.1.0",                  
     description                   = "A python implementation of the Artificial Bee Colony optimization algorithm",
     long_description              = open('README.md').read(),  
     long_description_content_type = "text/markdown", 

@@ -52,7 +52,7 @@ if __name__ == '__main__':
                 
                 for s in trange(N_SIMULATIONS,desc='Running simulations'):
                     
-                    ABC = ArtificialBeeColony(n_bees = N_BEES,
+                    ABC = ArtificialBeeColony(n_bees   = N_BEES,
                                               bounds   = function.bounds,
                                               function = function.fun)
                     ABC.optimize(max_iters      = MAX_ITERS,

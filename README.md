@@ -23,9 +23,12 @@ This repository contains a Python implementation of the Artificial Bee Colony (A
 - [ ] Add arg parser for command line usage
 - [ ] Add docstrings
 - [ ] Try to practice with docker and create a container for the project
-- [ ] Understand better PyPy packages
+- [ ] Understand better PyPy packages (-> for what i understood the best practice is to have both setup.py and pyproject.toml)
 
+Note: for installation propose 3 ways: clone and do pip install ., clone and use poetry (should work thanks to .toml file) , directly from pip (if I publish the package)
 
+NOTE: the n_bees assert is actually dependent on the mutation strategy....e.g. if we select ABC/best/2 we need 4 donors different from the current bee,
+so we need both the onlookers and the employees to be at least 5
 
 # Installation
 
