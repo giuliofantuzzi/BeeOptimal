@@ -33,7 +33,7 @@ def optimization_boxplot(function,simulations_df,scale='log',title=''):
     Returns:
         plotly.graph_objects.Figure : Boxplot of the optimization results.
     """
-    plot_df = simulations_df[simulations_df['Function'] == function.name].copy()
+    plot_df = simulations_df[(simulations_df['Function'] == function.name) & (simulations_df['Mutation'].isin(['StandardABC','ModifiedABC']))].copy()
     plot_df["Configuration"] = plot_df["Mutation"] + " (" + plot_df["Initialization"] + ")"
     fig = go.Figure()
     for config in plot_df["Configuration"].unique():
@@ -46,7 +46,7 @@ def optimization_boxplot(function,simulations_df,scale='log',title=''):
         title_font=dict(size=16, weight='bold'),
         title_x=0.5,
         xaxis_title="Optimum (log scale)",
-        xaxis=dict(type=scale,tickformat='.2e',title_font=dict(size=12, weight='normal')),
+        xaxis=dict(type=scale,tickformat='.2e',title_font=dict(size=12, weight='normal'),tickfont=dict(size=10,weight='normal')),
         yaxis=dict(tickangle=0,title_font=dict(size=12, weight='normal'),tickfont=dict(size=10,weight='normal')), 
         showlegend=False,           
         width=1500,
@@ -61,9 +61,9 @@ def optimization_boxplot(function,simulations_df,scale='log',title=''):
 if __name__ == '__main__':
     # Load the optimization results
     simulations_df = pd.read_csv(CSV_PATH)
-    # Clip the values
+    # Clip the values for a better visualization
     simulations_df['OptValue'] = np.clip(simulations_df['OptValue'],10e-30,None)
     # Create and store the boxplots
     for function in BENCHMARK_FUNCTIONS:
-        boxplot = optimization_boxplot(function,simulations_df,scale='log',title=f'Simulation results for {function.name}')
-        boxplot.write_image(BOXPLOTS_PATH+f'{function.name}_boxplot.png',scale=2)
+        boxplot = optimization_boxplot(function,simulations_df,scale='linear',title=f'Simulation results for {function.name}')
+        boxplot.write_image(BOXPLOTS_PATH+f'{function.name}_Standard_vs_Modified_boxplot.png',scale=2)
