@@ -15,14 +15,14 @@ from tqdm import trange
 N_BEES              = 100
 LIMIT               = 'default'
 MAX_ITERS           = 1000
-BENCHMARK_FUNCTIONS = [Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Weierstrass2d,Griewank2d,Schwefel2d,Sumsquares2d]
+BENCHMARK_FUNCTIONS =  [Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Weierstrass2d,Griewank2d,Schwefel2d,Sumsquares2d]
                        #Sphere10d,Rosenbrock10d,Ackley10d,Rastrigin10d,Weierstrass10d,Griewank10d,Schwefel10d,Sumsquares10d,
                        #Sphere30d,Rosenbrock30d,Ackley30d,Rastrigin30d,Weierstrass30d,Griewank30d,Schwefel30d,Sumsquares30d]
 SELECTION           = 'RouletteWheel'
 MUTATIONS           = ['StandardABC','ModifiedABC','ABC/best/1','ABC/best/2']
 INITIALIZATIONS     = ['random','cahotic']                      
 MR                  = 0.7
-STAGNATION_TOL      = 1e-6
+STAGNATION_TOL      = np.NINF#1e-6
 RANDOM_SEED         = 1234
 N_SIMULATIONS       = 10
 PLOT_COLORS         = ['#2E86C1','#55DDF9','#14521A','#68C73C','#BE291D','#FB9991','#C28D00','#FADA48'] 
@@ -66,7 +66,7 @@ if __name__ == '__main__':
 
                     optimal_history = [best_bee.value for best_bee in ABC.optimal_bee_history]
                     # Padding in case of stagnation
-                    optimal_history += [optimal_history[-1]] * (MAX_ITERS + 1 - len(optimal_history))
+                    #optimal_history += [optimal_history[-1]] * (MAX_ITERS + 1 - len(optimal_history))
                     cost_history[m,i,s,:] = optimal_history
                     
         cost_medians = np.median(cost_history,axis=2)
