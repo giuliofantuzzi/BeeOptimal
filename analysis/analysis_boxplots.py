@@ -13,9 +13,9 @@ import numpy as np
 # Global variables and functions
 #++++++++++++++++++++++++++++++++++++
 
-BENCHMARK_FUNCTIONS =  [Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Weierstrass2d,Griewank2d,Schwefel2d,Sumsquares2d,
-                        Sphere10d,Rosenbrock10d,Ackley10d,Rastrigin10d,Weierstrass10d,Griewank10d,Schwefel10d,Sumsquares10d,
-                        Sphere30d,Rosenbrock30d,Ackley30d,Rastrigin30d,Weierstrass30d,Griewank30d,Schwefel30d,Sumsquares30d]
+BENCHMARK_FUNCTIONS =  [Griewank2d]#[Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Weierstrass2d,Griewank2d,Schwefel2d,Sumsquares2d,
+                        #Sphere10d,Rosenbrock10d,Ackley10d,Rastrigin10d,Weierstrass10d,Griewank10d,Schwefel10d,Sumsquares10d,
+                        #Sphere30d,Rosenbrock30d,Ackley30d,Rastrigin30d,Weierstrass30d,Griewank30d,Schwefel30d,Sumsquares30d]
 
 CSV_PATH            = 'simulations/opt_report_full.csv'
 BOXPLOTS_PATH       = 'images/opt_boxplots/'
@@ -63,8 +63,10 @@ if __name__ == '__main__':
     # Load the optimization results
     simulations_df = pd.read_csv(CSV_PATH)
     # Clip the values for a better visualization
-    simulations_df['OptValue'] = np.clip(simulations_df['OptValue'],10e-30,None)
+    simulations_df['OptValue'] = np.clip(simulations_df['OptValue'],10e-15,None)
     # Create and store the boxplots
     for function in BENCHMARK_FUNCTIONS:
         boxplot = optimization_boxplot(function,simulations_df,scale='linear',title=f'Simulation results for {function.name}')
-        boxplot.write_image(BOXPLOTS_PATH+f'{function.name}_Standard_vs_Modified_boxplot.png',scale=2)
+        boxplot.write_image(BOXPLOTS_PATH+f'{function.name}_boxplot.png',scale=2)
+        #boxplot.write_image(BOXPLOTS_PATH+f'{function.name}_Standard_vs_Modified_boxplot.png',scale=2)
+        
