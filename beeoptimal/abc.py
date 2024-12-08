@@ -39,7 +39,6 @@ class ArtificialBeeColony():
         self_adaptive_sf (bool)      : Whether to use a self-adaptive scaling factor. Defaults to False
         mr (float)                   : The mutation rate for 'ModifiedABC' strategy. Defaults to 0.7.
         
-    
     Methods:
         optimize()                   : Runs the optimization process.
         send_employees_()            : Performs the employed bees phase.
@@ -62,7 +61,10 @@ class ArtificialBeeColony():
             n_employed_bees (int, optional) : The number of employed bees. Defaults to half the total number of bees.
 
         Raises:
-            AssertionError: If the number of bees is less than or equal to 2.
+            AssertionError: If the number of bees is less than or equal to 10 (for compatibility with ALL mutation types).
+            AssertionError: If the number of employed bees is less than 5 (for compatibility with ALL mutation types).
+            AssertionError: If the number of onlokeer bees is less than 5 (for compatibility with ALL mutation types).
+            AssertionError: If the number of employed bees is greater than or equal to the total number of bees.
         
         Notes:
             To ensure compatibility with all the mutation types, the bee colony must have at least 5 employed bees and at least 5 onlokeer bees.
@@ -295,9 +297,9 @@ class ArtificialBeeColony():
         Generates a candidate neighbor solution for a given bee based on the chosen mutation strategy.
 
         Parameters:
-            bee (Bee): The bee for which a candidate neighbor is generated.
-            bee_idx (int): The index of the bee in the population.
-            population (list): The population of bees from which donors are selected (i.e., employed or onlooker bees).
+            bee (Bee)         : The bee for which a candidate neighbor is generated.
+            bee_idx (int)     : The index of the bee in the population.
+            population (list) : The population of bees from which donors are selected (i.e., employed or onlooker bees).
 
         Returns:
             Bee: A new candidate bee solution.
@@ -345,9 +347,9 @@ class ArtificialBeeColony():
         Selects donor bees from the population (for a given bee)
 
         Args:
-            n_donors (int, optional): The number of donor bees to return. Defaults to 1.
-            bee_idx (int, optional): The index of the bee for which donors are selected. Defaults to None.
-            population (list, optional): The population of bees from which donors are selected. Defaults to None.
+            n_donors (int, optional)    : The number of donor bees to return. Defaults to 1.
+            bee_idx (int, optional)     : The index of the bee for which donors are selected. Defaults to None.
+            population (list, optional) : The population of bees from which donors are selected. Defaults to None.
 
         Returns:
             list: A list of donor bees (as Bee instances).
