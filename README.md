@@ -31,6 +31,8 @@ NOTE: the n_bees assert is actually dependent on the mutation strategy....e.g. i
 so we need both the onlookers and the employees to be at least 5. As for now i set a unique assert for the number of bees, but it should be more flexible.
 I should assert the number of bees for each configuration (4 cases)!
 
+
+NOTE: try to manage padding for plots...it would be beneficial for reducing the time needed to make the plots...
 # Installation
 
 To install the package, you can use the following command:

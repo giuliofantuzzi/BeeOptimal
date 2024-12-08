@@ -33,7 +33,8 @@ def optimization_boxplot(function,simulations_df,scale='log',title=''):
     Returns:
         plotly.graph_objects.Figure : Boxplot of the optimization results.
     """
-    plot_df = simulations_df[(simulations_df['Function'] == function.name) & (simulations_df['Mutation'].isin(['StandardABC','ModifiedABC']))].copy()
+    plot_df = simulations_df[(simulations_df['Function'] == function.name)].copy()
+    #plot_df = simulations_df[(simulations_df['Function'] == function.name) & (simulations_df['Mutation'].isin(['StandardABC','ModifiedABC']))].copy()
     plot_df["Configuration"] = plot_df["Mutation"] + " (" + plot_df["Initialization"] + ")"
     fig = go.Figure()
     for config in plot_df["Configuration"].unique():
