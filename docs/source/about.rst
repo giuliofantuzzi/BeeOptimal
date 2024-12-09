@@ -1,7 +1,7 @@
 About
 =====
 
-BeeOptimal is a Python library inspired by bee algorithms for optimization.
+BeeOptimal is a Python package inspired by bee algorithms for optimization.
 
 
 Artificial Bee Colony

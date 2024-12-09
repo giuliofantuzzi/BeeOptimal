@@ -1,5 +1,5 @@
-Benchmarks Module
-=================
+Benchmarks
+==========
 
 .. autoclass:: beeoptimal.benchmarks.BenchmarkFunction
    :members:

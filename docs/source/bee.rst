@@ -1,5 +1,5 @@
-Bee Module
-==========
+Bee
+===
 
 .. automodule:: beeoptimal.bee
    :members:

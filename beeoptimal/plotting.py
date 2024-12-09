@@ -41,6 +41,7 @@ def ContourPlotBee(x,y,Z,bee_colony,title='',optimal_solution=None):
         ValueError        : If the bee colony is empty.
 
     Example:
+        >>> from beeoptimal.plotting import ContourPlotBee
         >>> from beeoptimal.benchmarks import Sphere2d
         >>> ABC = ArtificialBeeColony(n_bees=100,function=Sphere2d.fun,bounds=Sphere2d.bounds)
         >>> x = np.linspace(function.bounds[0][0], function.bounds[0][1], 100)

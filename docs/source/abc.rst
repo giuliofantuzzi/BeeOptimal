@@ -1,5 +1,5 @@
-ABC Module
-==========
+ArtificialBeeColony
+===================
 
 .. automodule:: beeoptimal.abc
    :members:
