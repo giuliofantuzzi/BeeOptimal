@@ -8,10 +8,10 @@ def get_marker_path():
     "BeeMarker.png" file located in the "package_assets" directory, and checks if the file exists.
 
     Returns:
-        - str: The full path to the "BeeMarker.png" file.
+        str: The full path to the "BeeMarker.png" file.
 
     Raises:
-        - FileNotFoundError: If the marker file is not found at the expected path.
+        FileNotFoundError: If the marker file is not found at the expected path.
     """
     # Get the directory of the current script (plots.py)
     base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -26,19 +26,19 @@ def ContourPlotBee(x,y,Z,bee_colony,title='',optimal_solution=None):
     Create a contour plot with bee markers and an optional optimal solution point.
 
     Args:
-        - x (numpy.ndarray)                  : 1D array representing the x-coordinates of the contour grid.
-        - y (numpy.ndarray)                  : 1D array representing the y-coordinates of the contour grid.
-        - Z (numpy.ndarray)                  : 2D array representing the values for the contour plot.
-        - bee_colony (list)                  : List of Bee objects.
-        - title (str, optional)              : The title of the plot. Defaults to an empty string.
-        - optimal_solution (tuple, optional) : Optimal solution (x, y) to be marked with a red "X". Defaults to None.
+        x (numpy.ndarray)                  : 1D array representing the x-coordinates of the contour grid.
+        y (numpy.ndarray)                  : 1D array representing the y-coordinates of the contour grid.
+        Z (numpy.ndarray)                  : 2D array representing the values for the contour plot.
+        bee_colony (list)                  : List of Bee objects.
+        title (str, optional)              : The title of the plot. Defaults to an empty string.
+        optimal_solution (tuple, optional) : Optimal solution (x, y) to be marked with a red "X". Defaults to None.
 
     Returns:
-        - plotly.graph_objects.Figure: A Plotly figure containing the contour plot with bee markers and, optionally, the optimal solution marker.
+        plotly.graph_objects.Figure: A Plotly figure containing the contour plot with bee markers and, optionally, the optimal solution marker.
 
     Raises:
-        - FileNotFoundError : If the "BeeMarker.png" image file is not found.
-        - ValueError        : If the bee colony is empty.
+        FileNotFoundError : If the "BeeMarker.png" image file is not found.
+        ValueError        : If the bee colony is empty.
 
     Example:
         >>> from beeoptimal.benchmarks import Sphere2d
