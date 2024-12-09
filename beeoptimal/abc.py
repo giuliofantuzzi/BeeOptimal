@@ -4,7 +4,7 @@
 
 import numpy as np
 import copy
-from .bee_cls import Bee
+from .bee import Bee
 from tqdm import trange,tqdm
 
 #++++++++++++++++++++++++++++++++++++

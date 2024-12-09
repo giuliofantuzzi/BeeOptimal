@@ -5,7 +5,7 @@
 from beeoptimal import ArtificialBeeColony
 import numpy as np
 from beeoptimal.benchmarks import *
-from beeoptimal.visualization import ContourPlotBee
+from beeoptimal.plotting import ContourPlotBee
 import tempfile
 from PIL import Image
 
@@ -19,7 +19,7 @@ MAX_ITERS           = 1000
 STAGNATION_TOL      = 1e-6
 BENCHMARK_FUNCTIONS = [Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Weierstrass2d,Griewank2d,Schwefel2d,Sumsquares2d,Eggholder]
 SELECTION           = 'RouletteWheel'
-MUTATIONS           = ['StandardABC','ModifiedABC','ABC/best/1','ABC/best/2']
+MUTATIONS           = ['ABC/best/1']#['StandardABC','ModifiedABC','ABC/best/1','ABC/best/2']
 INITIALIZATIONS     = ['random','cahotic']
 MR                  = 0.7
 SF                  = 1.0
@@ -104,10 +104,11 @@ if __name__ == '__main__':
 
                     # Open images and save as GIF
                     images = [Image.open(file) for file in image_files]
-                    gif_path = GIF_PATH + f"{mutation_name}/{function.name}_{mutation_name}_{initialization}.gif"
+                    gif_path = GIF_PATH  + f"{mutation_name}/" + f"{function.name}_{mutation_name}_{initialization}.gif"
                     images[0].save(gif_path, save_all=True, append_images=images[1:], 
                                 duration=200, loop=0)
                     print(f"Animated GIF saved in {gif_path}")
-            
+            break
+        break
         
 #--------------------------------------------------------------------------------
