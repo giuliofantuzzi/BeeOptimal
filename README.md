@@ -1,7 +1,7 @@
 <p align="center">
   <a href="https://github.com/giuliofantuzzi/BeeOptimal">
-    <!-- <img src="https://github.com/giuliofantuzzi/BeeOptimal/raw/main/assets/LogoBeeOptimal.png" alt="Logo" width="250" height="250"> -->
-    <img src="assets/LogoBeeOptimal.png" alt="Logo" width="250" height="250">
+    <!-- <img src="https://github.com/giuliofantuzzi/BeeOptimal/raw/main/assets/logo_BeeOptimal.png" alt="Logo" width="250" height="250"> -->
+    <img src="assets/logo_BeeOptimal.png" alt="Logo" width="250" height="250">
   </a>
 </p>
 <h2 align="center">BeeOptimal</h2>
