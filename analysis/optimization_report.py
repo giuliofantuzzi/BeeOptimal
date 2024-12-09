@@ -2,7 +2,7 @@
 # Libraries and modules
 #++++++++++++++++++++++++++++++++++++
 
-from beeoptimal import ArtificialBeeColony
+from beeoptimal.abc import ArtificialBeeColony
 import numpy as np
 from beeoptimal.benchmarks import *
 from tqdm import trange
