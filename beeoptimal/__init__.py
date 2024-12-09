@@ -8,6 +8,7 @@ from .benchmarks import (
     Weierstrass2d,Weierstrass10d,Weierstrass30d,
     Griewank2d,Griewank10d,Griewank30d,
     Schwefel2d,Schwefel10d,Schwefel30d,
-    Sumsquares2d,Sumsquares10d,Sumsquares30d
+    Sumsquares2d,Sumsquares10d,Sumsquares30d,
+    Eggholder
 )
-from .plotting import ContourPlotBee
+from .plotting import ContourPlotBee,ContourPlotBee_matplotlib

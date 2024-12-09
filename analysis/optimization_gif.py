@@ -5,7 +5,7 @@
 from beeoptimal import ArtificialBeeColony
 import numpy as np
 from beeoptimal.benchmarks import *
-from beeoptimal.plotting import ContourPlotBee
+from beeoptimal.plotting import ContourPlotBee,#ContourPlotBee_matplotlib
 import tempfile
 from PIL import Image
 
@@ -19,7 +19,7 @@ MAX_ITERS           = 1000
 STAGNATION_TOL      = 1e-6
 BENCHMARK_FUNCTIONS = [Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Weierstrass2d,Griewank2d,Schwefel2d,Sumsquares2d,Eggholder]
 SELECTION           = 'RouletteWheel'
-MUTATIONS           = ['ABC/best/1']#['StandardABC','ModifiedABC','ABC/best/1','ABC/best/2']
+MUTATIONS           = ['StandardABC','ModifiedABC','ABC/best/1','ABC/best/2']
 INITIALIZATIONS     = ['random','cahotic']
 MR                  = 0.7
 SF                  = 1.0
@@ -89,9 +89,14 @@ if __name__ == '__main__':
                 # Adaptive step in order to have gifs with same number of frames
                 step = max(1, (ABC.actual_iters+1) // 50) #Note: actual_iters +1 to include initial population
                 for iteration in range(0,(ABC.actual_iters+1),step): 
+                    # Plotly version
                     plots.append(ContourPlotBee(x=x,y=y,Z=Z,bee_colony=ABC.colony_history[iteration],
                                                 title=f"{function.name.upper()} optimization [Iteration {iteration} / {ABC.actual_iters}]",
                                                 optimal_solution=function.optimal_solution))
+                    # Matplotlib version
+                    # plots.append(ContourPlotBee_matplotlib(x=x,y=y,Z=Z,bee_colony=ABC.colony_history[iteration],
+                    #                             title=f"{function.name.upper()} optimization [Iteration {iteration} / {ABC.actual_iters}]",
+                    #                             optimal_solution=function.optimal_solution))
 
                 with tempfile.TemporaryDirectory() as tmpdirname:
                     image_files = []
@@ -99,7 +104,8 @@ if __name__ == '__main__':
                     for i, fig in enumerate(plots):
                         # Define the file path
                         file_path = f"{tmpdirname}/frame_{i}.png"
-                        fig.write_image(file_path, format="png", scale=3)
+                        fig.write_image(file_path, format="png", scale=3) # Plotly version
+                        #fig.savefig(file_path, format="png",dpi=300)       # Matplotlib version
                         image_files.append(file_path)
 
                     # Open images and save as GIF
@@ -108,7 +114,5 @@ if __name__ == '__main__':
                     images[0].save(gif_path, save_all=True, append_images=images[1:], 
                                 duration=200, loop=0)
                     print(f"Animated GIF saved in {gif_path}")
-            break
-        break
         
 #--------------------------------------------------------------------------------
