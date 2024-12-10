@@ -32,7 +32,7 @@ class ArtificialBeeColony():
         actual_iters (int)           : The actual number of iterations.
         limit (int)                  : The trial limit for scout bees. If 'default', it is set to 0.6 * n_employed_bees * dimensionality. Defaults to 'default'.
         selection (str)              : The selection strategy for onlooker bees. Defaults to 'RouletteWheel'.
-        mutation (str)               : The mutation strategy. Must be one among 'StandardABC', 'ModifiedABC', 'ABC/best/1' and 'ABC/best/2'. Defaults to 'StandardABC'.
+        mutation (str)               : The mutation strategy. Must be one among 'StandardABC', 'ModifiedABC', 'ABC/best/1', 'ABC/best/2' and 'DirectedABC'. Defaults to 'StandardABC'.
         initialization (str)         : The initialization strategy for the bee population. Must be one among 'random' and 'cahotic'. Defaults to 'random'.
         stagnation_tol (float)       : The tolerance for stagnation in fitness values to trigger early termination. Defaults to np.NINF (i.e. stagnation disabled).
         sf (float)                   : The scaling factor for mutations. Defaults to 1.0.
@@ -122,7 +122,9 @@ class ArtificialBeeColony():
         """
         
         assert (max_iters > 1)                                                         , 'The number of iterations must be greater than 1'
-        assert (mutation in ['StandardABC', 'ModifiedABC', 'ABC/best/1','ABC/best/2']) , 'Invalid mutation strategy'
+        
+        assert (mutation in ['StandardABC', 'ModifiedABC', 'ABC/best/1','ABC/best/2','DirectedABC']) , 'Invalid mutation strategy'
+        
         assert (initialization in ['random','cahotic'])                                , 'Invalid initialization strategy'
         assert (mr>=0 and mr<=1)                                                       , 'Invalid mutation rate'
         
@@ -136,10 +138,11 @@ class ArtificialBeeColony():
         self.sf               = sf 
         self.initial_sf       = sf
         self.self_adaptive_sf = self_adaptive_sf 
+        self.directions       = np.zeros((self.n_employed_bees,self.dim))
         self.stagnation_tol   = stagnation_tol
         
         assert (self.limit > 0) , "The trial limit must be greater than 1. If this error occurs when limit='default', please set it manually to 1"
-        
+                
         # Initialization
         if random_seed:
             np.random.seed(random_seed)
@@ -163,8 +166,6 @@ class ArtificialBeeColony():
             
             self.employed_bees = sorted(cahotic_pop+opposite_pop, key=lambda bee: bee.fitness, reverse=True)[:self.n_employed_bees]
             
-            
-        
         self.colony_history.append(copy.deepcopy(self.employed_bees))
         self.optimal_bee = copy.deepcopy(max(self.employed_bees,key=lambda bee: bee.fitness))
         self.optimal_bee_history.append(copy.deepcopy(self.optimal_bee))
@@ -202,8 +203,21 @@ class ArtificialBeeColony():
             if candidate_bee.fitness >= bee.fitness:
                 self.employed_bees[bee_idx] = candidate_bee
                 succesful_mutations += 1
+        
+                if self.mutation == 'DirectedABC':
+                    if (bee.position != candidate_bee.position).any(): # this is needed when candidate_bee.fitness == bee.fitness
+                        # Retrieve the index mutated and update the direction
+                        j = np.where(bee.position != candidate_bee.position)[0][0]
+                        self.directions[bee_idx,j] = np.sign(candidate_bee.position[j] - bee.position[j])
+                
             else:
                 bee.trial += 1
+                
+                if self.mutation == 'DirectedABC':
+                    # Retrieve the index mutated and update the direction
+                    j = np.where(bee.position != candidate_bee.position)[0][0]
+                    self.directions[bee_idx,j] = 0
+                
         if self.self_adaptive_sf:
             self.update_SF_(succesful_mutations_ratio= (succesful_mutations / self.n_employed_bees) )
             
@@ -250,7 +264,20 @@ class ArtificialBeeColony():
             if candidate_bee.fitness >= bee.fitness:
                 self.employed_bees[winner_idx] = candidate_bee
                 succesful_mutations += 1
-        
+                
+                if self.mutation == 'DirectedABC':
+                    if (bee.position != candidate_bee.position).any(): # this is needed when candidate_bee.fitness == bee.fitness
+                        # Retrieve the index mutated and update the direction
+                        j = np.where(bee.position != candidate_bee.position)[0][0]
+                        self.directions[winner_idx,j] = np.sign(candidate_bee.position[j] - bee.position[j])
+                
+            else:
+                
+                if self.mutation == 'DirectedABC':
+                    # Retrieve the index mutated and update the direction
+                    j = np.where(bee.position != candidate_bee.position)[0][0]
+                    self.directions[winner_idx,j] = 0
+                
         if self.self_adaptive_sf:
             self.update_SF_(succesful_mutations_ratio= (succesful_mutations / self.n_onlooker_bees) )
             
@@ -312,8 +339,8 @@ class ArtificialBeeColony():
             donor_bee = self.get_donor_bees_(n_donors=1,bee_idx=bee_idx,population=population)[0]
             candidate_bee = copy.deepcopy(bee)
             phi = np.random.uniform(-self.sf,self.sf,self.dim)
-            mask = np.random.uniform(size=self.dim) <= self.mr
-            candidate_bee.position[mask] = bee.position[mask] + phi[mask]* bee.position[mask] - donor_bee.position[mask]
+            mutation_mask = np.random.uniform(size=self.dim) <= self.mr
+            candidate_bee.position[mutation_mask] = bee.position[mutation_mask] + phi[mutation_mask] * (bee.position[mutation_mask] - donor_bee.position[mutation_mask])
             candidate_bee.position = np.clip(candidate_bee.position,self.bounds[:,0],self.bounds[:,1])
             
         if self.mutation == 'ABC/best/1':
@@ -333,6 +360,18 @@ class ArtificialBeeColony():
                                         + phi*(donor3.position[j] - donor4.position[j])
             candidate_bee.position[j] = np.clip(candidate_bee.position[j],self.bounds[j][0],self.bounds[j][1])
         
+        if self.mutation == 'DirectedABC':
+            donor_bee = self.get_donor_bees_(n_donors=1,bee_idx=bee_idx,population=population)[0]
+            candidate_bee = copy.deepcopy(bee)
+            directions = self.directions[bee_idx,:]
+            j = np.random.randint(0,self.dim)
+            r = (directions[j] == 0)  * np.random.uniform(-self.sf,self.sf) + \
+                (directions[j] == 1)  * np.random.uniform(0,self.sf)        + \
+                (directions[j] == -1) * np.random.uniform(-self.sf,0)
+                
+            candidate_bee.position[j] = bee.position[j] + r * np.abs(bee.position[j] - donor_bee.position[j])
+            candidate_bee.position[j] = np.clip(candidate_bee.position[j],self.bounds[j][0],self.bounds[j][1])
+
         return candidate_bee
     
     #------------------------------------------------------------------------------------------------------------------
@@ -384,5 +423,6 @@ class ArtificialBeeColony():
         self.optimal_bee_history = []
         self.actual_iters        = 0
         self.sf                  = self.initial_sf
+        self.directions          = np.zeros((self.n_employed_bees,self.dim))
     #------------------------------------------------------------------------------------------------------------------
         

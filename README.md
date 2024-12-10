@@ -17,7 +17,7 @@ This repository contains a Python implementation of the Artificial Bee Colony (A
 - [ ] Directed ABC
 - [ ] Constraint handling
 - [ ] Add arg parser for command line usage
-- [ ] Check if it is possible to render plotly figures in sphinx
+- [ ] Type hint the code
 - [ ] Understand how to avoid copying tutorials inside the docs
 
 # Installation
