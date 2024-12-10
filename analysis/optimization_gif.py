@@ -19,14 +19,14 @@ MAX_ITERS           = 1000
 STAGNATION_TOL      = 1e-6
 BENCHMARK_FUNCTIONS = [Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Weierstrass2d,Griewank2d,Schwefel2d,Sumsquares2d,Eggholder]
 SELECTION           = 'RouletteWheel'
-MUTATIONS           = ['StandardABC','ModifiedABC','ABC/best/1','ABC/best/2']
+MUTATIONS           = ['StandardABC','ModifiedABC','ABC/best/1','ABC/best/2','DirectedABC']
 INITIALIZATIONS     = ['random','cahotic']
 MR                  = 0.7
 SF                  = 1.0
 SELF_ADAPTIVE_SF    = False
 VERBOSE             = True
-RANDOM_SEED         = 1234
-MUTATION_NAMES      = ['StandardABC','ModifiedABC','ABCbest1','ABCbest2']
+RANDOM_SEED         = 12345
+MUTATION_NAMES      = ['StandardABC','ModifiedABC','ABCbest1','ABCbest2','DirectedABC']
 GIF_PATH            = 'images/optimization_gifs/'
 
 #++++++++++++++++++++++++++++++++++++
