@@ -22,11 +22,11 @@ SELECTION           = 'RouletteWheel'
 MUTATIONS           = ['StandardABC','ModifiedABC','ABC/best/1','ABC/best/2']
 INITIALIZATIONS     = ['random','cahotic']                      
 MR                  = 0.7
-STAGNATION_TOL      = np.NINF#1e-7
+STAGNATION_TOL      = 1e-7
 RANDOM_SEED         = 1234
 N_SIMULATIONS       = 10
 PLOT_COLORS         = ['#2E86C1','#55DDF9','#14521A','#68C73C','#BE291D','#FB9991','#C28D00','#FADA48'] 
-IMG_PATH = 'images/analysis_mutation/'
+IMG_PATH            = 'images/analysis_mutation/'
 
 #++++++++++++++++++++++++++++++++++++
 # Main
@@ -70,7 +70,7 @@ if __name__ == '__main__':
                     cost_history[m,i,s,:] = optimal_history
                     
         cost_medians = np.median(cost_history,axis=2)
-        cost_medians = np.clip(cost_medians,a_min=10e-15,a_max=None)
+        cost_medians = np.clip(cost_medians,a_min=10e-30,a_max=None)
         
         plt.figure(figsize=(10, 7))
         x = np.arange(MAX_ITERS+1)
