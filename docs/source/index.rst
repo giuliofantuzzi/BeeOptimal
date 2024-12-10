@@ -33,8 +33,8 @@ Contents:
    :maxdepth: 1
    :caption: Tutorials
 
-   examples/tutorial1
-   examples/tutorial2
+   tutorials/tutorial1
+   tutorials/tutorial2
 
 .. toctree::
    :maxdepth: 1

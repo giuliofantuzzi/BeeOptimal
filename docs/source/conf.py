@@ -13,6 +13,9 @@ sys.path.insert(0, os.path.abspath('../../'))
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
+def setup(app):
+    app.add_js_file("https://cdn.plot.ly/plotly-latest.min.js")
+
 project = 'BeeOptimal documentation'
 copyright = '2024, Giulio Fantuzzi'
 author = 'Giulio Fantuzzi'
@@ -27,7 +30,8 @@ extensions = [
     'sphinx.ext.viewcode',  # Links to source code
     'nbsphinx',             # For Jupyter notebooks
     'nbsphinx_link',        # For Jupyter notebooks
-    'sphinx_rtd_dark_mode'  # Dark mode
+    'sphinx_rtd_dark_mode',  # Dark mode
+    'sphinx.ext.mathjax'
 ]
 
 
