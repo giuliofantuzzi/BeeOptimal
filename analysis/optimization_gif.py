@@ -5,7 +5,7 @@
 from beeoptimal import ArtificialBeeColony
 import numpy as np
 from beeoptimal.benchmarks import *
-from beeoptimal.plotting import ContourPlotBee#ContourPlotBee_matplotlib
+from beeoptimal.plotting import contourplot_bees
 import tempfile
 from PIL import Image
 
@@ -74,29 +74,18 @@ if __name__ == '__main__':
                 print('-'*100)
                 
                 # GIF
-                x = np.linspace(function.bounds[0][0]-0.05*np.abs(function.bounds[0][0]),
-                                function.bounds[0][1]+0.05*np.abs(function.bounds[0][1]), 
-                                100)
-                y = np.linspace(function.bounds[1][0]-0.05*np.abs(function.bounds[1][0]),
-                                function.bounds[1][1]+0.05*np.abs(function.bounds[1][1]),
-                                100)
-                X, Y = np.meshgrid(x, y)
-                points = np.c_[X.ravel(), Y.ravel()]  
-                Z = np.array([function.evaluate(p) for p in points]).reshape(X.shape)
-                
                 plots = []
-                
                 # Adaptive step in order to have gifs with same number of frames
                 step = max(1, (ABC.actual_iters+1) // 50) #Note: actual_iters +1 to include initial population
                 for iteration in range(0,(ABC.actual_iters+1),step): 
-                    # Plotly version
-                    plots.append(ContourPlotBee(x=x,y=y,Z=Z,bee_colony=ABC.colony_history[iteration],
-                                                title=f"{function.name.upper()} optimization [Iteration {iteration} / {ABC.actual_iters}]",
-                                                optimal_solution=function.optimal_solution))
-                    # Matplotlib version
-                    # plots.append(ContourPlotBee_matplotlib(x=x,y=y,Z=Z,bee_colony=ABC.colony_history[iteration],
-                    #                             title=f"{function.name.upper()} optimization [Iteration {iteration} / {ABC.actual_iters}]",
-                    #                             optimal_solution=function.optimal_solution))
+                    plots.append(contourplot_bees(function=function,
+                                                  bee_colony=ABC.colony_history[iteration],
+                                                  title=f"{function.name.upper()} optimization [Iteration {iteration} / {ABC.actual_iters}]",
+                                                  optimal_solution=function.optimal_solution,
+                                                  extended_bounds=0.05,
+                                                  figsize=(600,600)
+                                                  )
+                                 )
 
                 with tempfile.TemporaryDirectory() as tmpdirname:
                     image_files = []
@@ -104,7 +93,7 @@ if __name__ == '__main__':
                     for i, fig in enumerate(plots):
                         # Define the file path
                         file_path = f"{tmpdirname}/frame_{i}.png"
-                        fig.write_image(file_path, format="png", scale=3) # Plotly version
+                        fig.write_image(file_path, format="png", scale=3)   # Plotly version
                         #fig.savefig(file_path, format="png",dpi=300)       # Matplotlib version
                         image_files.append(file_path)
 
