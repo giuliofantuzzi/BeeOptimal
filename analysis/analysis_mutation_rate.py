@@ -25,7 +25,7 @@ MUTATION_RATES      = [0.1,0.3,0.5,0.7,0.9]
 RANDOM_SEED         = 1234
 IMG_PATH            = 'images/analysis_mr/'
 STAGNATION_TOL      = np.NINF # No stagnation, we want to see the full optimization process
-N_SIMULATIONS       = 15
+N_SIMULATIONS       = 10
 PLOT_COLORS         = ['#2E86C1','#8E44AD','#E74C3C','#F3C40F','#68C73C']
 
 
