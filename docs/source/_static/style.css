@@ -1,3 +1,9 @@
 .wy-nav-content {
     max-width: none;
 }
+.math {
+    text-align: left;
+}
+.eqno {
+    float: right;
+}

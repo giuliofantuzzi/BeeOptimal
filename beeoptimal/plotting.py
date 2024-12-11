@@ -132,7 +132,7 @@ def contourplot_bees(function,bee_colony,optimal_solution=None,title='',extended
 
     Args:
         function (BenchmarkFunction)            : A benchmark function object.
-        bee_colony (list)                       : List of Bee objects.
+        bee_colony (list of Bee)                : List of Bee objects.
         optimal_solution (numpy.ndarray)        : The optimal solution point. Defaults to None.
         title (str)                             : Title of the plot. Defaults to empty string.
         extended_bounds (float or numpy.ndarray): Specifies the extended bounds for the plot.
@@ -203,7 +203,7 @@ def contourplot_bees(function,bee_colony,optimal_solution=None,title='',extended
 #         x (numpy.ndarray)                  : 1D array representing the x-coordinates of the contour grid.
 #         y (numpy.ndarray)                  : 1D array representing the y-coordinates of the contour grid.
 #         Z (numpy.ndarray)                  : 2D array representing the values for the contour plot.
-#         bee_colony (list)                  : List of Bee objects.
+#         bee_colony (list of Bee)           : List of Bee objects.
 #         title (str, optional)              : The title of the plot. Defaults to an empty string.
 #         optimal_solution (tuple, optional) : Optimal solution (x, y) to be marked with a red "X". Defaults to None.
 
@@ -291,7 +291,7 @@ def contourplot_bees(function,bee_colony,optimal_solution=None,title='',extended
 #         x (numpy.ndarray)                  : 1D array representing the x-coordinates of the contour grid.
 #         y (numpy.ndarray)                  : 1D array representing the y-coordinates of the contour grid.
 #         Z (numpy.ndarray)                  : 2D array representing the values for the contour plot.
-#         bee_colony (list)                  : List of Bee objects with a `position` attribute.
+#         bee_colony (list of Bee)           : List of Bee objects with a `position` attribute.
 #         title (str, optional)              : The title of the plot. Defaults to an empty string.
 #         optimal_solution (tuple, optional) : Optimal solution (x, y) to be marked with a red "X". Defaults to None.
 
