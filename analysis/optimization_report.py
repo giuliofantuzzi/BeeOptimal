@@ -19,14 +19,14 @@ BENCHMARK_FUNCTIONS = [Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Weierstrass2d,
                        Sphere10d,Rosenbrock10d,Ackley10d,Rastrigin10d,Weierstrass10d,Griewank10d,Schwefel10d,Sumsquares10d,
                        Sphere30d,Rosenbrock30d,Ackley30d,Rastrigin30d,Weierstrass30d,Griewank30d,Schwefel30d,Sumsquares30d]
 SELECTION           = 'RouletteWheel'
-MUTATIONS           = ['ModifiedABC','DirectedABC']#['StandardABC','ModifiedABC','ABC/best/1','ABC/best/2']
+MUTATIONS           = ['StandardABC','ModifiedABC','ABC/best/1','ABC/best/2','DirectedABC']
 INITIALIZATIONS     = ['random','cahotic']                      
 MR                  = 0.7
-STAGNATION_TOL      = 1e-6#np.NINF#1e-6
+STAGNATION_TOL      = np.NINF#1e-6
 RANDOM_SEED         = 12345
 N_SIMULATIONS       = 15
-FULL_CSV_PATH       = 'simulations/ModDir_full_stagnation.csv'      
-STATS_CSV_PATH      = 'simulations/ModDir_stats_stagnation.csv'
+FULL_CSV_PATH       = 'simulations/ModDir_full.csv'      
+STATS_CSV_PATH      = 'simulations/ModDir_stats.csv'
 
 #++++++++++++++++++++++++++++++++++++
 # Main

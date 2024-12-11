@@ -19,13 +19,13 @@ BENCHMARK_FUNCTIONS =  [Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Weierstrass2d
                        Sphere10d,Rosenbrock10d,Ackley10d,Rastrigin10d,Weierstrass10d,Griewank10d,Schwefel10d,Sumsquares10d,
                        Sphere30d,Rosenbrock30d,Ackley30d,Rastrigin30d,Weierstrass30d,Griewank30d,Schwefel30d,Sumsquares30d]
 SELECTION           = 'RouletteWheel'
-MUTATIONS           = ['StandardABC','ModifiedABC','ABC/best/1','ABC/best/2']
+MUTATIONS           = ['StandardABC','ModifiedABC','ABC/best/1','ABC/best/2','DirectedABC']
 INITIALIZATIONS     = ['random','cahotic']                      
 MR                  = 0.7
 STAGNATION_TOL      = 1e-7
-RANDOM_SEED         = 1234
+RANDOM_SEED         = 12345
 N_SIMULATIONS       = 10
-PLOT_COLORS         = ['#2E86C1','#55DDF9','#14521A','#68C73C','#BE291D','#FB9991','#C28D00','#FADA48'] 
+PLOT_COLORS         = ['#2E86C1','#55DDF9','#14521A','#68C73C','#BE291D','#FA9B94','#C28D00','#FADA48','#590C6A','#E896E8'] 
 IMG_PATH            = 'images/analysis_mutation/'
 
 #++++++++++++++++++++++++++++++++++++

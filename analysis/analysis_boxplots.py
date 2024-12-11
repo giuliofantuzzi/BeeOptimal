@@ -63,10 +63,10 @@ if __name__ == '__main__':
     # Load the optimization results
     simulations_df = pd.read_csv(CSV_PATH)
     # Clip the values for a better visualization
-    simulations_df['OptValue'] = np.clip(simulations_df['OptValue'],10e-15,None)
+    simulations_df['OptValue'] = np.clip(simulations_df['OptValue'],10e-30,None)
     # Create and store the boxplots
     for function in BENCHMARK_FUNCTIONS:
-        boxplot = optimization_boxplot(function,simulations_df,scale='linear',title=f'Simulation results for {function.name}')
+        boxplot = optimization_boxplot(function,simulations_df,scale='log',title=f'Simulation results for {function.name}')
         boxplot.write_image(BOXPLOTS_PATH+f'{function.name}_boxplot.png',scale=2)
         #boxplot.write_image(BOXPLOTS_PATH+f'{function.name}_Standard_vs_Modified_boxplot.png',scale=2)
         
