@@ -31,13 +31,13 @@ class ArtificialBeeColony():
         max_iters (int)              : The maximum number of iterations. Defaults to 1000.
         actual_iters (int)           : The actual number of iterations.
         limit (int)                  : The trial limit for scout bees. If 'default', it is set to 0.6 * n_employed_bees * dimensionality. Defaults to 'default'.
-        selection (str)              : The selection strategy for onlooker bees. Defaults to 'RouletteWheel'.
+        selection (str, optional)    : The selection strategy for onlooker bees. Must be one among 'RouletteWheel' and 'Tournament'. Defaults to 'RouletteWheel'.
         mutation (str)               : The mutation strategy. Must be one among 'StandardABC', 'ModifiedABC', 'ABC/best/1', 'ABC/best/2' and 'DirectedABC'. Defaults to 'StandardABC'.
         initialization (str)         : The initialization strategy for the bee population. Must be one among 'random' and 'cahotic'. Defaults to 'random'.
         stagnation_tol (float)       : The tolerance for stagnation in fitness values to trigger early termination. Defaults to np.NINF (i.e. stagnation disabled).
         sf (float)                   : The scaling factor for mutations. Defaults to 1.0.
-        initial_sf (float)           : The initial scaling factor
-        self_adaptive_sf (bool)      : Whether to use a self-adaptive scaling factor. Defaults to False
+        initial_sf (float)           : The initial scaling factor. Defaults to 1.0.
+        self_adaptive_sf (bool)      : Whether to use a self-adaptive scaling factor. Defaults to False.
         mr (float)                   : The mutation rate for 'ModifiedABC' strategy. Defaults to 0.7.
     
     .. note::
@@ -104,9 +104,9 @@ class ArtificialBeeColony():
         Args:
             max_iters (int, optional)        : The maximum number of iterations. Defaults to 1000.
             limit (int or str, optional)     : The trial limit for scout bees. If 'default', it is set to 0.6 * n_employed_bees * dimensionality. Defaults to 'default'.
-            selection (str, optional)        : The selection strategy for onlooker bees. Defaults to 'RouletteWheel'.
+            selection (str, optional)        : The selection strategy for onlooker bees. Must be one among 'RouletteWheel' and 'Tournament'. Defaults to 'RouletteWheel'.
             mutation (str, optional)         : The mutation strategy. Must be one among 'StandardABC', 'ModifiedABC', 'ABC/best/1' and 'ABC/best/2'. Defaults to 'StandardABC'.
-            initialization (str, optional)   : The initialization strategy for the bee population. Must be one among 'random' or 'cahotic'. Defaults to 'random'.
+            initialization (str, optional)   : The initialization strategy for the bee population. Must be one among 'random' and 'cahotic'. Defaults to 'random'.
             tournament_size (int, optional)  : The size of the tournament for the 'Tournament' selection strategy. Defaults to None.
             stagnation_tol (float, optional) : The tolerance for stagnation in fitness values to trigger early termination. Defaults to np.NINF (i.e. stagnation disabled).
             sf (float, optional)             : The scaling factor for mutations. Defaults to 1.0.
@@ -120,6 +120,7 @@ class ArtificialBeeColony():
             AssertionError: If the trial limit is less than 1.
             AssertionError: If the selection strategy is invalid.
             AssertionError: If the initialization strategy is invalid.
+            AssertionError: If the tournament size is invalid.
             
         """
         
