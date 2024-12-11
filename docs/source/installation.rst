@@ -4,6 +4,8 @@ Installation
 Installing via PIP
 ------------------
 
+You can install the package from the Python Package Index (PyPI) via pip:
+
 .. code-block:: bash
 
    pip install beeoptimal

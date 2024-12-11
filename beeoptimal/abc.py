@@ -91,10 +91,11 @@ class ArtificialBeeColony():
                  selection        = 'RouletteWheel',
                  mutation         = 'StandardABC',
                  initialization   = 'random',
+                 tournament_size  = None,
                  stagnation_tol   = np.NINF,
                  sf               = 1.0,
                  self_adaptive_sf = False,
-                 mr               = 0.7,
+                 mr               = 1.0,
                  verbose          = False,
                  random_seed      = None):
         """
@@ -106,10 +107,11 @@ class ArtificialBeeColony():
             selection (str, optional)        : The selection strategy for onlooker bees. Defaults to 'RouletteWheel'.
             mutation (str, optional)         : The mutation strategy. Must be one among 'StandardABC', 'ModifiedABC', 'ABC/best/1' and 'ABC/best/2'. Defaults to 'StandardABC'.
             initialization (str, optional)   : The initialization strategy for the bee population. Must be one among 'random' or 'cahotic'. Defaults to 'random'.
+            tournament_size (int, optional)  : The size of the tournament for the 'Tournament' selection strategy. Defaults to None.
             stagnation_tol (float, optional) : The tolerance for stagnation in fitness values to trigger early termination. Defaults to np.NINF (i.e. stagnation disabled).
             sf (float, optional)             : The scaling factor for mutations. Defaults to 1.0.
             self_adaptive_sf (bool, optional): Whether to use a self-adaptive scaling factor. Defaults to False.
-            mr (float, optional)             : The mutation rate for 'ModifiedABC' strategy. Defaults to 0.7.
+            mr (float, optional)             : The mutation rate for 'ModifiedABC' strategy. Defaults to 1.0.
             verbose (bool, optional)         : Whether to display optimization progress. Defaults to False.
             random_seed (int, optional)      : The seed for random number generation. Defaults to None.
         
@@ -121,17 +123,22 @@ class ArtificialBeeColony():
             
         """
         
-        assert (max_iters > 1)                                                         , 'The number of iterations must be greater than 1'
+        assert (max_iters > 0)                                                                                 , 'The number of iterations must be greater than 0'
         
-        assert (mutation in ['StandardABC', 'ModifiedABC', 'ABC/best/1','ABC/best/2','DirectedABC']) , 'Invalid mutation strategy'
-        
-        assert (initialization in ['random','cahotic'])                                , 'Invalid initialization strategy'
-        assert (mr>=0 and mr<=1)                                                       , 'Invalid mutation rate'
+        assert (mutation in ['StandardABC', 'ModifiedABC', 'ABC/best/1','ABC/best/2','DirectedABC'])           , 'Invalid mutation strategy. Please choose one among StandardABC, ModifiedABC, ABC/best/1, ABC/best/2 and DirectedABC'
+        assert (initialization in ['random','cahotic'])                                                        , 'Invalid initialization strategy. Please choose one among random and cahotic'
+        assert (selection in ['RouletteWheel','Tournament'])                                                   , 'Invalid selection strategy. Please choose one among RouletteWheel and Tournament'
+        assert (mr>=0 and mr<=1)                                                                               , 'Invalid mutation rate. Please choose a value between 0 and 1'
+        if self.selection == 'Tournament':
+            assert (tournament_size > 0 and tournament_size <= self.n_employed_bees)  , 'Tournament size must be between 1 and the number of employed bees'
+        else:
+            assert (tournament_size is None)                                          , 'Tournament size must be None for the selected selection strategy'
         
         self.max_iters        = max_iters
         self.actual_iters     = 0
         self.limit            = limit if limit != 'default' else (0.6 * self.n_employed_bees * self.dim)  
         self.selection        = selection
+        self.tournament_size  = tournament_size
         self.mutation         = mutation
         self.initialization   = initialization
         self.mr               = mr
@@ -232,9 +239,19 @@ class ArtificialBeeColony():
         """
         
         fitness_values = np.array([bee.fitness for bee in self.employed_bees])
+        
         if self.selection == 'RouletteWheel':
             selection_probabilities  = fitness_values / np.sum(fitness_values)
-            dance_winners = np.random.choice(range(self.n_employed_bees),size=self.n_onlooker_bees,p=selection_probabilities)
+            dance_winners = np.random.choice(range(self.n_employed_bees),size=self.n_onlooker_bees,p=selection_probabilities,replace=True)
+            return dance_winners
+        
+        if self.selection == 'Tournament':
+            dance_winners = []
+            for _ in range(self.n_onlooker_bees):
+                tournament_indices = np.random.choice(range(self.n_employed_bees),size=self.tournament_size,replace=False)
+                tournament_fitness = fitness_values[tournament_indices]
+                winner_idx = tournament_indices[np.argmax(tournament_fitness)]
+                dance_winners.append(winner_idx)
             return dance_winners
     
     #------------------------------------------------------------------------------------------------------------------    

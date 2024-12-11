@@ -30,7 +30,7 @@ observe their dance and use the information to decide which food source to visit
    :align: center
 ..    :alt: Scheme of the foraging mechanism
 
-At the very beginning, a potential forager will start as unemployed forager.That forager bee will have no knowledge about the food sources around the nest. 
+At the very beginning, a potential forager will start as unemployed forager. That forager bee will have no knowledge about the food sources around the nest. 
 There are two possible options for such a bee:
 
 1. It can be a scout (S) and starts searching around the nest spontaneously for food due to some internal motivation or possible external clue;
@@ -57,7 +57,7 @@ In an optimization framework, the position of a food source represents a possibl
 problem, and the nectar amount of a food source corresponds to the profitability (fitness) of the associated solution.
 
 .. note::
-    In the proposed verions, each food source is exploited by only one employed bee. In other words, the number of employed bees is equal to the number
+    In the proposed version, each food source is exploited by only one employed bee. In other words, the number of employed bees is equal to the number
     of food sources existing around the hive (number of solutions in the population). 
 
 The ABC algorithm can be summarized in the following steps:
@@ -70,7 +70,8 @@ If the candidate solution is better than the current one, the bee adopts the new
 
 3. **Onlooker Bee Phase**: Onlooker bees probabilistically choose a solution to explore, based on the fitness information provided by the employed 
 bees (better solutions are more likely to be selected). Like employed bees, onlooker bees generate a new candidate solution in the neighborhood 
-of the selected solution and evaluate its quality. If the new solution is better than the current one, the onlooker bee adopts the new position and replaces the employed bee that provided the information.
+of the selected solution and evaluate its quality. If the new solution is better (or equal) than the current one, the onlooker bee adopts the new 
+position and replaces the employed bee that provided the information.
 
 4. **Scout Bee Phase**: If an employed bee has not improved its solution after a certain number of iterations (*limit*), 
 it becomes a scout bee and searches for a new solution.
@@ -121,10 +122,10 @@ where:
 - :math:`j` is a randomly selected dimension index.
 
 .. note::
-    - As the difference between the parameters of the :math:`xi,j` and :math:`xk,j` decreases, the perturbation on the j-th position decreases. Thus, as the search approaches to the optimal solution in the search space, the step length is adaptively reduced.
+    - As the difference between the parameters of the :math:`x_{i,j}` and :math:`x_{k,j}` decreases, the perturbation on the j-th position decreases. Thus, as the search approaches to the optimal solution in the search space, the step length is adaptively reduced.
     - If a parameter value produced by this operation exceeds its predetermined boundaries, the parameter can be set to an acceptable value with a clipping operation.
 
-Once :math:`\mathbf{v}_{i}` is generated, its fitness will be evaluated and compared to :math: `\mathbf{x}_i`. For a minimization problem, the fitness of a solution :math: `\mathbf{x}` can be defined as:
+Once :math:`\mathbf{v}_{i}` is generated, its fitness will be evaluated and compared to :math:`\mathbf{x}_i`. For a minimization problem, the fitness of a solution :math:`\mathbf{x}` can be defined as:
 
 .. math::
     \text{fitness}(\mathbf{x})= \begin{cases}
