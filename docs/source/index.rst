@@ -14,8 +14,6 @@ or simply need a reliable optimizer, **BeeOptimal** offers a user-friendly and c
 
 This documentation provides installation instructions and API details, as well as tutorials and examples to help you get started with the package.
 
-Contents:
-
 .. toctree::
    :maxdepth: 1
    :caption: Getting Started
