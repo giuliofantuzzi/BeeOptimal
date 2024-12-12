@@ -204,4 +204,89 @@ Eq. :eq:`eq-cahotic_system` is then used to generate the initial population acco
 
 Different mutations
 ^^^^^^^^^^^^^^^^^^^^
-Here introduce Modified ABC, DE-inspired ABC and Directed ABC
+
+In basic ABC, a new candidate solution :math:`\mathbf{v}_i`  is obtained changing only one parameter of the parent 
+solution :math:`\mathbf{x}_i`, resulting into a slow convergence rate. In order to overcome this issue, a control parameter 
+called modification rate (*MR*), was introduced. In this modified version, each parameter  :math:`x_{i,j}` is updated 
+according to the following equation:
+
+.. math::
+    v_{i,j} = \begin{cases}
+                x_{i,j} + \phi_{i,j} \cdot (x_{i,j} - x_{k,j}) & \text{if} \quad \text{rand}(0,1) \leq \text{MR} \\[0.2cm]
+                x_{i,j} & \text{otherwise}
+              \end{cases}
+    :label: eq-ModifiedABC_perturbation
+
+where :math:`\phi_{ij}` is a random number in the range :math:`[-1,1]` and :math:`\mathbf{x}_k` is a donor 
+solution different from :math:`\mathbf{x}_i`.
+
+.. note::
+    The mutation rate plays a crucial role in balancing the exploration and exploitation in the search for candidate solutions.
+    A lower value of MR may cause solutions to improve slowly while a higher one may cause too much 
+    diversity in a solution and hence in the population. It is hence recommended to avoid too high values, as they
+    may weaken the exploitation capability of the algorithm. Since the optimal value of MR is problem-dependent, it is
+    usually decided after a tuning phase.
+
+Another modification is related to the magnitude of the perturbation. In the original ABC, the perturbation :math:`(x_{i,j} - x_{k,j})`
+is multiplied by a factor :math:`\phi_{i,j} \in [-1,1]`. In the modified version, such factor is allowed to vary in a more general
+interval :math:`[-SF, SF]`, where :math:`SF` is called *scaling factor*.
+
+.. note::
+    A lower value of SF allows the search to fine tuning the process in small steps while causing slow convergence. 
+    A larger value of SF speeds up the search, but it reduces the exploitation capability of the perturbation process.
+
+Moreover, the scaling factor can be adaptively adjusted during the optimization process. Such automatic tuning is performed
+by using the *"one-fifth" rule*, which monitors the ratio of succesful mutations. In particular:
+
+.. math::
+    \text{SF}(t+1) = \begin{cases}
+                \text{SF}(t) \cdot k & \text{if} \quad \phi(m) < \cfrac{1}{5} \\[0.2cm]
+                \cfrac{\text{SF}(t)}{k} & \text{if} \quad \phi(m)  > \cfrac{1}{5} \\[0.2cm]
+                \text{SF}(t) & \text{otherwise}
+              \end{cases}
+    :label: eq-ScalingFactor
+
+where :math:`\phi(m)` is the ratio of successful mutations and :math:`k` is typically set to be 0.85 (value proposed by *Karaboga*).
+
+Other mutation strategies inspired by the field of *Differential Evolution* have been proposed in the 
+literature (and implemented in this package), such as:
+
+- **ABC/best/1**:
+    .. math::
+        v_{i,j} = x_{\text{best},j}+ \phi_{i,j} \cdot ( x_{k_1,j} - x_{k_2,j})
+- **ABC/best/2**:
+    .. math::
+        v_{i,j} = x_{\text{best},j}+ \phi_{i,j} \cdot ( x_{k_1,j} - x_{k_2,j}) + \phi_{i,j} \cdot (x_{k_3,j} - x_{k_4,j})
+
+where :math:`x_{\text{best},j}` is the best solution in the population, :math:`\phi_{i,j}` is a random scaling factor and 
+:math:`x_{k_1,j}, x_{k_2,j}, x_{k_3,j}, x_{k_4,j}` are randomly selected donor solutions.
+
+A further extension to the mutation strategies is the *Directed Artificial Bee Colony algorithm*, which incorporates 
+directional information to improve convergence speed and search efficiency. While in the standard ABC the perturbation
+is applied in a random direction (remember :math:`\phi_{i,j} \in [-1,1]`, or :math:`\phi_{i,j} \in [-SF,SF]` in the more 
+general formulation), now direction information for each dimension is added. The new candidate solution is then generated as follows:
+
+.. math::
+    v_{i,j} = \begin{cases}
+                x_{i,j} + \phi_{i,j} \cdot (x_{i,j} - x_{k,j}) & \text{if} \quad d_{i,j} = 0 \\[0.2cm]
+                x_{i,j} + r_{i,j} \cdot |x_{i,j} - x_{k,j}|    & \text{if} \quad d_{i,j} = 1 \\[0.2cm]
+                x_{i,j} - r_{i,j} \cdot |x_{i,j} - x_{k,j}|    & \text{if} \quad d_{i,j} = -1
+              \end{cases}
+    :label: eq-DirectedABC_perturbation
+
+
+where :math:`\phi_{i,j} \in [-1,1]`and :math:`r_{i,j} \in [0,1]` are two randomly choosen scaling factors, while 
+:math:`d_{i,j} \in \{-1,0,1\}` is the direction information for the j-th dimension of the i-th solution. After computing 
+the new candidate solution, two scenarios can occur:
+
+1. If :math:`\mathbf{v}_i` is worse (or equal) than :math:`\mathbf{x}_i`, the direction information :math:`d_{i,j}` is set to 0;
+2. If :math:`\mathbf{v}_i` is better than :math:`\mathbf{x}_i`, the direction information :math:`d_{i,j}` is updated as follows:
+    
+    .. math::
+        d_{i,j} = \begin{cases}
+                    1 & \text{if}  \quad v_{i,j} > x_{i,j} \\[0.2cm]
+                    -1 & \text{if} \quad v_{i,j} < x_{i,j} \\[0.2cm]
+                  \end{cases}
+
+.. note::
+    At initialization, the direction information is set to 0 for all dimensions.

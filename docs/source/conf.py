@@ -16,10 +16,10 @@ sys.path.insert(0, os.path.abspath('../../'))
 def setup(app):
     app.add_js_file("https://cdn.plot.ly/plotly-latest.min.js")
 
-project = 'BeeOptimal documentation'
+project   = 'BeeOptimal documentation 🐝🍯'
 copyright = '2024, Giulio Fantuzzi'
-author = 'Giulio Fantuzzi'
-release = '0.1.0'
+author    = 'Giulio Fantuzzi'
+release   = '0.1.0'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
