@@ -70,24 +70,23 @@ class BenchmarkFunction:
 #  Callable benchmark functions
 #--------------------------------------------------------------------------------
 def sphere(point):
-    point = np.array(point)
     return np.sum(point**2)
 
 def rosenbrock(point):
-    point = np.array(point)
     return np.sum(100*(point[1:] - point[:-1]**2)**2 + (point[:-1]-1)**2)
         
 def ackley(point):
-    return -20 * np.exp(-0.2*np.sqrt(0.5*(point[0]**2 + point[1]**2))) - np.exp(0.5*(np.cos(2*np.pi*point[0]) + np.cos(2*np.pi*point[1]))) + np.e + 20
+    D = len(point)
+    return -20 * np.exp(-0.2 * np.sqrt(np.sum(point**2) / D)) - np.exp(np.sum(np.cos(2 * np.pi * point)) / D) + 20 + np.e
 
 def rastrigin(point):
-    point = np.array(point)
     return (10*len(point) + np.sum((point**2 - 10*np.cos(2*np.pi*point))))
 
 def weierstrass(point,a=0.5,b=3,k_max=20):
-    point = np.array(point)
-    k = np.arange(k_max+1)
-    return np.sum(np.sum(a**k[:, None] * np.cos(2 * np.pi * b**k[:, None] * (point + 0.5)), axis=0)) - (len(point) * np.sum(a**k * np.cos(2 * np.pi * b**k * 0.5)))
+    k = np.arange(k_max + 1)
+    term1 = np.sum(a**k[:, None] * np.cos(2 * np.pi * b**k[:, None] * (point + 0.5)), axis=0)
+    term2 = np.sum(a**k * np.cos(2 * np.pi * b**k * 0.5))
+    return np.sum(term1) - len(point) * term2
 
 def griewank(point):
     point = np.array(point)
