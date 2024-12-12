@@ -19,6 +19,7 @@ BENCHMARK_FUNCTIONS =  [Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Weierstrass2d
 CSV_PATH            = 'simulations/opt_report_full.csv'
 BOXPLOTS_PATH       = 'images/opt_boxplots/'
 
+#------------------------------------------------------------------------------------------------------------------
 def optimization_boxplot(function,simulations_df,scale='log',title=''):
     """
     Boxplot of the simulation results for the ABC algorithm with different configurations (for a specific function).
@@ -32,9 +33,10 @@ def optimization_boxplot(function,simulations_df,scale='log',title=''):
     Returns:
         plotly.graph_objects.Figure : Boxplot of the optimization results.
     """
+    
     plot_df = simulations_df[(simulations_df['Function'] == function.name)].copy()
-    #plot_df = simulations_df[(simulations_df['Function'] == function.name) & (simulations_df['Mutation'].isin(['StandardABC','ModifiedABC']))].copy()
     plot_df["Configuration"] = plot_df["Mutation"] + " (" + plot_df["Initialization"] + ")"
+    
     fig = go.Figure()
     for config in plot_df["Configuration"].unique():
         values = plot_df[plot_df["Configuration"] == config]["OptValue"].values
@@ -56,13 +58,16 @@ def optimization_boxplot(function,simulations_df,scale='log',title=''):
 
     fig.update_layout(colorway=color_palette,template='ggplot2')
     return fig
-
+#------------------------------------------------------------------------------------------------------------------
 
 if __name__ == '__main__':
+    
     # Load the optimization results
     simulations_df = pd.read_csv(CSV_PATH)
+    
     # Clip the values for a better visualization
     simulations_df['OptValue'] = np.clip(simulations_df['OptValue'],10e-30,None)
+    
     # Create and store the boxplots
     for function in BENCHMARK_FUNCTIONS:
         boxplot = optimization_boxplot(function,simulations_df,scale='log',title=f'Simulation results for {function.name}')

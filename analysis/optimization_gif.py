@@ -48,22 +48,26 @@ if __name__ == '__main__':
                 print(f"Evaluating {function.name.upper()} with {initialization} initialization and {mutation} mutation")
                 print('-'*100)
                 
-                ABC = ArtificialBeeColony(n_bees          = N_BEES,
-                                          bounds          = np.array(function.bounds),
-                                          function        = function.fun,
-                                          n_employed_bees = None)
+                ABC = ArtificialBeeColony(
+                    n_bees          = N_BEES,
+                    bounds          = np.array(function.bounds),
+                    function        = function.fun,
+                    n_employed_bees = None
+                    )
 
-                ABC.optimize(max_iters        = MAX_ITERS,
-                             limit            = LIMIT,
-                             selection        = SELECTION,
-                             mutation         = mutation,
-                             initialization   = initialization,
-                             sf               = SF,
-                             self_adaptive_sf = SELF_ADAPTIVE_SF,
-                             mr               = MR,
-                             stagnation_tol   = STAGNATION_TOL,
-                             verbose          = VERBOSE,
-                             random_seed      = RANDOM_SEED)
+                ABC.optimize(
+                    max_iters        = MAX_ITERS,
+                    limit            = LIMIT,
+                    selection        = SELECTION,
+                    mutation         = mutation,
+                    initialization   = initialization,
+                    sf               = SF,
+                    self_adaptive_sf = SELF_ADAPTIVE_SF,
+                    mr               = MR,
+                    stagnation_tol   = STAGNATION_TOL,
+                    verbose          = VERBOSE,
+                    random_seed      = RANDOM_SEED
+                    )
                 
                 print(f"Optimal Solution:")
                 print(f"\tExpected : {function.optimal_solution}")
@@ -78,15 +82,15 @@ if __name__ == '__main__':
                 # Adaptive step in order to have gifs with same number of frames
                 step = max(1, (ABC.actual_iters+1) // 50) #Note: actual_iters +1 to include initial population
                 for iteration in range(0,(ABC.actual_iters+1),step): 
-                    plots.append(contourplot_bees(function=function,
-                                                  bee_colony=ABC.colony_history[iteration],
-                                                  title=f"{function.name.upper()} optimization [Iteration {iteration} / {ABC.actual_iters}]",
-                                                  optimal_solution=function.optimal_solution,
-                                                  bounds=None,
-                                                  zoom = 1.0,
-                                                  figsize=(600,600)
-                                                  )
-                                 )
+                    plots.append(contourplot_bees(
+                        function=function,
+                        bee_colony=ABC.colony_history[iteration],
+                        title=f"{function.name.upper()} optimization [Iteration {iteration} / {ABC.actual_iters}]",
+                        optimal_solution=function.optimal_solution,
+                        bounds=None,
+                        zoom = 1.0,
+                        figsize=(600,600)
+                        ))
 
                 with tempfile.TemporaryDirectory() as tmpdirname:
                     image_files = []

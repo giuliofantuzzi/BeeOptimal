@@ -54,17 +54,22 @@ if __name__ == '__main__':
                 
                 for s in trange(N_SIMULATIONS,desc='Running simulations'):
                     
-                    ABC = ArtificialBeeColony(n_bees   = N_BEES,
-                                              bounds   = function.bounds,
-                                              function = function.fun)
-                    ABC.optimize(max_iters      = MAX_ITERS,
-                                 selection      = SELECTION,
-                                 mutation       = mutation,
-                                 initialization = initialization,
-                                 mr             = MR,   
-                                 stagnation_tol = STAGNATION_TOL,
-                                 verbose        = False,
-                                 random_seed    = None)
+                    ABC = ArtificialBeeColony(
+                        n_bees   = N_BEES,
+                        bounds   = function.bounds,
+                        function = function.fun
+                        )
+                    
+                    ABC.optimize(
+                        max_iters      = MAX_ITERS,
+                        selection      = SELECTION,
+                        mutation       = mutation,
+                        initialization = initialization,
+                        mr             = MR,   
+                        stagnation_tol = STAGNATION_TOL,
+                        verbose        = False,
+                        random_seed    = None
+                        )
                     
                     optimum_series[s] = ABC.optimal_bee.value
                     

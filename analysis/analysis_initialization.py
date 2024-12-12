@@ -48,17 +48,21 @@ if __name__ == '__main__':
             # Simulations
             for s in trange(N_SIMULATIONS,desc=f'Simulations (Initialization={initialization})'):
 
-                ABC = ArtificialBeeColony(n_bees   = N_BEES,
-                                          bounds   = function.bounds,
-                                          function = function.fun)
+                ABC = ArtificialBeeColony(
+                    n_bees   = N_BEES,
+                    bounds   = function.bounds,
+                    function = function.fun
+                    )
                 
-                ABC.optimize(max_iters     = MAX_ITERS,
-                            limit          = LIMIT,
-                            selection      = SELECTION,
-                            mutation       = MUTATION,
-                            initialization = initialization,
-                            stagnation_tol = STAGNATION_TOL, 
-                            random_seed    = None)
+                ABC.optimize(
+                    max_iters      = MAX_ITERS,
+                    limit          = LIMIT,
+                    selection      = SELECTION,
+                    mutation       = MUTATION,
+                    initialization = initialization,
+                    stagnation_tol = STAGNATION_TOL, 
+                    random_seed    = None
+                    )
 
                 cost_history[i,s,:]    = [best_bee.value for best_bee in ABC.optimal_bee_history]
         

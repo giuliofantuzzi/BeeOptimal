@@ -48,16 +48,20 @@ if __name__ == '__main__':
             # Simulations
             for s in trange(N_SIMULATIONS,desc=f'Simulations (Initialization={initialization})'):
 
-                ABC = ArtificialBeeColony(n_bees   = N_BEES,
-                                          bounds   = function.bounds,
-                                          function = function.fun)
+                ABC = ArtificialBeeColony(
+                    n_bees   = N_BEES,
+                    bounds   = function.bounds,
+                    function = function.fun
+                    )
                 
-                ABC.optimize(max_iters     = MAX_ITERS,
-                            limit          = LIMIT,
-                            selection      = SELECTION,
-                            mutation       = MUTATION,
-                            initialization = initialization,
-                            random_seed    = None)
+                ABC.optimize(
+                    max_iters     = MAX_ITERS,
+                    limit          = LIMIT,
+                    selection      = SELECTION,
+                    mutation       = MUTATION,
+                    initialization = initialization,
+                    random_seed    = None
+                    )
                 
                 initial_positions = np.array([bee.position for bee in ABC.colony_history[0]]) # n_employs x n_dimensions
                 diversity = np.mean(np.sqrt(np.mean((initial_positions - initial_positions.mean(axis=0))**2,axis=1)))

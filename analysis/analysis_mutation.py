@@ -51,18 +51,22 @@ if __name__ == '__main__':
                 # Simulations
                 for s in trange(N_SIMULATIONS,desc=f'Simulations (Mutation={mutation}, Initialization={initialization})'):
 
-                    ABC = ArtificialBeeColony(n_bees   = N_BEES,
-                                              bounds   = function.bounds,
-                                              function = function.fun)
+                    ABC = ArtificialBeeColony(
+                        n_bees   = N_BEES,
+                        bounds   = function.bounds,
+                        function = function.fun
+                        )
 
-                    ABC.optimize(max_iters     = MAX_ITERS,
-                                limit          = LIMIT,
-                                selection      = SELECTION,
-                                mutation       = mutation,
-                                initialization = initialization,
-                                stagnation_tol = STAGNATION_TOL,
-                                mr             = MR,
-                                verbose=False)
+                    ABC.optimize(
+                        max_iters      = MAX_ITERS,
+                        limit          = LIMIT,
+                        selection      = SELECTION,
+                        mutation       = mutation,
+                        initialization = initialization,
+                        stagnation_tol = STAGNATION_TOL,
+                        mr             = MR,
+                        verbose=False
+                        )
 
                     optimal_history = [best_bee.value for best_bee in ABC.optimal_bee_history]
                     # Padding in case of stagnation
