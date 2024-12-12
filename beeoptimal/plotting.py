@@ -178,12 +178,8 @@ def contourplot_bees(function,bee_colony,optimal_solution=None,title='',bounds=N
         bee_colony (list of Bee)                : List of Bee objects.
         optimal_solution (numpy.ndarray)        : The optimal solution point. Defaults to None.
         title (str)                             : Title of the plot. Defaults to empty string.
-        extended_bounds (float or numpy.ndarray): Specifies the extended bounds for the plot.
-        
-                                                    - If float, bounds are extended by that percentage of the original range.
-                                                    - If NumPy array, it directly specifies the new bounds.
-                                                    - If None, no extension is applied. Defaults to None.
-            
+        bounds (numpy.ndarray, optional)        : Custom bounds for the plot (different from the default ones). Defaults to None.
+        zoom (float, optional)                  : Zoom factor for the plot. Defaults to 1.0.
         bee_marker_size (int or float, optional): Size of the bee markers. Defaults to None.
         figsize (tuple)                         : Size of the figure. Defaults to (600, 600).
         
