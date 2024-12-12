@@ -20,10 +20,16 @@ classifiers     = [
 ]
 #------------------------------------------------------------------------------------------
 [project.optional-dependencies]
-docs = ["sphinx"]
+docs = [
+    "sphinx>=4.0.0",
+    "sphinx-rtd-theme",
+    "nbsphinx",
+    "nbsphinx-link",
+    "sphinx-rtd-dark-mode"
+]
 #------------------------------------------------------------------------------------------
 [project.urls]
-Documentation = "https://readthedocs.org"
+Documentation = "https://readthedocs.org"     # TODO: Add the real link to the documentation
 Repository    = "https://github.com/giuliofantuzzi/BeeOptimal"
 Issues        = "https://github.com/giuliofantuzzi/BeeOptimal/issues"
 #------------------------------------------------------------------------------------------
