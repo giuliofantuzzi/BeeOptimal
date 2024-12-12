@@ -21,6 +21,7 @@ class ArtificialBeeColony():
         n_bees (int)                     : The total number of bees in the colony.
         n_employed_bees (int)            : The number of employed bees.
         n_onlooker_bees (int)            : The number of onlooker bees.
+        max_scouts (int)                 : The maximum number of scout bees per iteration. Defaults to None (will be set to n_employed_bees).
         function (callable)              : The objective function to optimize.
         bounds (array-like)              : The bounds for each dimension of the search space, provided as a 2D array [(lower1, upper1), ..., (lowerD, upperD)].
         employed_bees (list[Bee])        : The employed bees in the colony.
@@ -44,7 +45,9 @@ class ArtificialBeeColony():
             To ensure compatibility with all the mutation types, the bee colony must have at least 5 employed bees and at least 5 onlokeer bees.
     """
     
-    def __init__(self,n_bees,function,bounds,n_employed_bees=None):
+    #------------------------------------------------------------------------------------------------------------------
+    
+    def __init__(self,n_bees,function,bounds,n_employed_bees=None,max_scouts=None):
         """
         Initializes the ABC
         
@@ -53,6 +56,7 @@ class ArtificialBeeColony():
             function (callable)             : The objective function to optimize.
             bounds (array-like)             : The bounds for each dimension of the search space, provided as a 2D array [(lower1, upper1), ..., (lowerD, upperD)].
             n_employed_bees (int, optional) : The number of employed bees. Defaults to half the total number of bees.
+            max_scouts (int, optional)      : The maximum number of scout bees per iteration. Defaults to None (will be set to n_employed_bees).
 
         Raises:
             AssertionError: If the number of bees is less than or equal to 10 (for compatibility with ALL mutation types).
@@ -70,18 +74,20 @@ class ArtificialBeeColony():
             assert (n_employed_bees < n_bees) , 'The number of employed bees must be lower than the number of bees'
     
         self.dim                 = len(bounds)
-        self.n_bees              = n_bees
-        self.n_employed_bees     = n_employed_bees if n_employed_bees is not None else (self.n_bees // 2)
+        self.n_bees              = int(n_bees)
+        self.n_employed_bees     = int(n_employed_bees) if n_employed_bees is not None else self.n_bees // 2
         self.n_onlooker_bees     = self.n_bees - self.n_employed_bees
+        self.max_scouts          = int(max_scouts) if max_scouts is not None else self.n_employed_bees
         self.function            = function
-        self.bounds              = bounds if bounds is not None else np.array([(1e-30,1e30)]*self.dim)
+        self.bounds              = bounds if bounds is not None else np.array([(-1e30,1e30)]*self.dim)
         self.employed_bees       = []
         self.onlooker_bees       = []
         self.colony_history      = []
         self.optimal_bee         = None
         self.optimal_bee_history = []
         
-        assert (self.n_onlooker_bees >= 5) , 'The number of onlooker bees must be at least 5. Please change your configuration'
+        assert (self.n_onlooker_bees >= 5)               , 'The number of onlooker bees must be at least 5. Please change your configuration'
+        assert (self.max_scouts <= self.n_employed_bees) , 'The maximum number of scouts must be lower (or equal) than the number of employed bees'
     
     #------------------------------------------------------------------------------------------------------------------
     
@@ -178,15 +184,19 @@ class ArtificialBeeColony():
         self.optimal_bee = copy.deepcopy(max(self.employed_bees,key=lambda bee: bee.fitness))
         self.optimal_bee_history.append(copy.deepcopy(self.optimal_bee))
         
-        # Loop
+        # Optimization Loop
         for _ in trange(self.max_iters,desc='Running Optimization',disable= not verbose,bar_format='{l_bar}{bar}|[{elapsed}<{remaining}]'):
+            
             self.actual_iters += 1
-            self.send_employees_()
-            self.send_onlookers_()
-            self.send_scouts_()
+            
+            self.employees_phase_()
+            self.onlookers_phase_()
+            self.scouts_phase_()
+            
             self.colony_history.append(copy.deepcopy(self.employed_bees))
             self.optimal_bee = copy.deepcopy(max(self.employed_bees,key=lambda bee: bee.fitness))
             self.optimal_bee_history.append(copy.deepcopy(self.optimal_bee))
+            
             # Stagnation
             if (np.std([bee.fitness for bee in self.employed_bees]) < self.stagnation_tol):
                 if verbose:
@@ -195,7 +205,7 @@ class ArtificialBeeColony():
     
     #------------------------------------------------------------------------------------------------------------------
     
-    def send_employees_(self):
+    def employees_phase_(self):
         """
         Performs the employed bees phase, where each employed bee explores the search space by generating candidate solutions.
 
@@ -257,7 +267,7 @@ class ArtificialBeeColony():
     
     #------------------------------------------------------------------------------------------------------------------    
     
-    def send_onlookers_(self):
+    def onlookers_phase_(self):
         """
         Performs the onlooker bees phase, where onlookers exploit the information shared by employed bees to explore the search space.
 
@@ -301,16 +311,18 @@ class ArtificialBeeColony():
             
     #------------------------------------------------------------------------------------------------------------------
     
-    def send_scouts_(self):
+    def scouts_phase_(self):
         """
         Performs the scout bees phase, where employed bees that exceed the trial limit are forced to explore a new solution
 
         .. note::
             Depending on the initialization strategy, scouts are reinitialized either randomly or using a chaotic map.
         """
+        n_scouts = 0
         
         for bee_idx, bee in enumerate(self.employed_bees):
             if bee.trial > self.limit:
+                n_scouts += 1
                 if self.initialization == 'random':
                     self.employed_bees[bee_idx] = Bee(position = np.random.uniform(self.bounds[:,0],self.bounds[:,1],self.dim),
                                                       function = self.function,
@@ -329,6 +341,9 @@ class ArtificialBeeColony():
             
                     self.employed_bees[bee_idx] = sorted(cahotic_pop+opposite_pop,
                                                          key=lambda bee: bee.fitness, reverse=True)[0]
+            
+            if n_scouts >= self.max_scouts:
+                break 
     
     #------------------------------------------------------------------------------------------------------------------            
     
