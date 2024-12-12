@@ -98,10 +98,10 @@ D-dimensional search space. Despite not considering a constrained optimization p
 Initialization
 ^^^^^^^^^^^^^^
 
-In the initialization phase, we generate a population of :math:`N` candidate solutions :math:`\{\mathbf{x}_i\}_{i=1}^{N}` (employed bees) as follows:
+In the initialization phase, we generate a population of :math:`SN` candidate solutions :math:`\{\mathbf{x}_i\}_{i=1}^{SN}` (employed bees) as follows:
 
 .. math::
-    x_{i,j} = x_{\min,j} + \text{rand}(0,1) \cdot (x_{\max,j} - x_{\min,j}) \quad \text{for} \quad i=1,...,N \quad \text{and} \quad j=1,...,D
+    x_{i,j} = x_{\min,j} + \text{rand}(0,1) \cdot (x_{\max,j} - x_{\min,j}) \quad \text{for} \quad i=1,...,SN \quad \text{and} \quad j=1,...,D
     :label: eq-initialization
 
 where :math:`x_{\min,j}` and :math:`x_{\max,j}` are the lower and upper bounds of the search space along dimension :math:`j`, respectively.
@@ -143,7 +143,7 @@ At this stage, onlooker bees select a solution to explore based on the fitness i
 ranked selection, or tournament selection. In the original implementation, roulette wheel selection was adopted. Hence, the probability  :math:`p_i` of selecting a solution :math:`\mathbf{x}_i` is given by:
 
 .. math::
-    p_i = \cfrac{\text{fitness}(\mathbf{x}_i)}{\sum_{i=1}^{N} \text{fitness}(\mathbf{x}_i)}
+    p_i = \cfrac{\text{fitness}(\mathbf{x}_i)}{\sum_{i=1}^{SN} \text{fitness}(\mathbf{x}_i)}
     :label: eq-roulette_wheel
 
 Once an onlooker bee selects a solution :math:`\mathbf{x}_i`, a new candidate solution :math:`\mathbf{v}_i` is generated and evaluated in the same way as in the employed bee phase (see Eq. :eq:`eq-StandardABC_perturbation` 
@@ -168,7 +168,7 @@ monitors the variability of the bees in the colony: if the variability of the fi
 The stagnation value at time :math:`t` is calculated as follows:
 
 .. math::
-    \text{S}(t) = \frac{1}{N} \sum_{i=1}^{N} {\Big( \text{fitness}(\mathbf{x}_i) - \overline{\text{fitness}(t)} \Big)^2}
+    \text{S}(t) = \frac{1}{SN} \sum_{i=1}^{SN} {\Big( \text{fitness}(\mathbf{x}_i) - \overline{\text{fitness}(t)} \Big)^2}
     :label: eq-stagnation_criteria
     
 where :math:`\overline{\text{fitness}(t)}` is the average fitness of the population :math:`\{ \mathbf{x}_1,...,\mathbf{x}_N \}` at time :math:`t`.
@@ -184,7 +184,23 @@ Several variants of the ABC algorithm have been proposed to enhance its performa
 Different initialization
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Here introduce cahotic and opposition-based initialization
+Population initialization is a crucial task in evolutionary algorithms because it can affect the convergence speed and the quality of the final solution.
+*Wei-feng Gao* and *San-yang Liu* proposed a novel initialization approach which combines *opposition-based* learning with cahotic systems to generate
+the initial population. The package follows the proposal of the authors and implements a sinusoidal iterator, like follows:
+
+.. math::
+    ch_{k+1} = \sin(\pi \cdot ch_k) \quad \text{for} \quad k=1,...,K
+    :label: eq-cahotic_system
+
+where :math:`k` is the iteration counter and :math:`K` is the maximum number of cahotic iterations (defaults to 300).
+
+Eq. :eq:`eq-cahotic_system` is then used to generate the initial population according to the following algorithm:
+
+.. image:: _static/cahotic_initialization.png
+    :width: 600
+    :align: center
+    :class: border
+
 
 Different mutations
 ^^^^^^^^^^^^^^^^^^^^

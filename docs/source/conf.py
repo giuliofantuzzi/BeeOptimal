@@ -31,7 +31,7 @@ extensions = [
     'nbsphinx',             # For Jupyter notebooks
     'nbsphinx_link',        # For Jupyter notebooks
     'sphinx_rtd_dark_mode',  # Dark mode
-    'sphinx.ext.mathjax'
+    'sphinx.ext.mathjax',
 ]
 
 
