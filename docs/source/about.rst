@@ -155,8 +155,12 @@ and Eq. :eq:`eq-fitness`). Again, the better solution between :math:`\mathbf{x}_
 Scout Bee Phase
 ^^^^^^^^^^^^^^^
 
-If a solution :math:`\mathbf{x}_i` has not been improved for a certain number of iterations (*limit*), it becomes a scout bee. In this case, the solution is randomly initialized within the search space by using Eq. :eq:`eq-initialization`.
+If a solution :math:`\mathbf{x}_i` has not been improved for a certain number of iterations (*limit*), it becomes a scout bee. In this case, the 
+solution is randomly initialized within the search space by using Eq. :eq:`eq-initialization`.
 
+.. tip::
+    A good heuristic for the *limit* parameter is :math:`0.6 \cdot \text{SN} \cdot \text{D}`, where :math:`\text{SN}` is the
+    number of employed bees and :math:`\text{D}` is the dimensionality of the search space.
 
 Termination Critera
 ^^^^^^^^^^^^^^^^^^^
