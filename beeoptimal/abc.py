@@ -17,28 +17,28 @@ class ArtificialBeeColony():
     Artificial Bee Colony (ABC) class
     
     Args:
-        dim (int)                    : The dimensionality of the search space.
-        n_bees (int)                 : The total number of bees in the colony.
-        n_employed_bees (int)        : The number of employed bees.
-        n_onlooker_bees (int)        : The number of onlooker bees.
-        function (callable)          : The objective function to optimize.
-        bounds (array-like)          : The bounds for each dimension of the search space, provided as a 2D array [(lower1, upper1), ..., (lowerD, upperD)].
-        employed_bees (list)         : The employed bees in the colony.
-        onlooker_bees (list)         : The onlooker bees in the colony.
-        colony_history (list)        : The history of the employed bees at each iteration.
-        optimal_bee (Bee)            : The optimal bee in the colony.
-        optimal_bee_history (list)   : The history of the optimal bee at each iteration.
-        max_iters (int)              : The maximum number of iterations. Defaults to 1000.
-        actual_iters (int)           : The actual number of iterations.
-        limit (int)                  : The trial limit for scout bees. If 'default', it is set to 0.6 * n_employed_bees * dimensionality. Defaults to 'default'.
-        selection (str, optional)    : The selection strategy for onlooker bees. Must be one among 'RouletteWheel' and 'Tournament'. Defaults to 'RouletteWheel'.
-        mutation (str)               : The mutation strategy. Must be one among 'StandardABC', 'ModifiedABC', 'ABC/best/1', 'ABC/best/2' and 'DirectedABC'. Defaults to 'StandardABC'.
-        initialization (str)         : The initialization strategy for the bee population. Must be one among 'random' and 'cahotic'. Defaults to 'random'.
-        stagnation_tol (float)       : The tolerance for stagnation in fitness values to trigger early termination. Defaults to np.NINF (i.e. stagnation disabled).
-        sf (float)                   : The scaling factor for mutations. Defaults to 1.0.
-        initial_sf (float)           : The initial scaling factor. Defaults to 1.0.
-        self_adaptive_sf (bool)      : Whether to use a self-adaptive scaling factor. Defaults to False.
-        mr (float)                   : The mutation rate for 'ModifiedABC' strategy. Defaults to 0.7.
+        dim (int)                        : The dimensionality of the search space.
+        n_bees (int)                     : The total number of bees in the colony.
+        n_employed_bees (int)            : The number of employed bees.
+        n_onlooker_bees (int)            : The number of onlooker bees.
+        function (callable)              : The objective function to optimize.
+        bounds (array-like)              : The bounds for each dimension of the search space, provided as a 2D array [(lower1, upper1), ..., (lowerD, upperD)].
+        employed_bees (list[Bee])        : The employed bees in the colony.
+        onlooker_bees (list[Bee])        : The onlooker bees in the colony.
+        colony_history (list[list[Bee]]) : The history of the employed bees at each iteration.
+        optimal_bee (Bee)                : The optimal bee in the colony.
+        optimal_bee_history (list[Bee])  : The history of the optimal bee at each iteration.
+        max_iters (int)                  : The maximum number of iterations. Defaults to 1000.
+        actual_iters (int)               : The actual number of iterations.
+        limit (int)                      : The trial limit for scout bees. If 'default', it is set to 0.6 * n_employed_bees * dimensionality. Defaults to 'default'.
+        selection (str, optional)        : The selection strategy for onlooker bees. Must be one among 'RouletteWheel' and 'Tournament'. Defaults to 'RouletteWheel'.
+        mutation (str)                   : The mutation strategy. Must be one among 'StandardABC', 'ModifiedABC', 'ABC/best/1', 'ABC/best/2' and 'DirectedABC'. Defaults to 'StandardABC'.
+        initialization (str)             : The initialization strategy for the bee population. Must be one among 'random' and 'cahotic'. Defaults to 'random'.
+        stagnation_tol (float)           : The tolerance for stagnation in fitness values to trigger early termination. Defaults to np.NINF (i.e. stagnation disabled).
+        sf (float)                       : The scaling factor for mutations. Defaults to 1.0.
+        initial_sf (float)               : The initial scaling factor. Defaults to 1.0.
+        self_adaptive_sf (bool)          : Whether to use a self-adaptive scaling factor. Defaults to False.
+        mr (float)                       : The mutation rate for 'ModifiedABC' strategy. Defaults to 0.7.
     
     .. note::
             To ensure compatibility with all the mutation types, the bee colony must have at least 5 employed bees and at least 5 onlokeer bees.
@@ -399,9 +399,9 @@ class ArtificialBeeColony():
         Selects donor bees from the population (for a given bee)
 
         Args:
-            n_donors (int, optional)    : The number of donor bees to return. Defaults to 1.
-            bee_idx (int, optional)     : The index of the bee for which donors are selected. Defaults to None.
-            population (list, optional) : The population of bees from which donors are selected. Defaults to None.
+            n_donors (int, optional)         : The number of donor bees to return. Defaults to 1.
+            bee_idx (int, optional)          : The index of the bee for which donors are selected. Defaults to None.
+            population (list[Bee], optional) : The population of bees from which donors are selected. Defaults to None.
 
         Returns:
             list: A list of donor bees (as Bee instances).
