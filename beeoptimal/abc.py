@@ -130,7 +130,7 @@ class ArtificialBeeColony():
         assert (initialization in ['random','cahotic'])                                                        , 'Invalid initialization strategy. Please choose one among random and cahotic'
         assert (selection in ['RouletteWheel','Tournament'])                                                   , 'Invalid selection strategy. Please choose one among RouletteWheel and Tournament'
         assert (mr>=0 and mr<=1)                                                                               , 'Invalid mutation rate. Please choose a value between 0 and 1'
-        if self.selection == 'Tournament':
+        if selection == 'Tournament':
             assert (tournament_size > 0 and tournament_size <= self.n_employed_bees)  , 'Tournament size must be between 1 and the number of employed bees'
         else:
             assert (tournament_size is None)                                          , 'Tournament size must be None for the selected selection strategy'

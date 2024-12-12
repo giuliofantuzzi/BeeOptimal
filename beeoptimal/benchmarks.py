@@ -8,13 +8,13 @@ import numpy as np
 #--------------------------------------------------------------------------------
 class BenchmarkFunction:
     """
-        Class to define a benchmark function for optimization.
+        Class to define a D-dimensional benchmark function for optimization.
         
         Args:
             name (str)                    : The name of the function. Defaults to 'Unspecified Name'.
             fun (callable)                : The function to evaluate. Defaults to None.
-            bounds (array-like)           : The bounds of the function, provided as a 2D array. Defaults to None.
-            optimal_solution (array-like) : The known solution achieving the optimal value. Defaults to None.
+            bounds (array-like)           : The bounds of the function, provided as a numpy array of shape `(D,2)`. Defaults to None.
+            optimal_solution (array-like) : The known solution achieving the optimal value, provided as numpy array of shape `(D,)`. Defaults to None. 
             
         Examples:
             >>> from beeoptimal.benchmarks import BenchmarkFunction
@@ -35,8 +35,8 @@ class BenchmarkFunction:
         Args:
             name (str)                    : The name of the function. Defaults to 'Unspecified Name'.
             fun (callable)                : The function to evaluate. Defaults to None.
-            bounds (array-like)           : The bounds of the function, provided as a 2D array. Defaults to None.
-            optimal_solution (array-like) : The known solution achieving the optimal value. Defaults to None.
+            bounds (array-like)           : The bounds of the function, provided as a numpy array of shape `(D,2)`. Defaults to None.
+            optimal_solution (array-like) : The known solution achieving the optimal value, provided as numpy array of shape `(D,)`. Defaults to None.
         """
         self.name = name
         self.fun = fun
@@ -48,7 +48,7 @@ class BenchmarkFunction:
         Evaluate the function at the given point.
         
         Args:
-            point (array-like) : The point at which to evaluate the function.
+            point (array-like) : The point at which to evaluate the function, provided as numpy array of shape `(D,)`.
         
         Returns:
             float: The value of the function computed at the given point.

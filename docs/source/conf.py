@@ -48,3 +48,4 @@ html_static_path  = ['_static']
 html_css_files = [
     'style.css',
 ]
+#nbsphinx_execute = 'always' # Execute notebooks before conversion

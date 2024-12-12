@@ -15,18 +15,16 @@ from .benchmarks import BenchmarkFunction
 # Plotting functions
 #--------------------------------------------------------------------------------
 
-def contourplot(function, title=None, extended_bounds=None,figsize=(600,600)):
+def contourplot(function, title=None, bounds=None,zoom=1.0,figsize=(600,600)):
     """
     Plots a 2D benchmark function as a contour plot.
     
     Args:
-        function (BenchmarkFunction)            : A benchmark function object.
-        title (str)                             : Title of the plot. Defaults to empty string.
-        extended_bounds (float or numpy.ndarray): Specifies the extended bounds for the plot.
-            
-                                                    - If float, bounds are extended by that percentage of the original range.
-                                                    - If NumPy array, it directly specifies the new bounds.
-                                                    - If None, no extension is applied. Defaults to None.
+        function (BenchmarkFunction)     : A benchmark function object.
+        title (str,optional)             : Title of the plot. Defaults to empty string.
+        bounds (numpy.ndarray, optional) : Custom bounds for the plot (different from the default ones). Defaults to None.
+        zoom (float, optional)           : Zoom factor for the plot. Defaults to 1.0.
+        figsize (tuple, optional)        : Size of the figure. Defaults to (600,600).
             
     Returns:
         plotly.graph_objects.Figure: A Plotly figure containing the contour plot of the function.
@@ -38,22 +36,32 @@ def contourplot(function, title=None, extended_bounds=None,figsize=(600,600)):
     assert len(function.bounds) == 2, "Function must be 2D"
     
     # Determine the bounds
-    x_bounds = function.bounds[0,:]
-    y_bounds = function.bounds[1,:]
-    
-    if extended_bounds is not None:
-        if isinstance(extended_bounds, float):
-            # Extend by a percentage
-            x_range = x_bounds[1] - x_bounds[0]
-            y_range = y_bounds[1] - y_bounds[0]
-            x_bounds = (x_bounds[0] - extended_bounds * x_range, x_bounds[1] + extended_bounds * x_range)
-            y_bounds = (y_bounds[0] - extended_bounds * y_range, y_bounds[1] + extended_bounds * y_range)
-        elif isinstance(extended_bounds, np.ndarray):
-            assert extended_bounds.shape == (2, 2), "extended_bounds must have shape (2, 2)"
-            x_bounds = (extended_bounds[0][0], extended_bounds[0][1])
-            y_bounds = (extended_bounds[1][0], extended_bounds[1][1])
+    if bounds is not None:
+        if isinstance(bounds, np.ndarray):
+            assert bounds.shape == (2, 2), "bounds must have shape (2, 2)."
+            x_bounds = (bounds[0, 0], bounds[0, 1])
+            y_bounds = (bounds[1, 0], bounds[1, 1])
         else:
-            raise ValueError("extend_bounds must be a float or a NumPy array of shape (2, 2)")
+            raise ValueError("bounds must be a NumPy array of shape (2, 2).")
+    else:
+        # Use predefined bounds if no bounds are provided
+        x_bounds = (function.bounds[0, 0], function.bounds[0, 1])
+        y_bounds = (function.bounds[1, 0], function.bounds[1, 1])
+
+    # Apply zoom factor
+    x_range = x_bounds[1] - x_bounds[0]
+    y_range = y_bounds[1] - y_bounds[0]
+    x_center = (x_bounds[0] + x_bounds[1]) / 2
+    y_center = (y_bounds[0] + y_bounds[1]) / 2
+
+    x_bounds = (
+        x_center - (x_range / 2) * zoom,
+        x_center + (x_range / 2) * zoom
+    )
+    y_bounds = (
+        y_center - (y_range / 2) * zoom,
+        y_center + (y_range / 2) * zoom
+    )
     
     # Generate grid
     x = np.linspace(x_bounds[0], x_bounds[1], 100)
@@ -89,14 +97,16 @@ def contourplot(function, title=None, extended_bounds=None,figsize=(600,600)):
 
 
 
-def plot_surface(function,title='',figsize=(600,600)):
+def surfaceplot(function,title='',bounds=None,zoom=1.0,figsize=(600,600)):
     """
     Plots the surface of a 2D benchmark function.
     
     Args:
-        function (BenchmarkFunction)            : A benchmark function object.
-        title (str)                             : Title of the plot. Defaults to empty string.
-        figsize (tuple)                         : Size of the figure. Defaults to (600, 600).
+        function (BenchmarkFunction)     : A benchmark function object.
+        title (str,optional)             : Title of the plot. Defaults to empty string.
+        bounds (numpy.ndarray, optional) : Custom bounds for the plot (different from the default ones). Defaults to None.
+        zoom (float, optional)           : Zoom factor for the plot. Defaults to 1.0.
+        figsize (tuple,optional)         : Size of the figure. Defaults to (600, 600).
     
     Returns:
         plotly.graph_objects.Figure: A Plotly figure containing the surface plot of the function.
@@ -104,8 +114,41 @@ def plot_surface(function,title='',figsize=(600,600)):
     
     assert len(function.bounds) == 2, "Function must be 2D"
     
-    x = np.linspace(function.bounds[0][0], function.bounds[0][1], 100)
-    y = np.linspace(function.bounds[1][0], function.bounds[1][1], 100)
+     # Determine the bounds
+    x_bounds = function.bounds[0,:]
+    y_bounds = function.bounds[1,:]
+    
+    # Determine the bounds
+    if bounds is not None:
+        if isinstance(bounds, np.ndarray):
+            assert bounds.shape == (2, 2), "bounds must have shape (2, 2)."
+            x_bounds = (bounds[0, 0], bounds[0, 1])
+            y_bounds = (bounds[1, 0], bounds[1, 1])
+        else:
+            raise ValueError("bounds must be a NumPy array of shape (2, 2).")
+    else:
+        # Use predefined bounds if no bounds are provided
+        x_bounds = (function.bounds[0, 0], function.bounds[0, 1])
+        y_bounds = (function.bounds[1, 0], function.bounds[1, 1])
+
+    # Apply zoom factor
+    x_range = x_bounds[1] - x_bounds[0]
+    y_range = y_bounds[1] - y_bounds[0]
+    x_center = (x_bounds[0] + x_bounds[1]) / 2
+    y_center = (y_bounds[0] + y_bounds[1]) / 2
+
+    x_bounds = (
+        x_center - (x_range / 2) * zoom,
+        x_center + (x_range / 2) * zoom
+    )
+    y_bounds = (
+        y_center - (y_range / 2) * zoom,
+        y_center + (y_range / 2) * zoom
+    )
+    
+    # Generate grid
+    x = np.linspace(x_bounds[0], x_bounds[1], 100)
+    y = np.linspace(y_bounds[0], y_bounds[1], 100)
     X, Y = np.meshgrid(x, y)
     points = np.c_[X.ravel(), Y.ravel()]  
     Z = np.array([function.evaluate(p) for p in points]).reshape(X.shape)
@@ -126,7 +169,7 @@ def plot_surface(function,title='',figsize=(600,600)):
     return fig
     
     
-def contourplot_bees(function,bee_colony,optimal_solution=None,title='',extended_bounds=None,bee_marker_size=None,figsize=(600,600)):
+def contourplot_bees(function,bee_colony,optimal_solution=None,title='',bounds=None,zoom=1.0,bee_marker_size=None,figsize=(600,600)):
     """
     Create a contour plot with bee markers and an optional optimal solution point.
 
@@ -156,7 +199,7 @@ def contourplot_bees(function,bee_colony,optimal_solution=None,title='',extended
     if not len(bee_colony):
         raise ValueError("Bee colony cannot be empty!")
         
-    fig = contourplot(function,title,extended_bounds=extended_bounds,figsize=figsize)
+    fig = contourplot(function,title,bounds=bounds,zoom=zoom,figsize=figsize)
     
     bee_marker_path = get_marker_path()
     bee_marker = Image.open(bee_marker_path)

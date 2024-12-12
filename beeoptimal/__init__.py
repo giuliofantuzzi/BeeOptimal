@@ -11,4 +11,4 @@ from .benchmarks import (
     Sumsquares2d,Sumsquares10d,Sumsquares30d,
     Eggholder
 )
-from .plotting import contourplot,contourplot_bees,plot_surface#ContourPlotBee,ContourPlotBee_matplotlib
+from .plotting import contourplot,surfaceplot,contourplot_bees#ContourPlotBee,ContourPlotBee_matplotlib
