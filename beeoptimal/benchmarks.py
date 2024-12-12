@@ -89,15 +89,12 @@ def weierstrass(point,a=0.5,b=3,k_max=20):
     return np.sum(term1) - len(point) * term2
 
 def griewank(point):
-    point = np.array(point)
     return 1 + np.sum(point**2)/4000 - np.prod(np.cos(point/np.sqrt(np.arange(1, len(point)+1))))
 
 def schwefel(point):
-    point = np.array(point)
     return 418.9829*len(point) - np.sum(point*np.sin(np.sqrt(np.abs(point))))
 
 def sumsquares(point):
-    point = np.array(point)
     return np.sum(np.arange(1, len(point)+1)* (point**2) )
 
 def eggholder(point):

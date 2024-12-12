@@ -15,18 +15,20 @@ import pandas as pd
 N_BEES              = 100
 LIMIT               = 'default'
 MAX_ITERS           = 1000
-BENCHMARK_FUNCTIONS = [Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Weierstrass2d,Griewank2d,Schwefel2d,Sumsquares2d,
-                       Sphere10d,Rosenbrock10d,Ackley10d,Rastrigin10d,Weierstrass10d,Griewank10d,Schwefel10d,Sumsquares10d,
-                       Sphere30d,Rosenbrock30d,Ackley30d,Rastrigin30d,Weierstrass30d,Griewank30d,Schwefel30d,Sumsquares30d]
+# BENCHMARK_FUNCTIONS = [Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Weierstrass2d,Griewank2d,Schwefel2d,Sumsquares2d,
+#                        Sphere10d,Rosenbrock10d,Ackley10d,Rastrigin10d,Weierstrass10d,Griewank10d,Schwefel10d,Sumsquares10d,
+#                        Sphere30d,Rosenbrock30d,Ackley30d,Rastrigin30d,Weierstrass30d,Griewank30d,Schwefel30d,Sumsquares30d]
+BENCHMARK_FUNCTIONS = [Ackley2d,Ackley10d,Ackley30d]
 SELECTION           = 'RouletteWheel'
 MUTATIONS           = ['StandardABC','ModifiedABC','ABC/best/1','ABC/best/2','DirectedABC']
 INITIALIZATIONS     = ['random','cahotic']                      
 MR                  = 0.7
-STAGNATION_TOL      = np.NINF#1e-6
+STAGNATION_TOL      = 1e-6#np.NINF
 RANDOM_SEED         = 12345
 N_SIMULATIONS       = 15
-FULL_CSV_PATH       = 'simulations/ModDir_full.csv'      
-STATS_CSV_PATH      = 'simulations/ModDir_stats.csv'
+FULL_CSV_PATH       = 'simulations/Ackley_full_stagnation.csv'      
+STATS_CSV_PATH      = 'simulations/Ackley_stats_stagnation.csv'
+
 
 #++++++++++++++++++++++++++++++++++++
 # Main

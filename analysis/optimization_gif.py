@@ -82,7 +82,8 @@ if __name__ == '__main__':
                                                   bee_colony=ABC.colony_history[iteration],
                                                   title=f"{function.name.upper()} optimization [Iteration {iteration} / {ABC.actual_iters}]",
                                                   optimal_solution=function.optimal_solution,
-                                                  extended_bounds=0.05,
+                                                  bounds=None,
+                                                  zoom = 1.0,
                                                   figsize=(600,600)
                                                   )
                                  )
