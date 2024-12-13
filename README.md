@@ -40,6 +40,26 @@ pip install beeoptimal
    pip install .
    ```
 
+## Optional Dependencies
 
-# TO-DO list
-- [ ] Understand how to avoid copying tutorials inside the docs
+In addition to the core functionalities, this package offers optional dependencies for specific use cases.
+
+To build and work with the documentation, you can install the package with the docs extra:
+
+```bash
+pip install beeoptimal[docs]
+```
+To use the tutorials and their required dependencies, install the package with the tutorials extra:
+  
+```bash
+pip install beeoptimal[tutorials]
+```
+
+To install both the documentation and the tutorials, you can use directly:
+
+```bash
+pip install beeoptimal[docs,tutorials]
+```
+
+> [!NOTE]
+> The same syntax can be followed when installing from source. Moreover, if you're using the `zsh` shell, you will need to wrap the extras in quotes to prevent conflicts with shell globbing (unquoted square brackets ([ ]) are used for pattern matching in `zsh`).

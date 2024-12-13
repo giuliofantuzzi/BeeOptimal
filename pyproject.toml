@@ -32,6 +32,11 @@ docs = [
     "nbsphinx-link",
     "sphinx-rtd-dark-mode"
 ]
+tutorials = [
+    "ipython>=8.12.3",
+    "torchvision>= 0.18.1",
+    "matplotlib>=3.8.4",
+]
 #------------------------------------------------------------------------------------------
 [project.urls]
 Documentation = "https://readthedocs.org"     # TODO: Add the real link to the documentation
