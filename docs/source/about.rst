@@ -285,7 +285,7 @@ general formulation), now direction information for each dimension is added. The
     :label: eq-DirectedABC_perturbation
 
 
-where :math:`\phi_{i,j} \in [-1,1]`and :math:`r_{i,j} \in [0,1]` are two randomly choosen scaling factors, while 
+where :math:`\phi_{i,j} \in [-1,1]` and :math:`r_{i,j} \in [0,1]` are two randomly choosen scaling factors, while 
 :math:`d_{i,j} \in \{-1,0,1\}` is the direction information for the j-th dimension of the i-th solution. After computing 
 the new candidate solution, two scenarios can occur:
 
