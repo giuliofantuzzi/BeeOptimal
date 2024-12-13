@@ -18,10 +18,10 @@ The minimal model of swarm-intelligent forage selection in a honey bee colony co
 
 - **Employed Bees**: bees associated with specific food sources that they are actively exploiting. Employed bees gather information about their respective sources (such as distance, direction, and profitability) and share this knowledge with unemployed bees (onlookers and scouts) within the hive;
 - **Onlooker Bees**: bees waiting in the hive and evaluating the information communicated by employed bees. By means of this information, they probabilistically select which food source to explore, favoring those with higher profitability;
-- **Scout Bees**:  bees exploring the environment randomly, searching for new food sources when current ones become depleted or less rewarding. Scouts ensure the colony continues to discover new opportunities for resource collection.
+- **Scout Bees**:  bees exploring the environment randomly, searching for new food sources when current ones become exhausted or less rewarding. Scouts ensure the colony continues to discover new opportunities for resource collection.
 
-Communication among bees occurs in the dancing area, a specific region within the hive where information about food sources is exchanged through a behavior known 
-as *waggle dance*. At this stage, employed foragers share their information with a probability proportional to the profitability of the food source. Onlooker bees 
+Communication among bees occurs in the *dancing area*, a specific region within the hive where information about food sources is exchanged through a behavior known 
+as **waggle dance**. At this stage, employed foragers share their information with a "dance intensity" proportional to the profitability of the food source. Onlooker bees 
 observe their dance and use the information to decide which food source to visit. 
 
 
@@ -34,7 +34,7 @@ At the very beginning, a potential forager will start as unemployed forager. Tha
 There are two possible options for such a bee:
 
 - It can be a scout (S) and starts searching around the nest spontaneously for food due to some internal motivation or possible external clue;
-- It can be a recruit (R) after watching the waggle dances and starts searching for a food source
+- It can be a recruit (R) after watching the waggle dances and starts searching for a food source.
 
 After finding the food source, the bee utilizes its own capability to memorize the location and then immediately starts
 exploiting it. Hence, the bee will become an employed forager. The foraging bee takes a load of nectar from the source
@@ -53,7 +53,7 @@ and returns to the hive, unloading the nectar to a food store. After unloading t
 Optimization Framework
 ^^^^^^^^^^^^^^^^^^^^^^
 
-In an optimization framework, the position of a food source represents a possible solution to the optimization
+In our optimization framework, the position of a food source represents a possible solution to the optimization
 problem, and the nectar amount of a food source corresponds to the profitability (fitness) of the associated solution.
 
 .. note::
@@ -69,7 +69,7 @@ Each solution is then evaluated based on the objective function, and the best so
 If the candidate solution is better than the current one, the bee adopts the new position; otherwise, it retains the current one (*greedy-selection*).
 
 3. **Onlooker Bee Phase**: Onlooker bees probabilistically choose a solution to explore, based on the fitness information provided by the employed 
-bees (better solutions are more likely to be selected). Like employed bees, onlooker bees generate a new candidate solution in the neighborhood 
+bees (better solutions are more likely to be selected). Like employed bees, onlooker bees explore a new candidate solution in the neighborhood 
 of the selected solution and evaluate its quality. If the new solution is better (or equal) than the current one, the onlooker bee adopts the new 
 position and replaces the employed bee that provided the information.
 
@@ -81,20 +81,26 @@ These phases are repeated iteratively until a termination criterion is met, such
 **Key features:**
 
 * The *exploitation* of good solutions is driven by the employed and onlooker bees, ensuring the algorithm intensifies the search around promising areas.
-* The *exploration* of the search space is maintained by the scout bees, preventing premature convergence to local optima
+* The *exploration* of the search space is maintained by the scout bees, preventing premature convergence to local optima.
 
 Mathematical Formulation
 ------------------------
 
-Let us consider a minimization problem of the form:
+Consider a minimization problem of the form:
 
+.. .. math::
+..     \text{min} f(\mathbf{x})
+..     :label: eq-minimization
 .. math::
-    \min f(\mathbf{x})
-    :label: eq-minimization
+    \begin{aligned}
+    &\text{min} \quad f(\mathbf{x}) \\
+    &\text{s.t.} \quad x_{\text{min},j} \leq x_j \leq x_{\text{max},j}, \quad j = 1, \dots, D
+    \end{aligned}
+    :label: eq-minimization-with-bounds
 
 where :math:`f(\mathbf{x})` is the objective function to minimize and :math:`\mathbf{x} = (x_1,...,x_D) \in \mathbb{R}^D` represents a candidate solution in a 
 D-dimensional search space. While this is not a constrained optimization problem, we still impose bounds on each dimension of the search space:
-:math:`x_{\min,j}` and :math:`x_{\max,j}` for :math:`j=1,...,D`.
+:math:`x_{\text{min},j}` and :math:`x_{\text{max},j}` for :math:`j=1,...,D`.
 
 Initialization
 ^^^^^^^^^^^^^^
@@ -102,10 +108,10 @@ Initialization
 In the initialization phase, we generate a population of :math:`SN` candidate solutions :math:`\{\mathbf{x}_i\}_{i=1}^{SN}` (employed bees) as follows:
 
 .. math::
-    x_{i,j} = x_{\min,j} + \text{rand}(0,1) \cdot (x_{\max,j} - x_{\min,j}) \quad \text{for} \quad i=1,...,SN \quad \text{and} \quad j=1,...,D
+    x_{i,j} = x_{\text{min},j} + \text{rand}(0,1) \cdot (x_{\text{max},j} - x_{\text{min},j}) \quad \text{for} \quad i=1,...,SN \quad \text{and} \quad j=1,...,D
     :label: eq-initialization
 
-where :math:`x_{\min,j}` and :math:`x_{\max,j}` are the lower and upper bounds of the search space along dimension :math:`j`, respectively.
+where :math:`x_{\text{min},j}` and :math:`x_{\text{max},j}` are the lower and upper bounds of the search space along dimension :math:`j`, respectively.
 
 
 Employed Bee Phase
