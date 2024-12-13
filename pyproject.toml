@@ -13,11 +13,11 @@ readme          = "README.md"
 authors         = [{ name = "Giulio Fantuzzi", email = "giulio.fantuzzi01@gmail.com" }]
 requires-python = ">=3.12.1"
 dependencies    = [
-    "numpy  >= 1.26.4, <2.0.0",
-    "plotly >=5.24.1",
-    "tqdm   >=4.66.4",
-    "pillow >=10.3.0",
-    "kaleido>=0.2.1"
+    "numpy   >= 1.26.4, <2.0.0",
+    "plotly  >= 5.24.1",
+    "tqdm    >= 4.66.4",
+    "pillow  >= 10.3.0",
+    "kaleido >= 0.2.1"
 ]
 classifiers     = [
     "Programming Language :: Python :: 3.12",
@@ -34,9 +34,9 @@ docs = [
     "sphinx-rtd-dark-mode"
 ]
 tutorials = [
-    "ipython>=8.12.3",
-    "torchvision>= 0.18.1",
-    "matplotlib>=3.8.4",
+    "ipython     >= 8.12.3",
+    "torchvision >= 0.18.1",
+    "matplotlib  >= 3.8.4",
 ]
 #------------------------------------------------------------------------------------------
 [project.urls]
