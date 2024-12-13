@@ -8,7 +8,7 @@ Artificial Bee Colony
 The *Artificial Bee Colony (ABC)* algorithm is a popular optimization technique inspired by the foraging behavior of honeybee swarms. 
 It was first introduced by *Karaboga* in 2005 as a simple and efficient population-based algorithm for solving numerical optimization problems. 
 The algorithm mimics how honeybees search for food sources, communicate their quality, and collaboratively optimize their collection process.
-The ABC algorithm is particularly well-suited for solving complex optimization problems, including those with non-linear, multi-modal, or 
+The *ABC* algorithm is particularly well-suited for solving complex optimization problems, including those with non-linear, multi-modal, or 
 high-dimensional search spaces.
 
 Collective Intelligence of Honey Bees
@@ -33,16 +33,16 @@ observe their dance and use the information to decide which food source to visit
 At the very beginning, a potential forager will start as unemployed forager. That forager bee will have no knowledge about the food sources around the nest. 
 There are two possible options for such a bee:
 
-1. It can be a scout (S) and starts searching around the nest spontaneously for food due to some internal motivation or possible external clue;
-2. It can be a recruit (R) after watching the waggle dances and starts searching for a food source
+- It can be a scout (S) and starts searching around the nest spontaneously for food due to some internal motivation or possible external clue;
+- It can be a recruit (R) after watching the waggle dances and starts searching for a food source
 
 After finding the food source, the bee utilizes its own capability to memorize the location and then immediately starts
 exploiting it. Hence, the bee will become an employed forager. The foraging bee takes a load of nectar from the source
 and returns to the hive, unloading the nectar to a food store. After unloading the food, the bee has the following options:
 
-i. It might become an uncommitted follower after abandoning the food source (UF);
-ii. It might dance and then recruit nest mates before returning to the same food source (EF1);
-iii. It might continue to forage at the food source without recruiting bees (EF2).
+- It might become an uncommitted follower after abandoning the food source (UF);
+- It might dance and then recruit nest mates before returning to the same food source (EF1);
+- It might continue to forage at the food source without recruiting bees (EF2).
 
 .. image:: _static/foraging_behaviour.png
    :width: 400
@@ -60,7 +60,7 @@ problem, and the nectar amount of a food source corresponds to the profitability
     In the proposed version, each food source is exploited by only one employed bee. In other words, the number of employed bees is equal to the number
     of food sources existing around the hive (number of solutions in the population). 
 
-The ABC algorithm can be summarized in the following steps:
+The *ABC* algorithm can be summarized in the following steps:
 
 1. **Initialization**: a population of candidate solutions (employed bees) is randomly initialized within the search space. 
 Each solution is then evaluated based on the objective function, and the best solution is identified as the current global best.
@@ -86,14 +86,15 @@ These phases are repeated iteratively until a termination criterion is met, such
 Mathematical Formulation
 ------------------------
 
-Let our optimization problem be defined as follows:
+Let us consider a minimization problem of the form:
 
 .. math::
-    \min f(\mathbf{x}) \quad \text{subject to} \quad \mathbf{x} \in \mathbb{R}^D
+    \min f(\mathbf{x})
     :label: eq-minimization
 
-where :math:`f(\mathbf{x})` is the objective function to minimize, and :math:`\boldsymbol{x} = (x_1,...,x_D) \in \mathbb{R}^D` is a vector representing a candidate solution in the 
-D-dimensional search space. Despite not considering a constrained optimization problem, we still define bounds along each dimension of the search space.
+where :math:`f(\mathbf{x})` is the objective function to minimize and :math:`\mathbf{x} = (x_1,...,x_D) \in \mathbb{R}^D` represents a candidate solution in a 
+D-dimensional search space. While this is not a constrained optimization problem, we still impose bounds on each dimension of the search space:
+:math:`x_{\min,j}` and :math:`x_{\max,j}` for :math:`j=1,...,D`.
 
 Initialization
 ^^^^^^^^^^^^^^
@@ -146,8 +147,8 @@ ranked selection, or tournament selection. In the original implementation, roule
     p_i = \cfrac{\text{fitness}(\mathbf{x}_i)}{\sum_{i=1}^{SN} \text{fitness}(\mathbf{x}_i)}
     :label: eq-roulette_wheel
 
-Once an onlooker bee selects a solution :math:`\mathbf{x}_i`, a new candidate solution :math:`\mathbf{v}_i` is generated and evaluated in the same way as in the employed bee phase (see Eq. :eq:`eq-StandardABC_perturbation` 
-and Eq. :eq:`eq-fitness`). Again, the better solution between :math:`\mathbf{x}_i` and :math:`\mathbf{v}_i` is retained according to a greedy selection strategy.
+Once an onlooker bee selects a solution :math:`\mathbf{x}_i`, a new candidate solution :math:`\mathbf{v}_i` is generated and evaluated in the same way as in the employed bee phase (see Equation :eq:`eq-StandardABC_perturbation` 
+and Equation :eq:`eq-fitness`). Again, the better solution between :math:`\mathbf{x}_i` and :math:`\mathbf{v}_i` is retained according to a greedy selection strategy.
 
 .. note::
     At the end of the onlooker bee phase, the population of employed bees is updated with the new solutions obtained by the onlooker bees!
@@ -156,7 +157,7 @@ Scout Bee Phase
 ^^^^^^^^^^^^^^^
 
 If a solution :math:`\mathbf{x}_i` has not been improved for a certain number of iterations (*limit*), it becomes a scout bee. In this case, the 
-solution is randomly initialized within the search space by using Eq. :eq:`eq-initialization`.
+solution is randomly initialized within the search space by using Equation :eq:`eq-initialization`.
 
 .. tip::
     A good heuristic for the *limit* parameter is :math:`0.6 \cdot \text{SN} \cdot \text{D}`, where :math:`\text{SN}` is the
@@ -179,11 +180,10 @@ where :math:`\overline{\text{fitness}(t)}` is the average fitness of the populat
 
 If the stagnation value is below a certain threshold :math: `\tau`, the algorithm halts, ensuring computational efficiency while still achieving good optimization results.
 
+Variants of the *ABC* Algorithm
+-------------------------------
 
-Variants of the ABC Algorithm
------------------------------
-
-Several variants of the ABC algorithm have been proposed to enhance its performance and address specific challenges in optimization problems...
+Several variants of the *ABC* algorithm have been proposed to enhance its performance and address specific challenges in optimization problems...
 
 Different initialization
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -198,7 +198,7 @@ the initial population. The package follows the proposal of the authors and impl
 
 where :math:`k` is the iteration counter and :math:`K` is the maximum number of cahotic iterations (defaults to 300).
 
-Eq. :eq:`eq-cahotic_system` is then used to generate the initial population according to the following algorithm:
+Equation :eq:`eq-cahotic_system` is then used to generate the initial population according to the following algorithm:
 
 .. image:: _static/cahotic_initialization.png
     :width: 600
@@ -231,7 +231,7 @@ solution different from :math:`\mathbf{x}_i`.
     may weaken the exploitation capability of the algorithm. Since the optimal value of MR is problem-dependent, it is
     usually decided after a tuning phase.
 
-Another modification is related to the magnitude of the perturbation. In the original ABC, the perturbation :math:`(x_{i,j} - x_{k,j})`
+Another modification is related to the magnitude of the perturbation. In the original *ABC*, the perturbation :math:`(x_{i,j} - x_{k,j})`
 is multiplied by a factor :math:`\phi_{i,j} \in [-1,1]`. In the modified version, such factor is allowed to vary in a more general
 interval :math:`[-SF, SF]`, where :math:`SF` is called *scaling factor*.
 
@@ -266,7 +266,7 @@ where :math:`x_{\text{best},j}` is the best solution in the population, :math:`\
 :math:`x_{k_1,j}, x_{k_2,j}, x_{k_3,j}, x_{k_4,j}` are randomly selected donor solutions.
 
 A further extension to the mutation strategies is the *Directed Artificial Bee Colony algorithm*, which incorporates 
-directional information to improve convergence speed and search efficiency. While in the standard ABC the perturbation
+directional information to improve convergence speed and search efficiency. While in the original *ABC* the perturbation
 is applied in a random direction (remember :math:`\phi_{i,j} \in [-1,1]`, or :math:`\phi_{i,j} \in [-SF,SF]` in the more 
 general formulation), now direction information for each dimension is added. The new candidate solution is then generated as follows:
 
