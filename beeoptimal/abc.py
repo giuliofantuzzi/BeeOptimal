@@ -65,13 +65,15 @@ class ArtificialBeeColony():
             AssertionError: If the number of employed bees is greater than or equal to the total number of bees.
         
         .. note::
-            - To ensure compatibility with all the mutation types, the bee colony must have at least 5 employed bees and at least 5 onlokeer bees.
+            - To ensure compatibility with all the mutation types, the bee colony must have at least 5 employed bees and at least 5 onlokeer bees (i.e., colony_size >= 10).
         """
         
-        assert ( colony_size >= 10) , 'The number of bees must be at least 10 for compatibility with all mutation types'
+        assert ( colony_size >= 10)                , 'The colony size must be at least 10 for compatibility with all mutation types'
         if n_employed_bees:
-            assert (n_employed_bees >= 5)     , 'The number of employed bees must be at least 5 for compatibility with all mutation types'
+            assert (n_employed_bees >= 5)          , 'The number of employed bees must be at least 5 for compatibility with all mutation types'
             assert (n_employed_bees < colony_size) , 'The number of employed bees must be lower than the number of bees'
+        
+        assert(bounds is not None) , 'Bounds must be provided'
     
         self.dim                 = len(bounds)
         self.colony_size         = int(colony_size)
@@ -79,7 +81,7 @@ class ArtificialBeeColony():
         self.n_onlooker_bees     = self.colony_size - self.n_employed_bees
         self.max_scouts          = int(max_scouts) if max_scouts is not None else self.n_employed_bees
         self.function            = function
-        self.bounds              = bounds if bounds is not None else np.array([(-1e30,1e30)]*self.dim)
+        self.bounds              = bounds 
         self.employed_bees       = []
         self.onlooker_bees       = []
         self.colony_history      = []
@@ -87,7 +89,7 @@ class ArtificialBeeColony():
         self.optimal_bee_history = []
         
         assert (self.n_onlooker_bees >= 5)               , 'The number of onlooker bees must be at least 5. Please change your configuration'
-        assert (self.max_scouts <= self.n_employed_bees) , 'The maximum number of scouts must be lower (or equal) than the number of employed bees'
+        assert (self.max_scouts > 0 and self.max_scouts <= self.n_employed_bees) , 'The maximum number of scouts must be lower (or equal) than the number of employed bees'
     
     #------------------------------------------------------------------------------------------------------------------
     
