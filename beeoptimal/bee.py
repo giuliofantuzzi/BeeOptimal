@@ -10,7 +10,7 @@ class Bee():
     """
     Instantiates a bee object for the artificial bee colony algorithm.
 
-    Args:
+    Attributes:
         position (array-like) : The current position of the bee in the search space.
         function (callable)   : The objective function to evaluate the position.
         bounds (array-like)   : Bounds for each dimension of the search space.

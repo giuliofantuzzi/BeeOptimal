@@ -12,13 +12,12 @@ import pandas as pd
 #++++++++++++++++++++++++++++++++++++
 # Global variables and settings
 #++++++++++++++++++++++++++++++++++++
-N_BEES              = 100
+COLONY_SIZE         = 100
 LIMIT               = 'default'
 MAX_ITERS           = 1000
-# BENCHMARK_FUNCTIONS = [Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Weierstrass2d,Griewank2d,Schwefel2d,Sumsquares2d,
-#                        Sphere10d,Rosenbrock10d,Ackley10d,Rastrigin10d,Weierstrass10d,Griewank10d,Schwefel10d,Sumsquares10d,
-#                        Sphere30d,Rosenbrock30d,Ackley30d,Rastrigin30d,Weierstrass30d,Griewank30d,Schwefel30d,Sumsquares30d]
-BENCHMARK_FUNCTIONS = [Ackley2d,Ackley10d,Ackley30d]
+BENCHMARK_FUNCTIONS = [Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Weierstrass2d,Griewank2d,Schwefel2d,Sumsquares2d,
+                       Sphere10d,Rosenbrock10d,Ackley10d,Rastrigin10d,Weierstrass10d,Griewank10d,Schwefel10d,Sumsquares10d,
+                       Sphere30d,Rosenbrock30d,Ackley30d,Rastrigin30d,Weierstrass30d,Griewank30d,Schwefel30d,Sumsquares30d]
 SELECTION           = 'RouletteWheel'
 MUTATIONS           = ['StandardABC','ModifiedABC','ABC/best/1','ABC/best/2','DirectedABC']
 INITIALIZATIONS     = ['random','cahotic']                      
@@ -55,9 +54,9 @@ if __name__ == '__main__':
                 for s in trange(N_SIMULATIONS,desc='Running simulations'):
                     
                     ABC = ArtificialBeeColony(
-                        n_bees   = N_BEES,
-                        bounds   = function.bounds,
-                        function = function.fun
+                        colony_size = COLONY_SIZE,
+                        bounds      = function.bounds,
+                        function    = function.fun
                         )
                     
                     ABC.optimize(

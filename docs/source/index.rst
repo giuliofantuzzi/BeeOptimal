@@ -39,6 +39,7 @@ This documentation provides installation instructions and API details, as well a
    tutorials/tutorial2
    tutorials/tutorial3
    tutorials/tutorial4
+   tutorials/tutorial5
 
 .. toctree::
    :maxdepth: 1

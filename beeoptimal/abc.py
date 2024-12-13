@@ -16,12 +16,12 @@ class ArtificialBeeColony():
     """
     Artificial Bee Colony (ABC) class
     
-    Args:
-        dim (int)                        : The dimensionality of the search space.
-        n_bees (int)                     : The total number of bees in the colony.
+    Attributes:
+        colony_size (int)                : The total number of bees in the colony.
         n_employed_bees (int)            : The number of employed bees.
         n_onlooker_bees (int)            : The number of onlooker bees.
         max_scouts (int)                 : The maximum number of scout bees per iteration. Defaults to None (will be set to n_employed_bees).
+        dim (int)                        : The dimensionality of the search space.
         function (callable)              : The objective function to optimize.
         bounds (array-like)              : The bounds for each dimension of the search space, provided as a 2D array [(lower1, upper1), ..., (lowerD, upperD)].
         employed_bees (list[Bee])        : The employed bees in the colony.
@@ -47,12 +47,12 @@ class ArtificialBeeColony():
     
     #------------------------------------------------------------------------------------------------------------------
     
-    def __init__(self,n_bees,function,bounds,n_employed_bees=None,max_scouts=None):
+    def __init__(self,colony_size,function,bounds,n_employed_bees=None,max_scouts=None):
         """
         Initializes the ABC
         
         Args:
-            n_bees (int)                    : The total number of bees in the colony.
+            colony_size (int)               : The total number of bees in the colony.
             function (callable)             : The objective function to optimize.
             bounds (array-like)             : The bounds for each dimension of the search space, provided as a 2D array [(lower1, upper1), ..., (lowerD, upperD)].
             n_employed_bees (int, optional) : The number of employed bees. Defaults to half the total number of bees.
@@ -68,15 +68,15 @@ class ArtificialBeeColony():
             - To ensure compatibility with all the mutation types, the bee colony must have at least 5 employed bees and at least 5 onlokeer bees.
         """
         
-        assert ( n_bees >= 10) , 'The number of bees must be at least 10 for compatibility with all mutation types'
+        assert ( colony_size >= 10) , 'The number of bees must be at least 10 for compatibility with all mutation types'
         if n_employed_bees:
             assert (n_employed_bees >= 5)     , 'The number of employed bees must be at least 5 for compatibility with all mutation types'
-            assert (n_employed_bees < n_bees) , 'The number of employed bees must be lower than the number of bees'
+            assert (n_employed_bees < colony_size) , 'The number of employed bees must be lower than the number of bees'
     
         self.dim                 = len(bounds)
-        self.n_bees              = int(n_bees)
-        self.n_employed_bees     = int(n_employed_bees) if n_employed_bees is not None else self.n_bees // 2
-        self.n_onlooker_bees     = self.n_bees - self.n_employed_bees
+        self.colony_size         = int(colony_size)
+        self.n_employed_bees     = int(n_employed_bees) if n_employed_bees is not None else self.colony_size // 2
+        self.n_onlooker_bees     = self.colony_size - self.n_employed_bees
         self.max_scouts          = int(max_scouts) if max_scouts is not None else self.n_employed_bees
         self.function            = function
         self.bounds              = bounds if bounds is not None else np.array([(-1e30,1e30)]*self.dim)

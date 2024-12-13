@@ -8,24 +8,24 @@ import numpy as np
 #--------------------------------------------------------------------------------
 class BenchmarkFunction:
     """
-        Class to define a D-dimensional benchmark function for optimization.
+    Class to define a D-dimensional benchmark function for optimization.
+    
+    Attributes:
+        name (str)                    : The name of the function. Defaults to 'Unspecified Name'.
+        fun (callable)                : The function to evaluate. Defaults to None.
+        bounds (array-like)           : The bounds of the function, provided as a numpy array of shape `(D,2)`. Defaults to None.
+        optimal_solution (array-like) : The known solution achieving the optimal value, provided as numpy array of shape `(D,)`. Defaults to None. 
         
-        Args:
-            name (str)                    : The name of the function. Defaults to 'Unspecified Name'.
-            fun (callable)                : The function to evaluate. Defaults to None.
-            bounds (array-like)           : The bounds of the function, provided as a numpy array of shape `(D,2)`. Defaults to None.
-            optimal_solution (array-like) : The known solution achieving the optimal value, provided as numpy array of shape `(D,)`. Defaults to None. 
-            
-        Examples:
-            >>> from beeoptimal.benchmarks import BenchmarkFunction
-            >>> import numpy as np
-            >>> sphere = lambda point: np.sum(np.array(point)**2)
-            >>> Sphere2d = BenchmarkFunction(
-                    name             = "Sphere-2d",
-                    fun              = sphere,
-                    bounds           = np.array([(-5.12, 5.12)]*2),
-                    optimal_solution = np.zeros(2)
-                )
+    Examples:
+        >>> from beeoptimal.benchmarks import BenchmarkFunction
+        >>> import numpy as np
+        >>> sphere = lambda point: np.sum(np.array(point)**2)
+        >>> Sphere2d = BenchmarkFunction(
+                name             = "Sphere-2d",
+                fun              = sphere,
+                bounds           = np.array([(-5.12, 5.12)]*2),
+                optimal_solution = np.zeros(2)
+            )
     """
     
     def __init__(self, name = 'Unspecified Name', fun=None, bounds=None, optimal_solution=None):

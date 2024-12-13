@@ -13,7 +13,7 @@ from PIL import Image
 # Global variables and settings
 #++++++++++++++++++++++++++++++++++++
 
-N_BEES              = 100
+COLONY_SIZE         = 100
 LIMIT               = 'default'
 MAX_ITERS           = 1000
 STAGNATION_TOL      = 1e-6
@@ -49,7 +49,7 @@ if __name__ == '__main__':
                 print('-'*100)
                 
                 ABC = ArtificialBeeColony(
-                    n_bees          = N_BEES,
+                    colony_size     = COLONY_SIZE,
                     bounds          = np.array(function.bounds),
                     function        = function.fun,
                     n_employed_bees = None

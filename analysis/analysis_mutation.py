@@ -12,7 +12,7 @@ from tqdm import trange
 #++++++++++++++++++++++++++++++++++++
 # Global variables and settings
 #++++++++++++++++++++++++++++++++++++
-N_BEES              = 100
+COLONY_SIZE         = 100
 LIMIT               = 'default'
 MAX_ITERS           = 1000
 BENCHMARK_FUNCTIONS =  [Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Weierstrass2d,Griewank2d,Schwefel2d,Sumsquares2d,
@@ -52,9 +52,9 @@ if __name__ == '__main__':
                 for s in trange(N_SIMULATIONS,desc=f'Simulations (Mutation={mutation}, Initialization={initialization})'):
 
                     ABC = ArtificialBeeColony(
-                        n_bees   = N_BEES,
-                        bounds   = function.bounds,
-                        function = function.fun
+                        colony_size = COLONY_SIZE,
+                        bounds      = function.bounds,
+                        function    = function.fun
                         )
 
                     ABC.optimize(
