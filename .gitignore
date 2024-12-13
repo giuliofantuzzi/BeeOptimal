@@ -3,3 +3,4 @@ __pycache__/
 beeoptimal.egg-info
 build/
 docs/source/_static/MNISTdata/
+assets/MNISTdata/
