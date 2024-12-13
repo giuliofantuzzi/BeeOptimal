@@ -17,6 +17,15 @@ search spaces, multi-modal objective functions, or simply need a reliable optimi
 
 # Installation
 
+Before installing the package, make sure you have **Python 3.12 or higher** installed on your system. 
+In case you want to avoid any conflicts with your system's Python packages, you might want to create (and activate) a dedicated virtual environment:
+
+```bash
+python -m venv /path/to/virtual/environment/beeoptimal_env
+source /path/to/virtual/environment/beeoptimal_env/bin/activate
+```
+
+
 ## Installing via PIP
 
 You can install the package from the *Python Package Index (PyPI)* via pip:
