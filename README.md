@@ -1,29 +1,45 @@
-<p align="center">
-  <a href="https://github.com/giuliofantuzzi/BeeOptimal">
-    <!-- <img src="https://github.com/giuliofantuzzi/BeeOptimal/raw/main/assets/logo_BeeOptimal.png" alt="Logo" width="250" height="250"> -->
-    <img src="assets/logo_BeeOptimal.png" alt="Logo" width="250" height="250">
-  </a>
-</p>
-<h2 align="center">BeeOptimal</h2>
-<h4 align="center">A Python implementation of the Artificial Bee Colony (ABC) optimization algorithm</h4>
+<div align="center">
+  <img src="assets/logo_BeeOptimal.png" alt="Logo" width="250">
+  <h3 align="center">BeeOptimal</h3>
+  <p align="center">
+    A Python implementation of the Artificial Bee Colony (ABC) optimization algorithm
+    <br />
+      <a href="LINK TO INSERT"><strong>Explore the docs »</strong></a>
+    <br />
+  </p>
+</div>
 
+# About
 
-
-This repository contains a Python implementation of the Artificial Bee Colony (ABC) optimization algorithm, along with several of its variants. Final project for the *Optimization for Artificial Intelligence* course, MSc's degree in Data Science and Artificial Intelligence @ University of Trieste.
-
-
-# TO-DO list
-
-- [ ] Directed ABC
-- [ ] Constraint handling
-- [ ] Add arg parser for command line usage
-- [ ] Type hint the code
-- [ ] Understand how to avoid copying tutorials inside the docs
+**BeeOptimal** is an open-source Python package that implements the *Artificial Bee Colony (ABC)* algorithm, a population-based optimization method 
+inspired by the foraging behavior of honeybee swarms and designed to solve complex optimization problems efficiently. Whether you are tackling high-dimensional 
+search spaces, multi-modal objective functions, or simply need a reliable optimizer, **BeeOptimal** offers a user-friendly and customizable solution for your needs.
 
 # Installation
 
-To install the package, you can use the following command:
+## Installing via PIP
+
+You can install the package from the *Python Package Index (PyPI)* via pip:
 
 ```bash
-pip install .
+pip install beeoptimal
 ```
+
+## Installing from source
+
+1. Clone the repository:
+   
+   ```bash
+   git clone https://github.com/giuliofantuzzi/BeeOptimal.git
+   ```
+
+2. Move into the repository directory and install the package with:
+   
+   ```bash
+   cd BeeOptimal/
+   pip install .
+   ```
+
+
+# TO-DO list
+- [ ] Understand how to avoid copying tutorials inside the docs

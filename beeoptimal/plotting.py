@@ -5,10 +5,10 @@ import numpy as np
 import plotly.graph_objects as go
 from PIL import Image
 from .utils import get_marker_path
-# for matplotlib version
-import matplotlib.pyplot as plt
-#from matplotlib.offsetbox import AnnotationBbox, OffsetImage
 from .benchmarks import BenchmarkFunction
+# for matplotlib version
+#import matplotlib.pyplot as plt
+#from matplotlib.offsetbox import AnnotationBbox, OffsetImage
 
 
 #--------------------------------------------------------------------------------

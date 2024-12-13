@@ -30,7 +30,7 @@ extensions = [
     'sphinx.ext.viewcode',  # Links to source code
     'nbsphinx',             # For Jupyter notebooks
     'nbsphinx_link',        # For Jupyter notebooks
-    'sphinx_rtd_dark_mode',  # Dark mode
+    'sphinx_rtd_dark_mode', # Dark mode
     'sphinx.ext.mathjax',
 ]
 
@@ -45,7 +45,7 @@ html_theme        = 'sphinx_rtd_theme'
 default_dark_mode = False
 html_logo         = '_static/logo_BeeOptimal.png'
 html_static_path  = ['_static']
-html_css_files = [
+html_css_files    = [
     'style.css',
 ]
 #nbsphinx_execute = 'always' # Execute notebooks before conversion

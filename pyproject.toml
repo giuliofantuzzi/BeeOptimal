@@ -12,7 +12,12 @@ keywords        = ["metahueristic", "optimization", "artificial bee colony", "sw
 readme          = "README.md"
 authors         = [{ name = "Giulio Fantuzzi", email = "giulio.fantuzzi01@gmail.com" }]
 requires-python = ">=3.12.1"
-dependencies    = []
+dependencies    = [
+    "numpy  >= 1.26.4, <2.0.0",
+    "plotly >=5.24.1",
+    "tqdm   >=4.66.4",
+    "pillow >=10.3.0"
+]
 classifiers     = [
     "Programming Language :: Python :: 3.12",
     "License :: OSI Approved :: MIT License",
