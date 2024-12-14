@@ -13,3 +13,4 @@ sphinxcontrib-jsmath==1.0.1
 sphinxcontrib-pseudocode==0.7.0
 sphinxcontrib-qthelp==2.0.0
 sphinxcontrib-serializinghtml==2.0.0
+sphinx-autodoc-typehints
