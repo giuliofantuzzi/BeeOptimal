@@ -187,7 +187,7 @@ class ArtificialBeeColony():
             raise ValueError(f"{selection} is an invalid selection. Choose one among {', '.join(valid_selections_)}.")
         self.selection = selection
         
-        if not (isinstance(mr,float) and  (0.0 <= mr <= 1.0)):
+        if not (isinstance(mr,float) and  (mr>=0) and (mr<= 1.0)):
             raise ValueError("`mr` must be a float value between 0.0 and 1.0")
         self.mr = mr
         
@@ -197,9 +197,6 @@ class ArtificialBeeColony():
             if not (isinstance(tournament_size, int) and (1 <= tournament_size <= self.n_employed_bees)):
                 raise ValueError("`tournament_size` must be an integer between 1 and `n_employed_bees` when using 'Tournament' selection.")
             self.tournament_size  = tournament_size
-        
-        if self.selection == 'DirectedABC':
-            self.directions       = np.zeros((self.n_employed_bees,self.dim))
         
         if not (isinstance(sf,(int,float)) and (sf>0.0)):
             raise ValueError(f"`sf` must be greater than 0, but got {sf}")
@@ -212,6 +209,8 @@ class ArtificialBeeColony():
         self.limit = limit if (limit != 'default') else (0.6 * self.n_employed_bees * self.dim)  
         if not (self.limit>0):
             raise ValueError("`limit` must be greater than 0, but got {self.limit}. If this error occurs when `limit`='default', change your configuration.")
+        
+        self.directions = np.zeros((self.n_employed_bees,self.dim))
         
         if not isinstance(stagnation_tol,float):
             raise TypeError('`stagnation_tol` must be float')
