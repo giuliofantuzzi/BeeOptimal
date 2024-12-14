@@ -39,12 +39,23 @@ class BenchmarkFunction:
             name (str)                    : The name of the function. Defaults to empty string.
         """
         
-        assert callable(fun)                                                   , "The function must be callable."
-        assert isinstance(bounds,np.ndarray)                                   , "Bounds must be provided as a numpy array"
-        assert (bounds.shape[0]==2) or (bounds.shape[1]==2)                    , "The bounds must have shape `(D,2)` or (2,D)"
+        if not callable(fun):
+            raise TypeError("The function must be callable.")
+        
+        if not isinstance(name, str):
+            raise TypeError("The name must be provided as a string.")
+        
+        if not isinstance(bounds, np.ndarray):
+            raise TypeError("Bounds must be provided as a numpy array.")
+
+        if not ((bounds.shape[0] == 2) or (bounds.shape[1] == 2)):
+            raise ValueError("The bounds must have shape `(D, 2)` or `(2, D)`.")
         self.bounds = bounds.reshape(-1,2) 
-        assert isinstance(optimal_solution,np.ndarray)                         , "The optimal solution must be provided as a numpy array"
-        assert optimal_solution.reshape(-1,1).shape[0] == self.bounds.shape[0] , "The optimal solution is not consistent with the bounds's dimensions"
+        if not isinstance(optimal_solution, np.ndarray):
+            raise TypeError("The optimal solution must be provided as a numpy array.")
+
+        if optimal_solution.reshape(-1, 1).shape[0] != self.bounds.shape[0]:
+            raise ValueError("The optimal solution is not consistent with the bounds' dimensions.")
         
         self.name = name
         self.fun = fun
@@ -61,12 +72,14 @@ class BenchmarkFunction:
             float: The value of the function computed at the given point.
             
         Raises:
-            AssertionError: If the point is not provided as a numpy array
-            AssertionError: If the point dimensions are not consistent with the optimal solution dimensions
+            TypeError  : If the point is not provided as a numpy array.
+            ValueError : If the point dimensions are not consistent with the optimal solution
         """
         
-        assert isinstance(point,np.ndarray)               , "The point must be provided as a numpy array"
-        assert point.shape == self.optimal_solution.shape , "Point dimensions are not consistent with the optimal solution dimensions"
+        if not isinstance(point,np.ndarray):
+            raise TypeError("The point must be provided as a numpy array")
+        if point.shape != self.optimal_solution.shape:
+            raise ValueError("Point dimensions are not consistent with the optimal solution ones")
         
         return self.fun(point)
     
