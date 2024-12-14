@@ -12,5 +12,3 @@ python:
   install:
     - method: pip
       path: .  # Install your Python package from the current directory
-    - method: pip
-      requirements: docs/requirements.txt  # Install dependencies from requirements.txt
