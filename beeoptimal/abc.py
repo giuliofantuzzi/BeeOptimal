@@ -210,7 +210,9 @@ class ArtificialBeeColony():
         if not (self.limit>0):
             raise ValueError("`limit` must be greater than 0, but got {self.limit}. If this error occurs when `limit`='default', change your configuration.")
         
-        self.directions = np.zeros((self.n_employed_bees,self.dim))
+        self.directions = np.full((self.n_employed_bees,self.dim),None)
+        if self.mutation=='DirectedABC':
+            self.directions = np.zeros((self.n_employed_bees,self.dim))
         
         if not isinstance(stagnation_tol,float):
             raise TypeError('`stagnation_tol` must be float')
