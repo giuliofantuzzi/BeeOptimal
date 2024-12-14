@@ -11,10 +11,10 @@ class Bee():
     Instantiates a bee object for the artificial bee colony algorithm.
 
     Attributes:
-        position (array-like) : The current position of the bee in the search space.
-        function (callable)   : The objective function to evaluate the position.
-        bounds (array-like)   : Bounds for each dimension of the search space.
-        trial (int)           : Counter to track the number of trials or unsuccessful updates for the bee.
+        position (numpy-array) : The current position of the bee in the search space, provided as numpy array of shape `(D,)`, `(D,1)` or `(1,D)`.
+        function (callable)    : The objective function to evaluate the position.
+        bounds (numpy-array)   : Bounds for each dimension of the search space,provided as a numpy array of shape `(D,2)` or `(2,D)`.
+        trial (int)            : Counter to track the number of trials or unsuccessful updates for the bee.
     
     .. warning::
         AssertionError: If the length of the position and bounds arrays are not equal.
@@ -25,34 +25,38 @@ class Bee():
         Initializes a Bee instance with a position, an objective function, and search space bounds.
 
         Args:
-            position (array-like) : The initial position of the bee in the search space
+            position (numpy-array): The initial position of the bee in the search space, provided as numpy array of shape `(D,)`, `(D,1)` or `(1,D)`.
             function (callable)   : The objective function to evaluate the position
-            bounds (array-like)   : Bounds for each dimension of the search space.
+            bounds (numpy-array)  : Bounds for each dimension of the search space, provided as a numpy array of shape `(D,2)` or `(2,D)`.
             trial (int)           : Counter to track the number of trials or unsuccessful updates for the bee.
         
         Raises:
-            TypeError  : If function is not callable.
-            TypeError  : If position is not a numpy array.
-            TypeError  : If bounds is not a numpy array.
-            ValueError : If bounds does not have shape `(D, 2)` or `(2, D)`.
-            ValueError : If position and bounds do not have compatible dimensions.
+            TypeError  : If `function` is not callable.
+            TypeError  : If `position` is not a numpy array.
+            TypeError  : If `bounds` is not a numpy array.
+            ValueError : If `bounds` does not have shape `(D, 2)` or `(2, D)`.
+            ValueError : If any dimension has its lower bound greater than the upper bound.
+            ValueError : If `position` and `bounds` do not have compatible dimensions.
         """
     
         if not callable(function):
-            raise TypeError("The function must be callable.")
+            raise TypeError("`function` must be callable.")
+        self.function = function
+        
+        if not isinstance(bounds, np.ndarray):
+            raise TypeError("`bounds` must be a numpy array.")
+        if not ((bounds.shape[0] == 2) or (bounds.shape[1] == 2)):
+            raise ValueError(f"`bounds` must have shape `(D, 2)` or `(2, D)`,  but got but got shape {bounds.shape}.")            
+        if not np.all(bounds.reshape(-1,2)[:, 0] <= bounds.reshape(-1,2)[:, 1]):
+            raise ValueError("Each lower bound must be less than or equal to its upper bound.")
+        self.bounds = bounds.reshape(-1,2) 
         
         if not isinstance(position, np.ndarray):
-            raise TypeError("The position must be a numpy array.")
-        if not isinstance(bounds, np.ndarray):
-            raise TypeError("The position must be a numpy array.")
-        if not ((bounds.shape[0] == 2) or (bounds.shape[1] == 2)):
-            raise ValueError("The bounds must have shape `(D, 2)` or `(2, D)`.")            
-        self.bounds = bounds.reshape(-1,2) 
+            raise TypeError("`position` must be a numpy array.")
         if position.reshape(-1, 1).shape[0] != self.bounds.shape[0]:
-            raise ValueError("Position and bounds must have compatible dimensions")
-        
+            raise ValueError(f"`position` dimensionality ({position.reshape(-1, 1).shape[0]}) is not compatible with the bounds provided.")
         self.position = position
-        self.function = function
+        
         self.trial    = 0
     
     @property

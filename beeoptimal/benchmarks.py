@@ -12,8 +12,8 @@ class BenchmarkFunction:
     
     Attributes:
         fun (callable)                : The function to evaluate.
-        bounds (array-like)           : The bounds of the function, provided as a numpy array of shape `(D,2)` or `(2,D)`.
-        optimal_solution (array-like) : The known solution achieving the optimal value, provided as numpy array of shape `(D,)`, `(D,1)` or `(1,D)`.
+        bounds (numpy-array)          : The bounds of the function, provided as a numpy array of shape `(D,2)` or `(2,D)`.
+        optimal_solution (numpy-array): The known solution achieving the optimal value, provided as numpy array of shape `(D,)`, `(D,1)` or `(1,D)`.
         name (str, optional)          : The name of the function. Defaults to empty string.
         
     Examples:
@@ -34,33 +34,40 @@ class BenchmarkFunction:
         
         Args:
             fun (callable)                : The function to evaluate.
-            bounds (array-like)           : The bounds of the function, provided as a numpy array of shape `(D,2)` or (2,D)
-            optimal_solution (array-like) : The known solution achieving the optimal value, provided as numpy array of shape `(D,)`, `(D,1)` or `(1,D)`
+            bounds (numpy-array)          : The bounds of the function, provided as a numpy array of shape `(D,2)` or (2,D)
+            optimal_solution (numpy-array): The known solution achieving the optimal value, provided as numpy array of shape `(D,)`, `(D,1)` or `(1,D)`
             name (str)                    : The name of the function. Defaults to empty string.
+            
+        Raises:
+            TypeError  : If `function` is not callable.
+            TypeError  : If `bounds` is not a numpy array.
+            ValueError : If `bounds` does not have shape `(D, 2)` or `(2, D)`.
+            ValueError : If any dimension has its lower bound greater than the upper bound.
+            ValueError : If `optimal_position` and `bounds` do not have compatible dimensions.
         """
         
         if not callable(fun):
-            raise TypeError("The function must be callable.")
-        
+            raise TypeError("`function` must be callable.")
+        self.fun = fun
+
         if not isinstance(name, str):
-            raise TypeError("The name must be provided as a string.")
+            raise TypeError("`name` must be provided as a string.")
+        self.name = name
         
         if not isinstance(bounds, np.ndarray):
-            raise TypeError("Bounds must be provided as a numpy array.")
-
+            raise TypeError("`bounds` must be provided as a numpy array.")
         if not ((bounds.shape[0] == 2) or (bounds.shape[1] == 2)):
-            raise ValueError("The bounds must have shape `(D, 2)` or `(2, D)`.")
+            raise ValueError(f"`bounds` must have shape `(D, 2)` or `(2, D)`, but got {bounds.shape}")
         self.bounds = bounds.reshape(-1,2) 
-        if not isinstance(optimal_solution, np.ndarray):
-            raise TypeError("The optimal solution must be provided as a numpy array.")
-
-        if optimal_solution.reshape(-1, 1).shape[0] != self.bounds.shape[0]:
-            raise ValueError("The optimal solution is not consistent with the bounds' dimensions.")
+        if not np.all(self.bounds[:, 0] <= self.bounds[:, 1]):
+            raise ValueError("Each lower bound must be less than or equal to its upper bound.")
         
-        self.name = name
-        self.fun = fun
+        if not isinstance(optimal_solution, np.ndarray):
+            raise TypeError("`optimal_solution` must be provided as a numpy array.")
+        if optimal_solution.reshape(-1, 1).shape[0] != self.bounds.shape[0]:
+            raise ValueError(f"`optimal_solution` dimensionality ({optimal_solution.reshape(-1, 1).shape[0]}) is not compatible with the bounds provided.")
         self.optimal_solution = optimal_solution
-
+        
     def evaluate(self, point):
         """
         Evaluate the function at the given point.
@@ -77,9 +84,9 @@ class BenchmarkFunction:
         """
         
         if not isinstance(point,np.ndarray):
-            raise TypeError("The point must be provided as a numpy array")
+            raise TypeError("`point` must be provided as a numpy array")
         if point.shape != self.optimal_solution.shape:
-            raise ValueError("Point dimensions are not consistent with the optimal solution ones")
+            raise ValueError(f"`point` shape is not consistent with `optimalsolution`'s one. Got {point.shape} vs {self.optimal_solution.shape}")
         
         return self.fun(point)
     
@@ -141,7 +148,7 @@ def rastrigin(point):
     Returns:
         float: The value of the function computed at the given point.
     """
-    point = np.array(point).flatten
+    point = np.array(point).flatten()
     return (10*len(point) + np.sum((point**2 - 10*np.cos(2*np.pi*point))))
 
 def weierstrass(point,a=0.5,b=3,k_max=20):

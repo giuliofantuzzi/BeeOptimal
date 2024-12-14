@@ -30,10 +30,9 @@ def contourplot(function, title=None, bounds=None,zoom=1.0,figsize=(600,600)):
         TypeError     : If `function` is not a `BenchmarkFunction` object.
         TypeError     : If `bounds` is not a NumPy array (when `bounds` is provided).
         ValueError    : If `bounds` does not have shape (2, 2) (when `bounds` is provided).
-        TypeError     : If `zoom` is not an int or a float.
-        ValueError    : If `zoom` is less than or equal to zero.
+        ValueError    : If `zoom` is not greater than zero.
     """
-    # Input checks
+
     if not isinstance(function, BenchmarkFunction):
         raise TypeError("`function` must be a `BenchmarkFunction` object.")
 
@@ -41,21 +40,15 @@ def contourplot(function, title=None, bounds=None,zoom=1.0,figsize=(600,600)):
         if not isinstance(bounds, np.ndarray):
             raise TypeError("`bounds` must be provided as a NumPy array.")
         if bounds.shape != (2, 2):
-            raise ValueError("`bounds` must have shape (2, 2).")
+            raise ValueError(f"`bounds` must have shape (2, 2), but got {bounds.shape}")
     
-    if not isinstance(zoom, (int, float)):
-        raise TypeError("`zoom` must be int or float.")
-    if zoom <= 0:
-        raise ValueError("`zoom` must be greater than zero.")
+    if not (isinstance(zoom, (int, float)) and zoom <= 0):
+        raise ValueError(f"`zoom` must be greater than zero, but got {zoom}")
     
     # Determine the bounds
     if bounds is not None:
-        if isinstance(bounds, np.ndarray):
-            assert bounds.shape == (2, 2), "bounds must have shape (2, 2)."
-            x_bounds = (bounds[0, 0], bounds[0, 1])
-            y_bounds = (bounds[1, 0], bounds[1, 1])
-        else:
-            raise ValueError("bounds must be a NumPy array of shape (2, 2).")
+        x_bounds = (bounds[0, 0], bounds[0, 1])
+        y_bounds = (bounds[1, 0], bounds[1, 1])
     else:
         # Use predefined bounds if no bounds are provided
         x_bounds = (function.bounds[0, 0], function.bounds[0, 1])
@@ -128,8 +121,7 @@ def surfaceplot(function,title='',bounds=None,zoom=1.0,figsize=(600,600)):
         TypeError     : If `function` is not a `BenchmarkFunction` object.
         TypeError     : If `bounds` is not a NumPy array (when bounds is provided).
         ValueError    : If `bounds` does not have shape (2, 2) (when `bounds` is provided).
-        TypeError     : If `zoom` is not an int or a float.
-        ValueError    : If `zoom` is less than or equal to zero.
+        ValueError    : If `zoom` is not greater than zero.
     """
     # Input checks
     if not isinstance(function, BenchmarkFunction):
@@ -141,23 +133,12 @@ def surfaceplot(function,title='',bounds=None,zoom=1.0,figsize=(600,600)):
         if bounds.shape != (2, 2):
             raise ValueError("`bounds` must have shape (2, 2).")
     
-    if not isinstance(zoom, (int, float)):
-        raise TypeError("`zoom` must be int or float.")
-    if zoom <= 0:
-        raise ValueError("`zoom` must be greater than zero.")
+    if not (isinstance(zoom, (int, float)) and zoom <= 0):
+        raise ValueError(f"`zoom` must be greater than zero, but got {zoom}")
     
-     # Determine the bounds
-    x_bounds = function.bounds[0,:]
-    y_bounds = function.bounds[1,:]
-    
-    # Determine the bounds
     if bounds is not None:
-        if isinstance(bounds, np.ndarray):
-            assert bounds.shape == (2, 2), "bounds must have shape (2, 2)."
-            x_bounds = (bounds[0, 0], bounds[0, 1])
-            y_bounds = (bounds[1, 0], bounds[1, 1])
-        else:
-            raise ValueError("bounds must be a NumPy array of shape (2, 2).")
+        x_bounds = (bounds[0, 0], bounds[0, 1])
+        y_bounds = (bounds[1, 0], bounds[1, 1])
     else:
         # Use predefined bounds if no bounds are provided
         x_bounds = (function.bounds[0, 0], function.bounds[0, 1])
@@ -219,11 +200,6 @@ def contourplot_bees(function,bee_colony,optimal_solution=None,title='',bounds=N
         plotly.graph_objects.Figure: A Plotly figure containing the contour plot with bee markers and, optionally, the optimal solution marker.
 
     Raises:
-        TypeError     : If `function` is not a `BenchmarkFunction` object.
-        TypeError     : If `bounds` is not a NumPy array (when `bounds` is provided).
-        ValueError    : If `bounds` does not have shape (2, 2) (when `bounds` is provided).
-        TypeError     : If `zoom` is not an int or a float.
-        ValueError    : If `zoom` is less than or equal to zero.
         TypeError     : If `bee_colony` is not a list
         ValueError    : If `bee_colony` is empty
         TypeError     : If elements of `bee_colony` are not `Bee` objects.
@@ -231,20 +207,6 @@ def contourplot_bees(function,bee_colony,optimal_solution=None,title='',bounds=N
         ValueError    : If `optimal_solution` is not a 2D point (when `optimal_solution` is provided).
     """
     # Input checks
-    if not isinstance(function, BenchmarkFunction):
-        raise TypeError("`function` must be a BenchmarkFunction object.")
-
-    if bounds is not None:
-        if not isinstance(bounds, np.ndarray):
-            raise TypeError("`bounds` must be provided as a NumPy array.")
-        if bounds.shape != (2, 2):
-            raise ValueError("`bounds` must have shape (2, 2).")
-    
-    if not isinstance(zoom, (int, float)):
-        raise TypeError("`zoom` must be int or float.")
-    if zoom <= 0:
-        raise ValueError("`zoom` must be greater than zero.")
-
     if not isinstance(bee_colony, list):
         raise TypeError("`bee_colony` must be a list.")
     if not len(bee_colony):

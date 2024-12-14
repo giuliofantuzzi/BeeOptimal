@@ -15,7 +15,7 @@ from beeoptimal.benchmarks import *
 
 COLONY_SIZE         = 100
 LIMIT               = 'default'
-MAX_ITERS           = 2         # Note: we are interested in the diversity at initialization
+MAX_ITERS           = 0 # As we evaluate diversity at initialization, we don't even need to iterate.
 BENCHMARK_FUNCTIONS = [Sphere2d,Rosenbrock2d,Ackley2d,Rastrigin2d,Weierstrass2d,Griewank2d,Schwefel2d,Sumsquares2d,
                        Sphere10d,Rosenbrock10d,Ackley10d,Rastrigin10d,Weierstrass10d,Griewank10d,Schwefel10d,Sumsquares10d,
                        Sphere30d,Rosenbrock30d,Ackley30d,Rastrigin30d,Weierstrass30d,Griewank30d,Schwefel30d,Sumsquares30d]
@@ -24,7 +24,7 @@ MUTATION            = 'StandardABC'
 INITIALIZATIONS     = ['random','cahotic']
 RANDOM_SEED         = 1234
 N_SIMULATIONS       = 15
-CSV_PATH            = 'simulations/diversity_report.csv'
+CSV_PATH            = 'simulations/diversity_report2.csv'
 
 #++++++++++++++++++++++++++++++++++++
 # Main

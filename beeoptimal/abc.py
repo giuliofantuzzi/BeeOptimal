@@ -59,38 +59,67 @@ class ArtificialBeeColony():
             max_scouts (int, optional)      : The maximum number of scout bees per iteration. Defaults to None (will be set to n_employed_bees).
 
         Raises:
-            AssertionError: If the number of bees is less than or equal to 10 (for compatibility with ALL mutation types).
-            AssertionError: If the number of employed bees is less than 5 (for compatibility with ALL mutation types).
-            AssertionError: If the number of onlokeer bees is less than 5 (for compatibility with ALL mutation types).
-            AssertionError: If the number of employed bees is greater than or equal to the total number of bees.
+            TypeError  : If the function is not callable.
+            TypeError  : If the bounds are not a numpy array.
+            ValueError : If the bounds do not have shape `(D, 2)` or `(2, D)`.
+            ValueError : If any dimension has its lower bound greater than the upper bound.
+            TypeError  : If the colony size is not an integer.
+            ValueError : If the colony size is less than 10.
+            TypeError  : If the number of employed bees is not an integer.
+            ValueError : If the number of employed bees is less than 5 or it is s.t the number of onlookers is less than 5.
+            TypeError  : If the maximum number of scouts is not an integer.
+            ValueError : If the maximum number of scouts is less than 0 or greater than the number of employed bees.
         
         .. note::
-            - To ensure compatibility with all the mutation types, the bee colony must have at least 5 employed bees and at least 5 onlokeer bees (i.e., colony_size >= 10).
+            Constraints about colony size, n_employed_bees and max_scouts ensure compatibility across all mutation types.
         """
         
-        assert ( colony_size >= 10)                , 'The colony size must be at least 10 for compatibility with all mutation types'
-        if n_employed_bees:
-            assert (n_employed_bees >= 5)          , 'The number of employed bees must be at least 5 for compatibility with all mutation types'
-            assert (n_employed_bees < colony_size) , 'The number of employed bees must be lower than the number of bees'
+        if not callable(function):
+            raise TypeError("`function` must be callable.")
+        self.function = function
         
-        assert(bounds is not None) , 'Bounds must be provided'
-    
-        self.dim                 = len(bounds)
-        self.colony_size         = int(colony_size)
-        self.n_employed_bees     = int(n_employed_bees) if n_employed_bees is not None else self.colony_size // 2
-        self.n_onlooker_bees     = self.colony_size - self.n_employed_bees
-        self.max_scouts          = int(max_scouts) if max_scouts is not None else self.n_employed_bees
-        self.function            = function
-        self.bounds              = bounds 
+        if not isinstance(bounds, np.ndarray):
+            raise TypeError("`bounds` must be a numpy array.")
+        if not ((bounds.shape[0] == 2) or (bounds.shape[1] == 2)):
+            raise ValueError("`bounds` must have shape `(D, 2)` or `(2, D)`, but got {bounds.shape}.") 
+        if not np.all(bounds.reshape(-1,2)[:, 0] <= bounds.reshape(-1,2)[:, 1]):
+            raise ValueError("Each lower bound must be less than or equal to its upper bound.")
+        self.bounds              = bounds.reshape(-1,2)
+        self.dim                 = self.bounds.shape[0]
+        
+        if not isinstance(colony_size,int):
+            raise TypeError("`colony_size` must be an integer.")
+        if colony_size < 10:
+            raise ValueError(f"`colony_size` must be at least 10 to ensure compatibility across all mutation types, but got {colony_size}") 
+        self.colony_size         = colony_size
+        
+        if n_employed_bees is not None:
+            if not isinstance(n_employed_bees,int):
+                raise TypeError("`n_employed_bees` must be an integer.")
+            if not ((n_employed_bees >= 5) and ((self.colony_size-n_employed_bees)>=5)):
+                raise ValueError("It must hold 5 <= `n_employed_bees` <= (`colony_size` - 5) to ensure compatibility across all mutation types")
+            self.n_employed_bees     = n_employed_bees
+        else:
+            self.n_employed_bees     = self.colony_size // 2
+            
+        self.n_onlooker_bees     = self.colony_size - self.n_employed_bees    
+        
+        if max_scouts is not None:
+            if not isinstance(max_scouts,int):
+                raise TypeError("`max_scouts` must be an integer.")
+            if not ( (max_scouts >= 0) and (max_scouts <= self.n_employed_bees) ):
+                raise ValueError(f"`max_scouts` must be beteen 0 and `n_employed_bees`, but got {max_scouts} and {self.n_employed_bees}, respectively.")
+            self.max_scouts = max_scouts
+        else:
+            self.max_scouts = self.n_employed_bees
+      
+        
         self.employed_bees       = []
         self.onlooker_bees       = []
         self.colony_history      = []
         self.optimal_bee         = None
         self.optimal_bee_history = []
-        
-        assert (self.n_onlooker_bees >= 5)               , 'The number of onlooker bees must be at least 5. Please change your configuration'
-        assert (self.max_scouts > 0 and self.max_scouts <= self.n_employed_bees) , 'The maximum number of scouts must be lower (or equal) than the number of employed bees'
-    
+            
     #------------------------------------------------------------------------------------------------------------------
     
     def optimize(self,
@@ -123,42 +152,76 @@ class ArtificialBeeColony():
             verbose (bool, optional)         : Whether to display optimization progress. Defaults to False.
             random_seed (int, optional)      : The seed for random number generation. Defaults to None.
         
-        Raise:
-            AssertionError: If the number of iterations is less than 2.
-            AssertionError: If the trial limit is less than 1.
-            AssertionError: If the selection strategy is invalid.
-            AssertionError: If the initialization strategy is invalid.
-            AssertionError: If the tournament size is invalid.
-            
+        Raises:
+            ValueError: If `max_iters` is not a positive integer.
+            ValueError: If `mutation` is not one of ['StandardABC', 'ModifiedABC', 'ABC/best/1', 'ABC/best/2', 'DirectedABC'].
+            ValueError: If `initialization` is not one of ['random', 'cahotic'].
+            ValueError: If `selection` is not one of ['RouletteWheel', 'Tournament'].
+            ValueError: If `mr` is not a float value between 0.0 and 1.0.
+            ValueError: If `selection` is 'Tournament' and `tournament_size` is not an integer between 1 and `n_employed_bees`.
+            ValueError: If `sf` is not a float value greater than 0.
+            ValueError: If `limit` is less than or equal to 0.
+            TypeError : If `self_adaptive_sf` is not a boolean.
+            TypeError : If `stagnation_tol` is not a float.
         """
         
-        assert (max_iters > 0)                                                                                 , 'The number of iterations must be greater than 0'
+        # Sanity checks and setting parameters
+        #.....................................................................................................................................
+        if not (isinstance(max_iters, int) and max_iters >= 0):
+            raise ValueError("`max_iters` must be a positive integer.")
+        self.max_iters    = max_iters
+        self.actual_iters = 0
         
-        assert (mutation in ['StandardABC', 'ModifiedABC', 'ABC/best/1','ABC/best/2','DirectedABC'])           , 'Invalid mutation strategy. Please choose one among StandardABC, ModifiedABC, ABC/best/1, ABC/best/2 and DirectedABC'
-        assert (initialization in ['random','cahotic'])                                                        , 'Invalid initialization strategy. Please choose one among random and cahotic'
-        assert (selection in ['RouletteWheel','Tournament'])                                                   , 'Invalid selection strategy. Please choose one among RouletteWheel and Tournament'
-        assert (mr>=0 and mr<=1)                                                                               , 'Invalid mutation rate. Please choose a value between 0 and 1'
-        if selection == 'Tournament':
-            assert (tournament_size > 0 and tournament_size <= self.n_employed_bees)  , 'Tournament size must be between 1 and the number of employed bees'
-        else:
-            assert (tournament_size is None)                                          , 'Tournament size must be None for the selected selection strategy'
+        valid_mutations_ = ['StandardABC', 'ModifiedABC', 'ABC/best/1', 'ABC/best/2', 'DirectedABC']
+        if mutation not in valid_mutations_:
+            raise ValueError(f"{mutation} is an invalid mutation strategy. Choose one among {', '.join(valid_mutations_)}.")
+        self.mutation = mutation
         
-        self.max_iters        = max_iters
-        self.actual_iters     = 0
-        self.limit            = limit if limit != 'default' else (0.6 * self.n_employed_bees * self.dim)  
-        self.selection        = selection
-        self.tournament_size  = tournament_size
-        self.mutation         = mutation
-        self.initialization   = initialization
-        self.mr               = mr
+        valid_initializations_ = ['random','cahotic']
+        if initialization not in valid_initializations_:
+            raise ValueError(f"{initialization} is an invalid intialization. Choose one among {', '.join(valid_initializations_)}.")
+        self.initialization = initialization
+        
+        valid_selections_ = ['RouletteWheel','Tournament']
+        if selection not in valid_selections_:
+            raise ValueError(f"{selection} is an invalid selection. Choose one among {', '.join(valid_selections_)}.")
+        self.selection = selection
+        
+        if not (isinstance(mr,float) and  (0.0 <= mr <= 1.0)):
+            raise ValueError("`mr` must be a float value between 0.0 and 1.0")
+        self.mr = mr
+        
+        if self.selection == 'Tournament':
+            if tournament_size is None:
+                raise ValueError("`Please specify a tournament_size`.")
+            if not (isinstance(tournament_size, int) and (1 <= tournament_size <= self.n_employed_bees)):
+                raise ValueError("`tournament_size` must be an integer between 1 and `n_employed_bees` when using 'Tournament' selection.")
+            self.tournament_size  = tournament_size
+        
+        if self.selection == 'DirectedABC':
+            self.directions       = np.zeros((self.n_employed_bees,self.dim))
+        
+        if not (isinstance(sf,(int,float)) and (sf>0.0)):
+            raise ValueError(f"`sf` must be greater than 0, but got {sf}")
         self.sf               = sf 
         self.initial_sf       = sf
-        self.self_adaptive_sf = self_adaptive_sf 
-        self.directions       = np.zeros((self.n_employed_bees,self.dim))
+        if not isinstance(self_adaptive_sf,bool):
+            raise TypeError("`self_adaptive_sf` must be bool")
+        self.self_adaptive_sf = self_adaptive_sf         
+        
+        self.limit = limit if (limit != 'default') else (0.6 * self.n_employed_bees * self.dim)  
+        if not (self.limit>0):
+            raise ValueError("`limit` must be greater than 0, but got {self.limit}. If this error occurs when `limit`='default', change your configuration.")
+        
+        if not isinstance(stagnation_tol,float):
+            raise TypeError('`stagnation_tol` must be float')
         self.stagnation_tol   = stagnation_tol
         
-        assert (self.limit > 0) , "The trial limit must be greater than 1. If this error occurs when limit='default', please set it manually to 1"
-                
+        if not isinstance(verbose,bool):
+            raise TypeError("`verbose` must be bool")
+        
+        #.....................................................................................................................................          
+        
         # Initialization
         if random_seed:
             np.random.seed(random_seed)
@@ -186,6 +249,8 @@ class ArtificialBeeColony():
         self.optimal_bee = copy.deepcopy(max(self.employed_bees,key=lambda bee: bee.fitness))
         self.optimal_bee_history.append(copy.deepcopy(self.optimal_bee))
         
+        #.....................................................................................................................................
+        
         # Optimization Loop
         for _ in trange(self.max_iters,desc='Running Optimization',disable= not verbose,bar_format='{l_bar}{bar}|[{elapsed}<{remaining}]'):
             
@@ -204,6 +269,7 @@ class ArtificialBeeColony():
                 if verbose:
                     tqdm.write(f"Early termination: Optimization stagnated at iteration {self.actual_iters} / {self.max_iters}")
                 break
+        #.....................................................................................................................................
     
     #------------------------------------------------------------------------------------------------------------------
     
@@ -323,6 +389,10 @@ class ArtificialBeeColony():
         n_scouts = 0
         
         for bee_idx, bee in enumerate(self.employed_bees):
+            
+            if n_scouts > self.max_scouts:
+                break
+    
             if bee.trial > self.limit:
                 n_scouts += 1
                 if self.initialization == 'random':
@@ -343,9 +413,7 @@ class ArtificialBeeColony():
             
                     self.employed_bees[bee_idx] = sorted(cahotic_pop+opposite_pop,
                                                          key=lambda bee: bee.fitness, reverse=True)[0]
-            
-            if n_scouts >= self.max_scouts:
-                break 
+
     
     #------------------------------------------------------------------------------------------------------------------            
     
@@ -458,6 +526,5 @@ class ArtificialBeeColony():
         self.optimal_bee_history = []
         self.actual_iters        = 0
         self.sf                  = self.initial_sf
-        self.directions          = np.zeros((self.n_employed_bees,self.dim))
     #------------------------------------------------------------------------------------------------------------------
         
