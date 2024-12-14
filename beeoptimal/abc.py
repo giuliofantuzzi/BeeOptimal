@@ -164,8 +164,8 @@ class ArtificialBeeColony():
             TypeError : If `self_adaptive_sf` is not a boolean.
             TypeError : If `stagnation_tol` is not a float.
         """
-        
-        # Sanity checks and setting parameters
+    
+        # Sanity checks and setting optimization parameters
         #.....................................................................................................................................
         if not (isinstance(max_iters, int) and max_iters >= 0):
             raise ValueError("`max_iters` must be a positive integer.")

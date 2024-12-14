@@ -1,6 +1,7 @@
-#--------------------------------------------------------------------------------
+#++++++++++++++++++++++++++++++++++++
 # Libraries and modules
-#--------------------------------------------------------------------------------
+#++++++++++++++++++++++++++++++++++++
+
 import numpy as np
 import plotly.graph_objects as go
 from PIL import Image
@@ -8,9 +9,9 @@ from .utils import get_marker_path
 from .benchmarks import BenchmarkFunction
 from .bee import Bee
 
-#--------------------------------------------------------------------------------
+#++++++++++++++++++++++++++++++++++++
 # Plotting functions
-#--------------------------------------------------------------------------------
+#++++++++++++++++++++++++++++++++++++
 
 def contourplot(function, title=None, bounds=None,zoom=1.0,figsize=(600,600)):
     """
@@ -45,12 +46,11 @@ def contourplot(function, title=None, bounds=None,zoom=1.0,figsize=(600,600)):
     if not (isinstance(zoom, (int, float)) and zoom <= 0):
         raise ValueError(f"`zoom` must be greater than zero, but got {zoom}")
     
-    # Determine the bounds
+    # Determine the bounds (use predefined ones if no custom bounds are provided)
     if bounds is not None:
         x_bounds = (bounds[0, 0], bounds[0, 1])
         y_bounds = (bounds[1, 0], bounds[1, 1])
     else:
-        # Use predefined bounds if no bounds are provided
         x_bounds = (function.bounds[0, 0], function.bounds[0, 1])
         y_bounds = (function.bounds[1, 0], function.bounds[1, 1])
 
@@ -69,26 +69,24 @@ def contourplot(function, title=None, bounds=None,zoom=1.0,figsize=(600,600)):
         y_center + (y_range / 2) * zoom
     )
     
-    # Generate grid
+    # Generate grid and make contourplot
     x = np.linspace(x_bounds[0], x_bounds[1], 100)
     y = np.linspace(y_bounds[0], y_bounds[1], 100)
     X, Y = np.meshgrid(x, y)
     points = np.c_[X.ravel(), Y.ravel()]  
     Z = np.array([function.evaluate(p) for p in points]).reshape(X.shape)
     
-    # Create contour plot
-    fig = go.Figure(data=go.Contour(
-        x=x, y=y, z=Z,
-        colorscale='Oranges', opacity=0.6,
-        contours=dict(
-            showlabels=False,
-            labelfont=dict(
-                size=12,
-                color='white')
+    fig = go.Figure(
+        data=go.Contour(
+            x=x, y=y, z=Z,
+            colorscale='Oranges', opacity=0.6,
+            contours=dict(
+                showlabels=False,
+                labelfont=dict(size=12,color='white')
+                )
+            )
         )
-    ))
     
-    # Update layout
     fig.update_layout(
         title= str(title),
         xaxis_title='x1',
@@ -136,11 +134,11 @@ def surfaceplot(function,title='',bounds=None,zoom=1.0,figsize=(600,600)):
     if not (isinstance(zoom, (int, float)) and zoom <= 0):
         raise ValueError(f"`zoom` must be greater than zero, but got {zoom}")
     
+    # Determine the bounds (use predefined ones if no custom bounds are provided)
     if bounds is not None:
         x_bounds = (bounds[0, 0], bounds[0, 1])
         y_bounds = (bounds[1, 0], bounds[1, 1])
     else:
-        # Use predefined bounds if no bounds are provided
         x_bounds = (function.bounds[0, 0], function.bounds[0, 1])
         y_bounds = (function.bounds[1, 0], function.bounds[1, 1])
 
@@ -159,7 +157,7 @@ def surfaceplot(function,title='',bounds=None,zoom=1.0,figsize=(600,600)):
         y_center + (y_range / 2) * zoom
     )
     
-    # Generate grid
+    # Generate grid and make surfaceplot 
     x = np.linspace(x_bounds[0], x_bounds[1], 100)
     y = np.linspace(y_bounds[0], y_bounds[1], 100)
     X, Y = np.meshgrid(x, y)
@@ -216,14 +214,15 @@ def contourplot_bees(function,bee_colony,optimal_solution=None,title='',bounds=N
     
     fig = contourplot(function,title,bounds=bounds,zoom=zoom,figsize=figsize)
     
+    # Bee marker settings
     bee_marker_path = get_marker_path()
     bee_marker = Image.open(bee_marker_path)
-    
     if bee_marker_size is None:
         x_range = np.abs(function.bounds[0,1]-function.bounds[0,0])
         y_range = np.abs(function.bounds[1,1]-function.bounds[1,0])
         bee_marker_size = min(x_range,y_range) * 0.05
     
+    # Add bees
     for bee in bee_colony:
         fig.add_layout_image(
                     dict(
@@ -240,6 +239,7 @@ def contourplot_bees(function,bee_colony,optimal_solution=None,title='',bounds=N
                         opacity=1
                     )
                 )
+    # Add optimal solution (if specified)
     if optimal_solution is not None:
         if not isinstance(optimal_solution,np.ndarray):
             raise TypeError("optimal_solution must be a NumPy array.")
@@ -251,7 +251,7 @@ def contourplot_bees(function,bee_colony,optimal_solution=None,title='',bounds=N
             y=[optimal_solution[0,1]],
             mode='markers',
             marker=dict(size=12, color='red', symbol='x'),
-            name='Optimal Solution'
-        ))
+            name='Optimal Solution')
+        )
     
     return fig

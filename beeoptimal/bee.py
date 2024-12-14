@@ -1,11 +1,13 @@
-#--------------------------------------------------------------------------------
+#++++++++++++++++++++++++++++++++++++
 # Libraries and modules
-#--------------------------------------------------------------------------------
+#++++++++++++++++++++++++++++++++++++
+
 import numpy as np
 
-#--------------------------------------------------------------------------------
+#++++++++++++++++++++++++++++++++++++
 # Bee class
-#--------------------------------------------------------------------------------
+#++++++++++++++++++++++++++++++++++++
+
 class Bee():
     """
     Instantiates a bee object for the artificial bee colony algorithm.
@@ -19,7 +21,7 @@ class Bee():
     .. warning::
         AssertionError: If the length of the position and bounds arrays are not equal.
     """
-    
+    #--------------------------------------------------------------------------------
     def __init__(self,position,function,bounds):
         """
         Initializes a Bee instance with a position, an objective function, and search space bounds.
@@ -57,8 +59,8 @@ class Bee():
             raise ValueError(f"`position` dimensionality ({position.reshape(-1, 1).shape[0]}) is not compatible with the bounds provided.")
         self.position = position
         
-        self.trial    = 0
-    
+        self.trial = 0
+    #--------------------------------------------------------------------------------
     @property
     def value(self):
         """
@@ -68,7 +70,7 @@ class Bee():
             float: The objective function value for the current position.
         """
         return self.function(self.position) 
-    
+    #--------------------------------------------------------------------------------
     @property
     def fitness(self):
         """
@@ -81,5 +83,4 @@ class Bee():
             return 1/(1+self.value)
         else:
             return 1 + np.abs(self.value)
-        
-#-------------------------------------------------------------------------------- 
+    #--------------------------------------------------------------------------------
