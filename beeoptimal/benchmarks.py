@@ -34,8 +34,8 @@ class BenchmarkFunction:
         
         Args:
             fun (callable)                : The function to evaluate.
-            bounds (array-like)           : The bounds of the function, provided as a numpy array of shape `(D,2)` or (2,D), list (or tuple) of D lists (or tuples) of length 2.
-            optimal_solution (array-like) : The known solution achieving the optimal value, provided as numpy array of shape `(D,)`, `(D,1)` or `(1,D)`, or list (tuple) of length D 
+            bounds (array-like)           : The bounds of the function, provided as a numpy array of shape `(D,2)` or (2,D)
+            optimal_solution (array-like) : The known solution achieving the optimal value, provided as numpy array of shape `(D,)`, `(D,1)` or `(1,D)`
             name (str)                    : The name of the function. Defaults to empty string.
         """
         

@@ -31,13 +31,28 @@ class Bee():
             trial (int)           : Counter to track the number of trials or unsuccessful updates for the bee.
         
         Raises:
-            AssertionError: If the length of the position and bounds arrays are not equal.
+            TypeError  : If function is not callable.
+            TypeError  : If position is not a numpy array.
+            TypeError  : If bounds is not a numpy array.
+            ValueError : If bounds does not have shape `(D, 2)` or `(2, D)`.
+            ValueError : If position and bounds do not have compatible dimensions.
         """
     
-        assert(len(position) == len(bounds)) , 'Position and bounds must have the same length'
+        if not callable(function):
+            raise TypeError("The function must be callable.")
+        
+        if not isinstance(position, np.ndarray):
+            raise TypeError("The position must be a numpy array.")
+        if not isinstance(bounds, np.ndarray):
+            raise TypeError("The position must be a numpy array.")
+        if not ((bounds.shape[0] == 2) or (bounds.shape[1] == 2)):
+            raise ValueError("The bounds must have shape `(D, 2)` or `(2, D)`.")            
+        self.bounds = bounds.reshape(-1,2) 
+        if position.reshape(-1, 1).shape[0] != self.bounds.shape[0]:
+            raise ValueError("Position and bounds must have compatible dimensions")
+        
         self.position = position
         self.function = function
-        self.bounds   = bounds
         self.trial    = 0
     
     @property
