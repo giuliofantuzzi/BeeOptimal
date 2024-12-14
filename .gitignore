@@ -2,6 +2,7 @@
 __pycache__/
 beeoptimal.egg-info
 docs/source/_static/MNISTdata/
+docs/build/
 assets/MNISTdata/
 dist/
 
