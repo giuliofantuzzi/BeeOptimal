@@ -28,6 +28,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.napoleon',  # For Google/NumPy style docstrings
     'sphinx.ext.viewcode',  # Links to source code
+    'sphinx.ext.autodoc',
     'nbsphinx',             # For Jupyter notebooks
     'nbsphinx_link',        # For Jupyter notebooks
     'sphinx_rtd_dark_mode', # Dark mode
