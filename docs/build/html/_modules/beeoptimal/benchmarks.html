@@ -1,0 +1,550 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>beeoptimal.benchmarks &mdash; BeeOptimal documentation 🐝🍯 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=d19441ff" />
+      <link rel="stylesheet" type="text/css" href="../../_static/dark_mode_css/general.css?v=c0a7eb24" />
+      <link rel="stylesheet" type="text/css" href="../../_static/dark_mode_css/dark.css?v=70edf1c7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../../_static/dark_mode_js/default_light.js?v=c2e647ce"></script>
+      <script src="../../_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            BeeOptimal documentation 🐝🍯
+              <img src="../../_static/logo_BeeOptimal.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../abc.html">ArtificialBeeColony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bee.html">Bee</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../benchmarks.html">Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plotting.html">Plotting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorial1.html">Tutorial 1: introduction to <code class="docutils literal notranslate"><span class="pre">BenchmarkFunction</span></code> class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorial2.html">Tutorial 2: ready-to-use benchmarks and visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorial3.html">Tutorial 3: solving your first optimization problem with ABC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorial4.html">Tutorial 4: visualizing bees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorial5.html">Tutorial 5: ABC for image reconstruction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">BeeOptimal documentation 🐝🍯</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">beeoptimal.benchmarks</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for beeoptimal.benchmarks</h1><div class="highlight"><pre>
+<span></span><span class="c1">#++++++++++++++++++++++++++++++++++++</span>
+<span class="c1"># Libraries and modules</span>
+<span class="c1">#++++++++++++++++++++++++++++++++++++</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1">#++++++++++++++++++++++++++++++++++++</span>
+<span class="c1"># BenchmarkFunction class</span>
+<span class="c1">#++++++++++++++++++++++++++++++++++++</span>
+
+<div class="viewcode-block" id="BenchmarkFunction">
+<a class="viewcode-back" href="../../benchmarks.html#beeoptimal.benchmarks.BenchmarkFunction">[docs]</a>
+<span class="k">class</span> <span class="nc">BenchmarkFunction</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class to define a D-dimensional benchmark function for optimization.</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        fun (callable)                : The function to evaluate.</span>
+<span class="sd">        bounds (numpy-array)          : The bounds of the function, provided as a numpy array of shape `(D,2)` or `(2,D)`.</span>
+<span class="sd">        optimal_solution (numpy-array): The known solution achieving the optimal value, provided as numpy array of shape `(D,)`, `(D,1)` or `(1,D)`.</span>
+<span class="sd">        name (str, optional)          : The name of the function. Defaults to empty string.</span>
+<span class="sd">        </span>
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; from beeoptimal.benchmarks import BenchmarkFunction</span>
+<span class="sd">        &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">        &gt;&gt;&gt; sphere = lambda point: np.sum(np.array(point)**2)</span>
+<span class="sd">        &gt;&gt;&gt; Sphere2d = BenchmarkFunction(</span>
+<span class="sd">                name             = &quot;Sphere-2d&quot;,</span>
+<span class="sd">                fun              = sphere,</span>
+<span class="sd">                bounds           = np.array([(-5.12, 5.12)]*2),</span>
+<span class="sd">                optimal_solution = np.zeros(2)</span>
+<span class="sd">            )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fun</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span> <span class="n">optimal_solution</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize a benchmark function.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            fun (callable)                : The function to evaluate.</span>
+<span class="sd">            bounds (numpy-array)          : The bounds of the function, provided as a numpy array of shape `(D,2)` or (2,D)</span>
+<span class="sd">            optimal_solution (numpy-array): The known solution achieving the optimal value, provided as numpy array of shape `(D,)`, `(D,1)` or `(1,D)`</span>
+<span class="sd">            name (str)                    : The name of the function. Defaults to empty string.</span>
+<span class="sd">            </span>
+<span class="sd">        Raises:</span>
+<span class="sd">            TypeError  : If `function` is not callable.</span>
+<span class="sd">            TypeError  : If `bounds` is not a numpy array.</span>
+<span class="sd">            ValueError : If `bounds` does not have shape `(D, 2)` or `(2, D)`.</span>
+<span class="sd">            ValueError : If any dimension has its lower bound greater than the upper bound.</span>
+<span class="sd">            ValueError : If `optimal_position` and `bounds` do not have compatible dimensions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">callable</span><span class="p">(</span><span class="n">fun</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;`function` must be callable.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fun</span> <span class="o">=</span> <span class="n">fun</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;`name` must be provided as a string.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">bounds</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;`bounds` must be provided as a numpy array.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">((</span><span class="n">bounds</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">bounds</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;`bounds` must have shape `(D, 2)` or `(2, D)`, but got </span><span class="si">{</span><span class="n">bounds</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bounds</span> <span class="o">=</span> <span class="n">bounds</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> 
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Each lower bound must be less than or equal to its upper bound.&quot;</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">optimal_solution</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;`optimal_solution` must be provided as a numpy array.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">optimal_solution</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;`optimal_solution` dimensionality (</span><span class="si">{</span><span class="n">optimal_solution</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">) is not compatible with the bounds provided.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">optimal_solution</span> <span class="o">=</span> <span class="n">optimal_solution</span>
+        
+<div class="viewcode-block" id="BenchmarkFunction.evaluate">
+<a class="viewcode-back" href="../../benchmarks.html#beeoptimal.benchmarks.BenchmarkFunction.evaluate">[docs]</a>
+    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Evaluate the function at the given point.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            point (array-like) : The point at which to evaluate the function, provided as numpy array of shape `(D,)`, `(D,1)` or `(1,D)`.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            float: The value of the function computed at the given point.</span>
+<span class="sd">            </span>
+<span class="sd">        Raises:</span>
+<span class="sd">            TypeError  : If the point is not provided as a numpy array.</span>
+<span class="sd">            ValueError : If the point dimensions are not consistent with the optimal solution</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">point</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;`point` must be provided as a numpy array&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">point</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimal_solution</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;`point` shape is not consistent with `optimalsolution`&#39;s one. Got </span><span class="si">{</span><span class="n">point</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">optimal_solution</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fun</span><span class="p">(</span><span class="n">point</span><span class="p">)</span></div>
+
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">optimal_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the optimal value of the function.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">optimal_solution</span><span class="p">)</span></div>
+
+    
+<span class="c1">#++++++++++++++++++++++++++++++++++++</span>
+<span class="c1">#  Callable benchmark functions</span>
+<span class="c1">#++++++++++++++++++++++++++++++++++++</span>
+
+<span class="k">def</span> <span class="nf">sphere</span><span class="p">(</span><span class="n">point</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the value of the sphere function at the given point.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        point (array-like): The point at which to evaluate the function, provided as numpy array of shape `(D,)`, `(D,1)` or `(1,D)` or list (or tuple) of length D.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        float: The value of the function computed at the given point.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">point</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">point</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">point</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">rosenbrock</span><span class="p">(</span><span class="n">point</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the value of the rosenbrock function at the given point.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        point (array-like): The point at which to evaluate the function, provided as numpy array of shape `(D,)`, `(D,1)` or `(1,D)` or list (or tuple) of length D.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        float: The value of the function computed at the given point.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">point</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">point</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="p">(</span><span class="n">point</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">point</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">point</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        
+<span class="k">def</span> <span class="nf">ackley</span><span class="p">(</span><span class="n">point</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the value of the acklet function at the given point.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        point (array-like): The point at which to evaluate the function, provided as numpy array of shape `(D,)`, `(D,1)` or `(1,D)` or list (or tuple) of length D.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        float: The value of the function computed at the given point.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">point</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">point</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">20</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">point</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">D</span><span class="p">))</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">point</span><span class="p">))</span> <span class="o">/</span> <span class="n">D</span><span class="p">)</span> <span class="o">+</span> <span class="mi">20</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">e</span>
+
+<span class="k">def</span> <span class="nf">rastrigin</span><span class="p">(</span><span class="n">point</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the value of the rastrigin function at the given point.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        point (array-like): The point at which to evaluate the function, provided as numpy array of shape `(D,)`, `(D,1)` or `(1,D)` or list (or tuple) of length D.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        float: The value of the function computed at the given point.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">point</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">point</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">10</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">point</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">point</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">10</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">point</span><span class="p">))))</span>
+
+<span class="k">def</span> <span class="nf">weierstrass</span><span class="p">(</span><span class="n">point</span><span class="p">,</span><span class="n">a</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">b</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">k_max</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the value of the weierstrass function at the given point.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        point (array-like): The point at which to evaluate the function, provided as numpy array of shape `(D,)`, `(D,1)` or `(1,D)` or list (or tuple) of length D.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        float: The value of the function computed at the given point.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">point</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">point</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">k_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">term1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">a</span><span class="o">**</span><span class="n">k</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">b</span><span class="o">**</span><span class="n">k</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">point</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">term2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">a</span><span class="o">**</span><span class="n">k</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">b</span><span class="o">**</span><span class="n">k</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">term1</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">point</span><span class="p">)</span> <span class="o">*</span> <span class="n">term2</span>
+
+<span class="k">def</span> <span class="nf">griewank</span><span class="p">(</span><span class="n">point</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the value of the griewank function at the given point.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        point (array-like): The point at which to evaluate the function, provided as numpy array of shape `(D,)`, `(D,1)` or `(1,D)` or list (or tuple) of length D.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        float: The value of the function computed at the given point.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">point</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">point</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">point</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">4000</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">point</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">point</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">))))</span>
+
+<span class="k">def</span> <span class="nf">schwefel</span><span class="p">(</span><span class="n">point</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the value of the schwefel function at the given point.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        point (array-like): The point at which to evaluate the function, provided as numpy array of shape `(D,)`, `(D,1)` or `(1,D)` or list (or tuple) of length D.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        float: The value of the function computed at the given point.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">point</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">point</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="k">return</span> <span class="mf">418.9829</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">point</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">point</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">point</span><span class="p">))))</span>
+
+<span class="k">def</span> <span class="nf">sumsquares</span><span class="p">(</span><span class="n">point</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the value of the sumsquares function at the given point.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        point (array-like): The point at which to evaluate the function, provided as numpy array of shape `(D,)`, `(D,1)` or `(1,D)`or list (or tuple) of length D.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        float: The value of the function computed at the given point.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">point</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">point</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">point</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span> <span class="p">(</span><span class="n">point</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">eggholder</span><span class="p">(</span><span class="n">point</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the value of the eggholder function at the given point.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        point (array-like): The point at which to evaluate the function, provided as numpy array of shape `(2,)`, `(2,1)` or `(1,2)`.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        float: The value of the function computed at the given point.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        AssertionError: If the point is not provided as a numpy array</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">point</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">point</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">point</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;The Eggholder function is only defined for 2 dimensions&quot;</span>
+    <span class="k">return</span> <span class="o">-</span><span class="p">(</span><span class="n">point</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">47</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">point</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">point</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">47</span><span class="p">)))</span> <span class="o">-</span> <span class="n">point</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">point</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">point</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">47</span><span class="p">))))</span>
+
+    
+    
+<span class="c1">#++++++++++++++++++++++++++++++++++++</span>
+<span class="c1"># Benchmark functions for testing</span>
+<span class="c1">#++++++++++++++++++++++++++++++++++++</span>
+
+<span class="c1"># 2d functions</span>
+
+<span class="n">Sphere2d</span> <span class="o">=</span> <span class="n">BenchmarkFunction</span><span class="p">(</span>
+    <span class="n">name</span>             <span class="o">=</span> <span class="s2">&quot;Sphere-2d&quot;</span><span class="p">,</span>
+    <span class="n">fun</span>              <span class="o">=</span> <span class="n">sphere</span><span class="p">,</span>
+    <span class="n">bounds</span>           <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="o">-</span><span class="mf">5.12</span><span class="p">,</span> <span class="mf">5.12</span><span class="p">)]</span><span class="o">*</span><span class="mi">2</span><span class="p">),</span>
+    <span class="n">optimal_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">Rosenbrock2d</span> <span class="o">=</span> <span class="n">BenchmarkFunction</span><span class="p">(</span>
+    <span class="n">name</span>             <span class="o">=</span> <span class="s2">&quot;Rosenbrock-2d&quot;</span><span class="p">,</span>
+    <span class="n">fun</span>              <span class="o">=</span> <span class="n">rosenbrock</span><span class="p">,</span>
+    <span class="n">bounds</span>           <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="o">-</span><span class="mf">2.048</span><span class="p">,</span> <span class="mf">2.048</span><span class="p">)]</span><span class="o">*</span><span class="mi">2</span><span class="p">),</span>
+    <span class="n">optimal_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">Ackley2d</span> <span class="o">=</span> <span class="n">BenchmarkFunction</span><span class="p">(</span>
+    <span class="n">name</span>             <span class="o">=</span> <span class="s2">&quot;Ackley-2d&quot;</span><span class="p">,</span>
+    <span class="n">fun</span>              <span class="o">=</span> <span class="n">ackley</span><span class="p">,</span>
+    <span class="n">bounds</span>           <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)]</span><span class="o">*</span><span class="mi">2</span><span class="p">),</span>
+    <span class="n">optimal_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">Rastrigin2d</span> <span class="o">=</span> <span class="n">BenchmarkFunction</span><span class="p">(</span>
+    <span class="n">name</span>             <span class="o">=</span> <span class="s2">&quot;Rastrigin-2d&quot;</span><span class="p">,</span>
+    <span class="n">fun</span>              <span class="o">=</span> <span class="n">rastrigin</span><span class="p">,</span>
+    <span class="n">bounds</span>           <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="o">-</span><span class="mf">5.12</span><span class="p">,</span> <span class="mf">5.12</span><span class="p">)]</span><span class="o">*</span><span class="mi">2</span><span class="p">),</span>
+    <span class="n">optimal_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">Weierstrass2d</span> <span class="o">=</span> <span class="n">BenchmarkFunction</span><span class="p">(</span>
+    <span class="n">name</span>             <span class="o">=</span> <span class="s2">&quot;Weierstrass-2d&quot;</span><span class="p">,</span>
+    <span class="n">fun</span>              <span class="o">=</span> <span class="n">weierstrass</span><span class="p">,</span>
+    <span class="n">bounds</span>           <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)]</span><span class="o">*</span><span class="mi">2</span><span class="p">),</span>
+    <span class="n">optimal_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">Griewank2d</span> <span class="o">=</span> <span class="n">BenchmarkFunction</span><span class="p">(</span>
+    <span class="n">name</span>             <span class="o">=</span> <span class="s2">&quot;Griewank-2d&quot;</span><span class="p">,</span>
+    <span class="n">fun</span>              <span class="o">=</span> <span class="n">griewank</span><span class="p">,</span>
+    <span class="n">bounds</span>           <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="o">-</span><span class="mi">600</span><span class="p">,</span> <span class="mi">600</span><span class="p">)]</span><span class="o">*</span><span class="mi">2</span><span class="p">),</span>
+    <span class="n">optimal_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">Schwefel2d</span> <span class="o">=</span> <span class="n">BenchmarkFunction</span><span class="p">(</span>
+    <span class="n">name</span>             <span class="o">=</span> <span class="s2">&quot;Schwefel-2d&quot;</span><span class="p">,</span>
+    <span class="n">fun</span>              <span class="o">=</span> <span class="n">schwefel</span><span class="p">,</span>
+    <span class="n">bounds</span>           <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="o">-</span><span class="mi">500</span><span class="p">,</span> <span class="mi">500</span><span class="p">)]</span><span class="o">*</span><span class="mi">2</span><span class="p">),</span>
+    <span class="n">optimal_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mf">420.9687</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">Sumsquares2d</span> <span class="o">=</span> <span class="n">BenchmarkFunction</span><span class="p">(</span>
+    <span class="n">name</span>             <span class="o">=</span> <span class="s2">&quot;Sumsquares-2d&quot;</span><span class="p">,</span>
+    <span class="n">fun</span>              <span class="o">=</span> <span class="n">sumsquares</span><span class="p">,</span>
+    <span class="n">bounds</span>           <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span><span class="o">*</span><span class="mi">2</span><span class="p">),</span>
+    <span class="n">optimal_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="p">)</span>    
+
+<span class="n">Eggholder</span> <span class="o">=</span> <span class="n">BenchmarkFunction</span><span class="p">(</span>
+    <span class="n">name</span>             <span class="o">=</span> <span class="s2">&quot;Eggholder&quot;</span><span class="p">,</span>
+    <span class="n">fun</span>              <span class="o">=</span> <span class="n">eggholder</span><span class="p">,</span>
+    <span class="n">bounds</span>           <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="o">-</span><span class="mi">512</span><span class="p">,</span> <span class="mi">512</span><span class="p">)]</span><span class="o">*</span><span class="mi">2</span><span class="p">),</span>
+    <span class="n">optimal_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">512</span><span class="p">,</span><span class="mf">404.2319</span><span class="p">])</span>
+<span class="p">)</span>
+
+<span class="c1"># 10d functions</span>
+
+<span class="n">Sphere10d</span> <span class="o">=</span> <span class="n">BenchmarkFunction</span><span class="p">(</span>
+    <span class="n">name</span>             <span class="o">=</span> <span class="s2">&quot;Sphere-10d&quot;</span><span class="p">,</span>
+    <span class="n">fun</span>              <span class="o">=</span> <span class="n">sphere</span><span class="p">,</span>
+    <span class="n">bounds</span>           <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="o">-</span><span class="mf">5.12</span><span class="p">,</span> <span class="mf">5.12</span><span class="p">)]</span><span class="o">*</span><span class="mi">10</span><span class="p">),</span>
+    <span class="n">optimal_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">Rosenbrock10d</span> <span class="o">=</span> <span class="n">BenchmarkFunction</span><span class="p">(</span>
+    <span class="n">name</span>             <span class="o">=</span> <span class="s2">&quot;Rosenbrock-10d&quot;</span><span class="p">,</span>
+    <span class="n">fun</span>              <span class="o">=</span> <span class="n">rosenbrock</span><span class="p">,</span>
+    <span class="n">bounds</span>           <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="o">-</span><span class="mf">2.048</span><span class="p">,</span> <span class="mf">2.048</span><span class="p">)]</span><span class="o">*</span><span class="mi">10</span><span class="p">),</span>
+    <span class="n">optimal_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">Ackley10d</span> <span class="o">=</span> <span class="n">BenchmarkFunction</span><span class="p">(</span>
+    <span class="n">name</span>             <span class="o">=</span> <span class="s2">&quot;Ackley-10d&quot;</span><span class="p">,</span>
+    <span class="n">fun</span>              <span class="o">=</span> <span class="n">ackley</span><span class="p">,</span>
+    <span class="n">bounds</span>           <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)]</span><span class="o">*</span><span class="mi">10</span><span class="p">),</span>
+    <span class="n">optimal_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">Rastrigin10d</span> <span class="o">=</span> <span class="n">BenchmarkFunction</span><span class="p">(</span>
+    <span class="n">name</span>             <span class="o">=</span> <span class="s2">&quot;Rastrigin-10d&quot;</span><span class="p">,</span>
+    <span class="n">fun</span>              <span class="o">=</span> <span class="n">rastrigin</span><span class="p">,</span>
+    <span class="n">bounds</span>           <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="o">-</span><span class="mf">5.12</span><span class="p">,</span> <span class="mf">5.12</span><span class="p">)]</span><span class="o">*</span><span class="mi">10</span><span class="p">),</span>
+    <span class="n">optimal_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">Weierstrass10d</span> <span class="o">=</span> <span class="n">BenchmarkFunction</span><span class="p">(</span>
+    <span class="n">name</span>             <span class="o">=</span> <span class="s2">&quot;Weierstrass-10d&quot;</span><span class="p">,</span>
+    <span class="n">fun</span>              <span class="o">=</span> <span class="n">weierstrass</span><span class="p">,</span>
+    <span class="n">bounds</span>           <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)]</span><span class="o">*</span><span class="mi">10</span><span class="p">),</span>
+    <span class="n">optimal_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">Griewank10d</span> <span class="o">=</span> <span class="n">BenchmarkFunction</span><span class="p">(</span>
+    <span class="n">name</span>             <span class="o">=</span> <span class="s2">&quot;Griewank-10d&quot;</span><span class="p">,</span>
+    <span class="n">fun</span>              <span class="o">=</span> <span class="n">griewank</span><span class="p">,</span>
+    <span class="n">bounds</span>           <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="o">-</span><span class="mi">600</span><span class="p">,</span> <span class="mi">600</span><span class="p">)]</span><span class="o">*</span><span class="mi">10</span><span class="p">),</span>
+    <span class="n">optimal_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">Schwefel10d</span> <span class="o">=</span> <span class="n">BenchmarkFunction</span><span class="p">(</span>
+    <span class="n">name</span>             <span class="o">=</span> <span class="s2">&quot;Schwefel-10d&quot;</span><span class="p">,</span>
+    <span class="n">fun</span>              <span class="o">=</span> <span class="n">schwefel</span><span class="p">,</span>
+    <span class="n">bounds</span>           <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="o">-</span><span class="mi">500</span><span class="p">,</span> <span class="mi">500</span><span class="p">)]</span><span class="o">*</span><span class="mi">10</span><span class="p">),</span>
+    <span class="n">optimal_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mf">420.9687</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">Sumsquares10d</span> <span class="o">=</span> <span class="n">BenchmarkFunction</span><span class="p">(</span>
+    <span class="n">name</span>             <span class="o">=</span> <span class="s2">&quot;Sumsquares-10d&quot;</span><span class="p">,</span>
+    <span class="n">fun</span>              <span class="o">=</span> <span class="n">sumsquares</span><span class="p">,</span>
+    <span class="n">bounds</span>           <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span><span class="o">*</span><span class="mi">10</span><span class="p">),</span>
+    <span class="n">optimal_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="p">)</span>    
+
+<span class="c1"># 30d functions</span>
+
+<span class="n">Sphere30d</span> <span class="o">=</span> <span class="n">BenchmarkFunction</span><span class="p">(</span>
+    <span class="n">name</span>             <span class="o">=</span> <span class="s2">&quot;Sphere-30d&quot;</span><span class="p">,</span>
+    <span class="n">fun</span>              <span class="o">=</span> <span class="n">sphere</span><span class="p">,</span>
+    <span class="n">bounds</span>           <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="o">-</span><span class="mf">5.12</span><span class="p">,</span> <span class="mf">5.12</span><span class="p">)]</span><span class="o">*</span><span class="mi">30</span><span class="p">),</span>
+    <span class="n">optimal_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">Rosenbrock30d</span> <span class="o">=</span> <span class="n">BenchmarkFunction</span><span class="p">(</span>
+    <span class="n">name</span>             <span class="o">=</span> <span class="s2">&quot;Rosenbrock-30d&quot;</span><span class="p">,</span>
+    <span class="n">fun</span>              <span class="o">=</span> <span class="n">rosenbrock</span><span class="p">,</span>
+    <span class="n">bounds</span>           <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="o">-</span><span class="mf">2.048</span><span class="p">,</span> <span class="mf">2.048</span><span class="p">)]</span><span class="o">*</span><span class="mi">30</span><span class="p">),</span>
+    <span class="n">optimal_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">Ackley30d</span> <span class="o">=</span> <span class="n">BenchmarkFunction</span><span class="p">(</span>
+    <span class="n">name</span>             <span class="o">=</span> <span class="s2">&quot;Ackley-30d&quot;</span><span class="p">,</span>
+    <span class="n">fun</span>              <span class="o">=</span> <span class="n">ackley</span><span class="p">,</span>
+    <span class="n">bounds</span>           <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)]</span><span class="o">*</span><span class="mi">30</span><span class="p">),</span>
+    <span class="n">optimal_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">Rastrigin30d</span> <span class="o">=</span> <span class="n">BenchmarkFunction</span><span class="p">(</span>
+    <span class="n">name</span>             <span class="o">=</span> <span class="s2">&quot;Rastrigin-30d&quot;</span><span class="p">,</span>
+    <span class="n">fun</span>              <span class="o">=</span> <span class="n">rastrigin</span><span class="p">,</span>
+    <span class="n">bounds</span>           <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="o">-</span><span class="mf">5.12</span><span class="p">,</span> <span class="mf">5.12</span><span class="p">)]</span><span class="o">*</span><span class="mi">30</span><span class="p">),</span>
+    <span class="n">optimal_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">Weierstrass30d</span> <span class="o">=</span> <span class="n">BenchmarkFunction</span><span class="p">(</span>
+    <span class="n">name</span>             <span class="o">=</span> <span class="s2">&quot;Weierstrass-30d&quot;</span><span class="p">,</span>
+    <span class="n">fun</span>              <span class="o">=</span> <span class="n">weierstrass</span><span class="p">,</span>
+    <span class="n">bounds</span>           <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)]</span><span class="o">*</span><span class="mi">30</span><span class="p">),</span>
+    <span class="n">optimal_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">Griewank30d</span> <span class="o">=</span> <span class="n">BenchmarkFunction</span><span class="p">(</span>
+    <span class="n">name</span>             <span class="o">=</span> <span class="s2">&quot;Griewank-30d&quot;</span><span class="p">,</span>
+    <span class="n">fun</span>              <span class="o">=</span> <span class="n">griewank</span><span class="p">,</span>
+    <span class="n">bounds</span>           <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="o">-</span><span class="mi">600</span><span class="p">,</span> <span class="mi">600</span><span class="p">)]</span><span class="o">*</span><span class="mi">30</span><span class="p">),</span>
+    <span class="n">optimal_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">Schwefel30d</span> <span class="o">=</span> <span class="n">BenchmarkFunction</span><span class="p">(</span>
+    <span class="n">name</span>             <span class="o">=</span> <span class="s2">&quot;Schwefel-30d&quot;</span><span class="p">,</span>
+    <span class="n">fun</span>              <span class="o">=</span> <span class="n">schwefel</span><span class="p">,</span>
+    <span class="n">bounds</span>           <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="o">-</span><span class="mi">500</span><span class="p">,</span> <span class="mi">500</span><span class="p">)]</span><span class="o">*</span><span class="mi">30</span><span class="p">),</span>
+    <span class="n">optimal_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="mf">420.9687</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">Sumsquares30d</span> <span class="o">=</span> <span class="n">BenchmarkFunction</span><span class="p">(</span>
+    <span class="n">name</span>             <span class="o">=</span> <span class="s2">&quot;Sumsquares-30d&quot;</span><span class="p">,</span>
+    <span class="n">fun</span>              <span class="o">=</span> <span class="n">sumsquares</span><span class="p">,</span>
+    <span class="n">bounds</span>           <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span><span class="o">*</span><span class="mi">30</span><span class="p">),</span>
+    <span class="n">optimal_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="p">)</span>    
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Giulio Fantuzzi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

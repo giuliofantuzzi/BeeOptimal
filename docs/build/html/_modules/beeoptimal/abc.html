@@ -1,0 +1,691 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>beeoptimal.abc &mdash; BeeOptimal documentation 🐝🍯 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=d19441ff" />
+      <link rel="stylesheet" type="text/css" href="../../_static/dark_mode_css/general.css?v=c0a7eb24" />
+      <link rel="stylesheet" type="text/css" href="../../_static/dark_mode_css/dark.css?v=70edf1c7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../../_static/dark_mode_js/default_light.js?v=c2e647ce"></script>
+      <script src="../../_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            BeeOptimal documentation 🐝🍯
+              <img src="../../_static/logo_BeeOptimal.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../abc.html">ArtificialBeeColony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bee.html">Bee</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../benchmarks.html">Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plotting.html">Plotting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorial1.html">Tutorial 1: introduction to <code class="docutils literal notranslate"><span class="pre">BenchmarkFunction</span></code> class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorial2.html">Tutorial 2: ready-to-use benchmarks and visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorial3.html">Tutorial 3: solving your first optimization problem with ABC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorial4.html">Tutorial 4: visualizing bees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorial5.html">Tutorial 5: ABC for image reconstruction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">BeeOptimal documentation 🐝🍯</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">beeoptimal.abc</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for beeoptimal.abc</h1><div class="highlight"><pre>
+<span></span><span class="c1">#++++++++++++++++++++++++++++++++++++</span>
+<span class="c1"># Libraries and modules</span>
+<span class="c1">#++++++++++++++++++++++++++++++++++++</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">from</span> <span class="nn">.bee</span> <span class="kn">import</span> <span class="n">Bee</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">trange</span><span class="p">,</span><span class="n">tqdm</span>
+
+<span class="c1">#++++++++++++++++++++++++++++++++++++</span>
+<span class="c1"># Artificial Bee Colony (ABC) class</span>
+<span class="c1">#++++++++++++++++++++++++++++++++++++</span>
+
+<div class="viewcode-block" id="ArtificialBeeColony">
+<a class="viewcode-back" href="../../abc.html#beeoptimal.abc.ArtificialBeeColony">[docs]</a>
+<span class="k">class</span> <span class="nc">ArtificialBeeColony</span><span class="p">():</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Artificial Bee Colony (ABC) class</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        colony_size (int)                : The total number of bees in the colony.</span>
+<span class="sd">        n_employed_bees (int)            : The number of employed bees.</span>
+<span class="sd">        n_onlooker_bees (int)            : The number of onlooker bees.</span>
+<span class="sd">        max_scouts (int)                 : The maximum number of scout bees per iteration. Defaults to None (will be set to n_employed_bees).</span>
+<span class="sd">        dim (int)                        : The dimensionality of the search space.</span>
+<span class="sd">        function (callable)              : The objective function to optimize.</span>
+<span class="sd">        bounds (array-like)              : The bounds for each dimension of the search space, provided as a 2D array [(lower1, upper1), ..., (lowerD, upperD)].</span>
+<span class="sd">        employed_bees (list[Bee])        : The employed bees in the colony.</span>
+<span class="sd">        onlooker_bees (list[Bee])        : The onlooker bees in the colony.</span>
+<span class="sd">        colony_history (list[list[Bee]]) : The history of the employed bees at each iteration.</span>
+<span class="sd">        optimal_bee (Bee)                : The optimal bee in the colony.</span>
+<span class="sd">        optimal_bee_history (list[Bee])  : The history of the optimal bee at each iteration.</span>
+<span class="sd">        max_iters (int)                  : The maximum number of iterations. Defaults to 1000.</span>
+<span class="sd">        actual_iters (int)               : The actual number of iterations.</span>
+<span class="sd">        limit (int)                      : The trial limit for scout bees. If &#39;default&#39;, it is set to 0.6 * n_employed_bees * dimensionality. Defaults to &#39;default&#39;.</span>
+<span class="sd">        selection (str, optional)        : The selection strategy for onlooker bees. Must be one among &#39;RouletteWheel&#39; and &#39;Tournament&#39;. Defaults to &#39;RouletteWheel&#39;.</span>
+<span class="sd">        mutation (str)                   : The mutation strategy. Must be one among &#39;StandardABC&#39;, &#39;ModifiedABC&#39;, &#39;ABC/best/1&#39;, &#39;ABC/best/2&#39; and &#39;DirectedABC&#39;. Defaults to &#39;StandardABC&#39;.</span>
+<span class="sd">        initialization (str)             : The initialization strategy for the bee population. Must be one among &#39;random&#39; and &#39;cahotic&#39;. Defaults to &#39;random&#39;.</span>
+<span class="sd">        stagnation_tol (float)           : The tolerance for stagnation in fitness values to trigger early termination. Defaults to np.NINF (i.e. stagnation disabled).</span>
+<span class="sd">        sf (float)                       : The scaling factor for mutations. Defaults to 1.0.</span>
+<span class="sd">        initial_sf (float)               : The initial scaling factor. Defaults to 1.0.</span>
+<span class="sd">        self_adaptive_sf (bool)          : Whether to use a self-adaptive scaling factor. Defaults to False.</span>
+<span class="sd">        mr (float)                       : The mutation rate for &#39;ModifiedABC&#39; strategy. Defaults to 0.7.</span>
+<span class="sd">    </span>
+<span class="sd">    .. note::</span>
+<span class="sd">            To ensure compatibility with all the mutation types, the bee colony must have at least 5 employed bees and at least 5 onlokeer bees.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1">#------------------------------------------------------------------------------------------------------------------</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">colony_size</span><span class="p">,</span><span class="n">function</span><span class="p">,</span><span class="n">bounds</span><span class="p">,</span><span class="n">n_employed_bees</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">max_scouts</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the ABC</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            colony_size (int)               : The total number of bees in the colony.</span>
+<span class="sd">            function (callable)             : The objective function to optimize.</span>
+<span class="sd">            bounds (array-like)             : The bounds for each dimension of the search space, provided as a 2D array [(lower1, upper1), ..., (lowerD, upperD)].</span>
+<span class="sd">            n_employed_bees (int, optional) : The number of employed bees. Defaults to half the total number of bees.</span>
+<span class="sd">            max_scouts (int, optional)      : The maximum number of scout bees per iteration. Defaults to None (will be set to n_employed_bees).</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            TypeError  : If the function is not callable.</span>
+<span class="sd">            TypeError  : If the bounds are not a numpy array.</span>
+<span class="sd">            ValueError : If the bounds do not have shape `(D, 2)` or `(2, D)`.</span>
+<span class="sd">            ValueError : If any dimension has its lower bound greater than the upper bound.</span>
+<span class="sd">            TypeError  : If the colony size is not an integer.</span>
+<span class="sd">            ValueError : If the colony size is less than 10.</span>
+<span class="sd">            TypeError  : If the number of employed bees is not an integer.</span>
+<span class="sd">            ValueError : If the number of employed bees is less than 5 or it is s.t the number of onlookers is less than 5.</span>
+<span class="sd">            TypeError  : If the maximum number of scouts is not an integer.</span>
+<span class="sd">            ValueError : If the maximum number of scouts is less than 0 or greater than the number of employed bees.</span>
+<span class="sd">        </span>
+<span class="sd">        .. note::</span>
+<span class="sd">            Constraints about colony size, n_employed_bees and max_scouts ensure compatibility across all mutation types.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">callable</span><span class="p">(</span><span class="n">function</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;`function` must be callable.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">function</span> <span class="o">=</span> <span class="n">function</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">bounds</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;`bounds` must be a numpy array.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">((</span><span class="n">bounds</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">bounds</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`bounds` must have shape `(D, 2)` or `(2, D)`, but got </span><span class="si">{bounds.shape}</span><span class="s2">.&quot;</span><span class="p">)</span> 
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">bounds</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">bounds</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Each lower bound must be less than or equal to its upper bound.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bounds</span>              <span class="o">=</span> <span class="n">bounds</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dim</span>                 <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">colony_size</span><span class="p">,</span><span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;`colony_size` must be an integer.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">colony_size</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;`colony_size` must be at least 10 to ensure compatibility across all mutation types, but got </span><span class="si">{</span><span class="n">colony_size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">colony_size</span>         <span class="o">=</span> <span class="n">colony_size</span>
+        
+        <span class="k">if</span> <span class="n">n_employed_bees</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n_employed_bees</span><span class="p">,</span><span class="nb">int</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;`n_employed_bees` must be an integer.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">((</span><span class="n">n_employed_bees</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="p">)</span> <span class="ow">and</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">colony_size</span><span class="o">-</span><span class="n">n_employed_bees</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">5</span><span class="p">)):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;It must hold 5 &lt;= `n_employed_bees` &lt;= (`colony_size` - 5) to ensure compatibility across all mutation types&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">n_employed_bees</span>     <span class="o">=</span> <span class="n">n_employed_bees</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">n_employed_bees</span>     <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">colony_size</span> <span class="o">//</span> <span class="mi">2</span>
+            
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_onlooker_bees</span>     <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">colony_size</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_employed_bees</span>    
+        
+        <span class="k">if</span> <span class="n">max_scouts</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">max_scouts</span><span class="p">,</span><span class="nb">int</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;`max_scouts` must be an integer.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span> <span class="p">(</span><span class="n">max_scouts</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">max_scouts</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_employed_bees</span><span class="p">)</span> <span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;`max_scouts` must be beteen 0 and `n_employed_bees`, but got </span><span class="si">{</span><span class="n">max_scouts</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_employed_bees</span><span class="si">}</span><span class="s2">, respectively.&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_scouts</span> <span class="o">=</span> <span class="n">max_scouts</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_scouts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_employed_bees</span>
+      
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">employed_bees</span>       <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">onlooker_bees</span>       <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">colony_history</span>      <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">optimal_bee</span>         <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">optimal_bee_history</span> <span class="o">=</span> <span class="p">[]</span>
+            
+    <span class="c1">#------------------------------------------------------------------------------------------------------------------</span>
+    
+<div class="viewcode-block" id="ArtificialBeeColony.optimize">
+<a class="viewcode-back" href="../../abc.html#beeoptimal.abc.ArtificialBeeColony.optimize">[docs]</a>
+    <span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">max_iters</span>        <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
+                 <span class="n">limit</span>            <span class="o">=</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span>
+                 <span class="n">selection</span>        <span class="o">=</span> <span class="s1">&#39;RouletteWheel&#39;</span><span class="p">,</span>
+                 <span class="n">mutation</span>         <span class="o">=</span> <span class="s1">&#39;StandardABC&#39;</span><span class="p">,</span>
+                 <span class="n">initialization</span>   <span class="o">=</span> <span class="s1">&#39;random&#39;</span><span class="p">,</span>
+                 <span class="n">tournament_size</span>  <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">stagnation_tol</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">NINF</span><span class="p">,</span>
+                 <span class="n">sf</span>               <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+                 <span class="n">self_adaptive_sf</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                 <span class="n">mr</span>               <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+                 <span class="n">verbose</span>          <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                 <span class="n">random_seed</span>      <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Runs the optimization process.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            max_iters (int, optional)        : The maximum number of iterations. Defaults to 1000.</span>
+<span class="sd">            limit (int or str, optional)     : The trial limit for scout bees. If &#39;default&#39;, it is set to 0.6 * n_employed_bees * dimensionality. Defaults to &#39;default&#39;.</span>
+<span class="sd">            selection (str, optional)        : The selection strategy for onlooker bees. Must be one among &#39;RouletteWheel&#39; and &#39;Tournament&#39;. Defaults to &#39;RouletteWheel&#39;.</span>
+<span class="sd">            mutation (str, optional)         : The mutation strategy. Must be one among &#39;StandardABC&#39;, &#39;ModifiedABC&#39;, &#39;ABC/best/1&#39; and &#39;ABC/best/2&#39;. Defaults to &#39;StandardABC&#39;.</span>
+<span class="sd">            initialization (str, optional)   : The initialization strategy for the bee population. Must be one among &#39;random&#39; and &#39;cahotic&#39;. Defaults to &#39;random&#39;.</span>
+<span class="sd">            tournament_size (int, optional)  : The size of the tournament for the &#39;Tournament&#39; selection strategy. Defaults to None.</span>
+<span class="sd">            stagnation_tol (float, optional) : The tolerance for stagnation in fitness values to trigger early termination. Defaults to np.NINF (i.e. stagnation disabled).</span>
+<span class="sd">            sf (float, optional)             : The scaling factor for mutations. Defaults to 1.0.</span>
+<span class="sd">            self_adaptive_sf (bool, optional): Whether to use a self-adaptive scaling factor. Defaults to False.</span>
+<span class="sd">            mr (float, optional)             : The mutation rate for &#39;ModifiedABC&#39; strategy. Defaults to 1.0.</span>
+<span class="sd">            verbose (bool, optional)         : Whether to display optimization progress. Defaults to False.</span>
+<span class="sd">            random_seed (int, optional)      : The seed for random number generation. Defaults to None.</span>
+<span class="sd">        </span>
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If `max_iters` is not a positive integer.</span>
+<span class="sd">            ValueError: If `mutation` is not one of [&#39;StandardABC&#39;, &#39;ModifiedABC&#39;, &#39;ABC/best/1&#39;, &#39;ABC/best/2&#39;, &#39;DirectedABC&#39;].</span>
+<span class="sd">            ValueError: If `initialization` is not one of [&#39;random&#39;, &#39;cahotic&#39;].</span>
+<span class="sd">            ValueError: If `selection` is not one of [&#39;RouletteWheel&#39;, &#39;Tournament&#39;].</span>
+<span class="sd">            ValueError: If `mr` is not a float value between 0.0 and 1.0.</span>
+<span class="sd">            ValueError: If `selection` is &#39;Tournament&#39; and `tournament_size` is not an integer between 1 and `n_employed_bees`.</span>
+<span class="sd">            ValueError: If `sf` is not a float value greater than 0.</span>
+<span class="sd">            ValueError: If `limit` is less than or equal to 0.</span>
+<span class="sd">            TypeError : If `self_adaptive_sf` is not a boolean.</span>
+<span class="sd">            TypeError : If `stagnation_tol` is not a float.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+    
+        <span class="c1"># Sanity checks and setting optimization parameters</span>
+        <span class="c1">#.....................................................................................................................................</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">max_iters</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="n">max_iters</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`max_iters` must be a positive integer.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_iters</span>    <span class="o">=</span> <span class="n">max_iters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actual_iters</span> <span class="o">=</span> <span class="mi">0</span>
+        
+        <span class="n">valid_mutations_</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;StandardABC&#39;</span><span class="p">,</span> <span class="s1">&#39;ModifiedABC&#39;</span><span class="p">,</span> <span class="s1">&#39;ABC/best/1&#39;</span><span class="p">,</span> <span class="s1">&#39;ABC/best/2&#39;</span><span class="p">,</span> <span class="s1">&#39;DirectedABC&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">mutation</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">valid_mutations_</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">mutation</span><span class="si">}</span><span class="s2"> is an invalid mutation strategy. Choose one among </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">valid_mutations_</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mutation</span> <span class="o">=</span> <span class="n">mutation</span>
+        
+        <span class="n">valid_initializations_</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;random&#39;</span><span class="p">,</span><span class="s1">&#39;cahotic&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">initialization</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">valid_initializations_</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">initialization</span><span class="si">}</span><span class="s2"> is an invalid intialization. Choose one among </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">valid_initializations_</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initialization</span> <span class="o">=</span> <span class="n">initialization</span>
+        
+        <span class="n">valid_selections_</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;RouletteWheel&#39;</span><span class="p">,</span><span class="s1">&#39;Tournament&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">selection</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">valid_selections_</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">selection</span><span class="si">}</span><span class="s2"> is an invalid selection. Choose one among </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">valid_selections_</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">selection</span> <span class="o">=</span> <span class="n">selection</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">mr</span><span class="p">,</span><span class="nb">float</span><span class="p">)</span> <span class="ow">and</span>  <span class="p">(</span><span class="n">mr</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">mr</span><span class="o">&lt;=</span> <span class="mf">1.0</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`mr` must be a float value between 0.0 and 1.0&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mr</span> <span class="o">=</span> <span class="n">mr</span>
+        
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">selection</span> <span class="o">==</span> <span class="s1">&#39;Tournament&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">tournament_size</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`Please specify a tournament_size`.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">tournament_size</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">tournament_size</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_employed_bees</span><span class="p">)):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`tournament_size` must be an integer between 1 and `n_employed_bees` when using &#39;Tournament&#39; selection.&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tournament_size</span>  <span class="o">=</span> <span class="n">tournament_size</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">sf</span><span class="p">,(</span><span class="nb">int</span><span class="p">,</span><span class="nb">float</span><span class="p">))</span> <span class="ow">and</span> <span class="p">(</span><span class="n">sf</span><span class="o">&gt;</span><span class="mf">0.0</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;`sf` must be greater than 0, but got </span><span class="si">{</span><span class="n">sf</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sf</span>               <span class="o">=</span> <span class="n">sf</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">initial_sf</span>       <span class="o">=</span> <span class="n">sf</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">self_adaptive_sf</span><span class="p">,</span><span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;`self_adaptive_sf` must be bool&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">self_adaptive_sf</span> <span class="o">=</span> <span class="n">self_adaptive_sf</span>         
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">limit</span> <span class="o">=</span> <span class="n">limit</span> <span class="k">if</span> <span class="p">(</span><span class="n">limit</span> <span class="o">!=</span> <span class="s1">&#39;default&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="p">(</span><span class="mf">0.6</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_employed_bees</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span>  
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">limit</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`limit` must be greater than 0, but got </span><span class="si">{self.limit}</span><span class="s2">. If this error occurs when `limit`=&#39;default&#39;, change your configuration.&quot;</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">directions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">n_employed_bees</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">),</span><span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mutation</span><span class="o">==</span><span class="s1">&#39;DirectedABC&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">directions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">n_employed_bees</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">))</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">stagnation_tol</span><span class="p">,</span><span class="nb">float</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;`stagnation_tol` must be float&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stagnation_tol</span>   <span class="o">=</span> <span class="n">stagnation_tol</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">verbose</span><span class="p">,</span><span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;`verbose` must be bool&quot;</span><span class="p">)</span>
+        
+        <span class="c1">#.....................................................................................................................................          </span>
+        
+        <span class="c1"># Initialization</span>
+        <span class="k">if</span> <span class="n">random_seed</span><span class="p">:</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_seed</span><span class="p">)</span>
+            
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">initialization</span> <span class="o">==</span> <span class="s1">&#39;random&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">employed_bees</span> <span class="o">=</span> <span class="p">[</span><span class="n">Bee</span><span class="p">(</span><span class="n">position</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">),</span>
+                                      <span class="n">function</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">,</span>
+                                      <span class="n">bounds</span>   <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_employed_bees</span><span class="p">)</span> <span class="p">]</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">initialization</span> <span class="o">==</span> <span class="s1">&#39;cahotic&#39;</span><span class="p">:</span>
+            <span class="c1"># Define cahotic map and iterate over it</span>
+            <span class="n">cahotic_map</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_employed_bees</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">300</span><span class="p">):</span>
+                <span class="n">cahotic_map</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">cahotic_map</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>    
+                
+            <span class="n">cahotic_pop</span>  <span class="o">=</span> <span class="p">[</span><span class="n">Bee</span><span class="p">(</span><span class="n">position</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">cahotic_map</span><span class="p">[</span><span class="n">i</span><span class="p">,:],</span>
+                                <span class="n">function</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">,</span>
+                                <span class="n">bounds</span>   <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_employed_bees</span><span class="p">)</span> <span class="p">]</span>
+            <span class="n">opposite_pop</span> <span class="o">=</span> <span class="p">[</span><span class="n">Bee</span><span class="p">(</span><span class="n">position</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">cahotic_pop</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">position</span><span class="p">,</span>
+                                <span class="n">function</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">,</span>
+                                <span class="n">bounds</span>   <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_employed_bees</span><span class="p">)</span> <span class="p">]</span>
+            
+            <span class="bp">self</span><span class="o">.</span><span class="n">employed_bees</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">cahotic_pop</span><span class="o">+</span><span class="n">opposite_pop</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">bee</span><span class="p">:</span> <span class="n">bee</span><span class="o">.</span><span class="n">fitness</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[:</span><span class="bp">self</span><span class="o">.</span><span class="n">n_employed_bees</span><span class="p">]</span>
+            
+        <span class="bp">self</span><span class="o">.</span><span class="n">colony_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">employed_bees</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">optimal_bee</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">employed_bees</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">bee</span><span class="p">:</span> <span class="n">bee</span><span class="o">.</span><span class="n">fitness</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">optimal_bee_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">optimal_bee</span><span class="p">))</span>
+        
+        <span class="c1">#.....................................................................................................................................</span>
+        
+        <span class="c1"># Optimization Loop</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">trange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_iters</span><span class="p">,</span><span class="n">desc</span><span class="o">=</span><span class="s1">&#39;Running Optimization&#39;</span><span class="p">,</span><span class="n">disable</span><span class="o">=</span> <span class="ow">not</span> <span class="n">verbose</span><span class="p">,</span><span class="n">bar_format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{l_bar}{bar}</span><span class="s1">|[</span><span class="si">{elapsed}</span><span class="s1">&lt;</span><span class="si">{remaining}</span><span class="s1">]&#39;</span><span class="p">):</span>
+            
+            <span class="bp">self</span><span class="o">.</span><span class="n">actual_iters</span> <span class="o">+=</span> <span class="mi">1</span>
+            
+            <span class="bp">self</span><span class="o">.</span><span class="n">employees_phase_</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">onlookers_phase_</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scouts_phase_</span><span class="p">()</span>
+            
+            <span class="bp">self</span><span class="o">.</span><span class="n">colony_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">employed_bees</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">optimal_bee</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">employed_bees</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">bee</span><span class="p">:</span> <span class="n">bee</span><span class="o">.</span><span class="n">fitness</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">optimal_bee_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">optimal_bee</span><span class="p">))</span>
+            
+            <span class="c1"># Stagnation</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">([</span><span class="n">bee</span><span class="o">.</span><span class="n">fitness</span> <span class="k">for</span> <span class="n">bee</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">employed_bees</span><span class="p">])</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">stagnation_tol</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                    <span class="n">tqdm</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Early termination: Optimization stagnated at iteration </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">actual_iters</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">max_iters</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">break</span></div>
+
+        <span class="c1">#.....................................................................................................................................</span>
+    
+    <span class="c1">#------------------------------------------------------------------------------------------------------------------</span>
+    
+<div class="viewcode-block" id="ArtificialBeeColony.employees_phase_">
+<a class="viewcode-back" href="../../abc.html#beeoptimal.abc.ArtificialBeeColony.employees_phase_">[docs]</a>
+    <span class="k">def</span> <span class="nf">employees_phase_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Performs the employed bees phase, where each employed bee explores the search space by generating candidate solutions.</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            Updates the employed bees with better candidate solutions based on the greedy selection.</span>
+<span class="sd">            Adjusts the scaling factor if self-adaptive scaling is enabled.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">succesful_mutations</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">bee_idx</span><span class="p">,</span> <span class="n">bee</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">employed_bees</span><span class="p">):</span>
+            <span class="n">candidate_bee</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_candidate_neighbor_</span><span class="p">(</span><span class="n">bee</span><span class="o">=</span><span class="n">bee</span><span class="p">,</span><span class="n">bee_idx</span><span class="o">=</span><span class="n">bee_idx</span><span class="p">,</span><span class="n">population</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">employed_bees</span><span class="p">)</span>
+            <span class="c1"># Greedy Selection</span>
+            <span class="k">if</span> <span class="n">candidate_bee</span><span class="o">.</span><span class="n">fitness</span> <span class="o">&gt;=</span> <span class="n">bee</span><span class="o">.</span><span class="n">fitness</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">employed_bees</span><span class="p">[</span><span class="n">bee_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">candidate_bee</span>
+                <span class="n">succesful_mutations</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mutation</span> <span class="o">==</span> <span class="s1">&#39;DirectedABC&#39;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">bee</span><span class="o">.</span><span class="n">position</span> <span class="o">!=</span> <span class="n">candidate_bee</span><span class="o">.</span><span class="n">position</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span> <span class="c1"># this is needed when candidate_bee.fitness == bee.fitness</span>
+                        <span class="c1"># Retrieve the index mutated and update the direction</span>
+                        <span class="n">j</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">bee</span><span class="o">.</span><span class="n">position</span> <span class="o">!=</span> <span class="n">candidate_bee</span><span class="o">.</span><span class="n">position</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">directions</span><span class="p">[</span><span class="n">bee_idx</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">candidate_bee</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">bee</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">bee</span><span class="o">.</span><span class="n">trial</span> <span class="o">+=</span> <span class="mi">1</span>
+                
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mutation</span> <span class="o">==</span> <span class="s1">&#39;DirectedABC&#39;</span><span class="p">:</span>
+                    <span class="c1"># Retrieve the index mutated and update the direction</span>
+                    <span class="n">j</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">bee</span><span class="o">.</span><span class="n">position</span> <span class="o">!=</span> <span class="n">candidate_bee</span><span class="o">.</span><span class="n">position</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">directions</span><span class="p">[</span><span class="n">bee_idx</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+                
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">self_adaptive_sf</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update_SF_</span><span class="p">(</span><span class="n">succesful_mutations_ratio</span><span class="o">=</span> <span class="p">(</span><span class="n">succesful_mutations</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_employed_bees</span><span class="p">)</span> <span class="p">)</span></div>
+
+            
+    <span class="c1">#------------------------------------------------------------------------------------------------------------------        </span>
+        
+<div class="viewcode-block" id="ArtificialBeeColony.waggle_dance_">
+<a class="viewcode-back" href="../../abc.html#beeoptimal.abc.ArtificialBeeColony.waggle_dance_">[docs]</a>
+    <span class="k">def</span> <span class="nf">waggle_dance_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Implements the waggle dance, which determines the probability of selecting employed bees for the onlooker phase.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            array: Indices of the selected employed bees (based on the chosen selection strategy).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">fitness_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">bee</span><span class="o">.</span><span class="n">fitness</span> <span class="k">for</span> <span class="n">bee</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">employed_bees</span><span class="p">])</span>
+        
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">selection</span> <span class="o">==</span> <span class="s1">&#39;RouletteWheel&#39;</span><span class="p">:</span>
+            <span class="n">selection_probabilities</span>  <span class="o">=</span> <span class="n">fitness_values</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">fitness_values</span><span class="p">)</span>
+            <span class="n">dance_winners</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_employed_bees</span><span class="p">),</span><span class="n">size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_onlooker_bees</span><span class="p">,</span><span class="n">p</span><span class="o">=</span><span class="n">selection_probabilities</span><span class="p">,</span><span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">dance_winners</span>
+        
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">selection</span> <span class="o">==</span> <span class="s1">&#39;Tournament&#39;</span><span class="p">:</span>
+            <span class="n">dance_winners</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_onlooker_bees</span><span class="p">):</span>
+                <span class="n">tournament_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_employed_bees</span><span class="p">),</span><span class="n">size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tournament_size</span><span class="p">,</span><span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                <span class="n">tournament_fitness</span> <span class="o">=</span> <span class="n">fitness_values</span><span class="p">[</span><span class="n">tournament_indices</span><span class="p">]</span>
+                <span class="n">winner_idx</span> <span class="o">=</span> <span class="n">tournament_indices</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">tournament_fitness</span><span class="p">)]</span>
+                <span class="n">dance_winners</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">winner_idx</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">dance_winners</span></div>
+
+    
+    <span class="c1">#------------------------------------------------------------------------------------------------------------------    </span>
+    
+<div class="viewcode-block" id="ArtificialBeeColony.onlookers_phase_">
+<a class="viewcode-back" href="../../abc.html#beeoptimal.abc.ArtificialBeeColony.onlookers_phase_">[docs]</a>
+    <span class="k">def</span> <span class="nf">onlookers_phase_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Performs the onlooker bees phase, where onlookers exploit the information shared by employed bees to explore the search space.</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            Updates employed bees with better solutions discovered by onlookers.</span>
+<span class="sd">            Adjusts the scaling factor if self-adaptive scaling is enabled.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">dance_winners</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">waggle_dance_</span><span class="p">()</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">onlooker_bees</span> <span class="o">=</span> <span class="p">[</span><span class="n">Bee</span><span class="p">(</span><span class="n">position</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">employed_bees</span><span class="p">[</span><span class="n">winner_idx</span><span class="p">]</span><span class="o">.</span><span class="n">position</span><span class="p">,</span>
+                                  <span class="n">function</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">,</span>
+                                  <span class="n">bounds</span>   <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">)</span> <span class="k">for</span> <span class="n">winner_idx</span> <span class="ow">in</span> <span class="n">dance_winners</span>
+                              <span class="p">]</span>
+        
+        <span class="n">succesful_mutations</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">bee_idx</span><span class="p">,</span> <span class="n">winner_idx</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dance_winners</span><span class="p">):</span>
+            <span class="n">bee</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">onlooker_bees</span><span class="p">[</span><span class="n">bee_idx</span><span class="p">]</span>
+            <span class="c1"># Get Candidate Neighbor</span>
+            <span class="n">candidate_bee</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_candidate_neighbor_</span><span class="p">(</span><span class="n">bee</span><span class="o">=</span><span class="n">bee</span><span class="p">,</span><span class="n">bee_idx</span><span class="o">=</span><span class="n">bee_idx</span><span class="p">,</span><span class="n">population</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">onlooker_bees</span><span class="p">)</span>
+            <span class="c1"># Greedy Selection</span>
+            <span class="k">if</span> <span class="n">candidate_bee</span><span class="o">.</span><span class="n">fitness</span> <span class="o">&gt;=</span> <span class="n">bee</span><span class="o">.</span><span class="n">fitness</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">employed_bees</span><span class="p">[</span><span class="n">winner_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">candidate_bee</span>
+                <span class="n">succesful_mutations</span> <span class="o">+=</span> <span class="mi">1</span>
+                
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mutation</span> <span class="o">==</span> <span class="s1">&#39;DirectedABC&#39;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">bee</span><span class="o">.</span><span class="n">position</span> <span class="o">!=</span> <span class="n">candidate_bee</span><span class="o">.</span><span class="n">position</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span> <span class="c1"># this is needed when candidate_bee.fitness == bee.fitness</span>
+                        <span class="c1"># Retrieve the index mutated and update the direction</span>
+                        <span class="n">j</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">bee</span><span class="o">.</span><span class="n">position</span> <span class="o">!=</span> <span class="n">candidate_bee</span><span class="o">.</span><span class="n">position</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">directions</span><span class="p">[</span><span class="n">winner_idx</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">candidate_bee</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">bee</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                
+            <span class="k">else</span><span class="p">:</span>
+                
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mutation</span> <span class="o">==</span> <span class="s1">&#39;DirectedABC&#39;</span><span class="p">:</span>
+                    <span class="c1"># Retrieve the index mutated and update the direction</span>
+                    <span class="n">j</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">bee</span><span class="o">.</span><span class="n">position</span> <span class="o">!=</span> <span class="n">candidate_bee</span><span class="o">.</span><span class="n">position</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">directions</span><span class="p">[</span><span class="n">winner_idx</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+                
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">self_adaptive_sf</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update_SF_</span><span class="p">(</span><span class="n">succesful_mutations_ratio</span><span class="o">=</span> <span class="p">(</span><span class="n">succesful_mutations</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_onlooker_bees</span><span class="p">)</span> <span class="p">)</span></div>
+
+            
+    <span class="c1">#------------------------------------------------------------------------------------------------------------------</span>
+    
+<div class="viewcode-block" id="ArtificialBeeColony.scouts_phase_">
+<a class="viewcode-back" href="../../abc.html#beeoptimal.abc.ArtificialBeeColony.scouts_phase_">[docs]</a>
+    <span class="k">def</span> <span class="nf">scouts_phase_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Performs the scout bees phase, where employed bees that exceed the trial limit are forced to explore a new solution</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            Depending on the initialization strategy, scouts are reinitialized either randomly or using a chaotic map.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">n_scouts</span> <span class="o">=</span> <span class="mi">0</span>
+        
+        <span class="k">for</span> <span class="n">bee_idx</span><span class="p">,</span> <span class="n">bee</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">employed_bees</span><span class="p">):</span>
+            
+            <span class="k">if</span> <span class="n">n_scouts</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_scouts</span><span class="p">:</span>
+                <span class="k">break</span>
+    
+            <span class="k">if</span> <span class="n">bee</span><span class="o">.</span><span class="n">trial</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">limit</span><span class="p">:</span>
+                <span class="n">n_scouts</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">initialization</span> <span class="o">==</span> <span class="s1">&#39;random&#39;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">employed_bees</span><span class="p">[</span><span class="n">bee_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">Bee</span><span class="p">(</span><span class="n">position</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">),</span>
+                                                      <span class="n">function</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">,</span>
+                                                      <span class="n">bounds</span>   <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">initialization</span> <span class="o">==</span> <span class="s1">&#39;cahotic&#39;</span><span class="p">:</span>
+                    <span class="n">cahotic_map</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_employed_bees</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">300</span><span class="p">):</span>
+                        <span class="n">cahotic_map</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">cahotic_map</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>    
+                        
+                    <span class="n">cahotic_pop</span>  <span class="o">=</span> <span class="p">[</span><span class="n">Bee</span><span class="p">(</span><span class="n">position</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">cahotic_map</span><span class="p">[</span><span class="n">i</span><span class="p">,:],</span>
+                                        <span class="n">function</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">,</span>
+                                        <span class="n">bounds</span>   <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_employed_bees</span><span class="p">)</span> <span class="p">]</span>
+                    <span class="n">opposite_pop</span> <span class="o">=</span> <span class="p">[</span><span class="n">Bee</span><span class="p">(</span><span class="n">position</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">cahotic_pop</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">position</span><span class="p">,</span>
+                                        <span class="n">function</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">,</span>
+                                        <span class="n">bounds</span>   <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_employed_bees</span><span class="p">)</span> <span class="p">]</span>
+            
+                    <span class="bp">self</span><span class="o">.</span><span class="n">employed_bees</span><span class="p">[</span><span class="n">bee_idx</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">cahotic_pop</span><span class="o">+</span><span class="n">opposite_pop</span><span class="p">,</span>
+                                                         <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">bee</span><span class="p">:</span> <span class="n">bee</span><span class="o">.</span><span class="n">fitness</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+
+    
+    <span class="c1">#------------------------------------------------------------------------------------------------------------------            </span>
+    
+<div class="viewcode-block" id="ArtificialBeeColony.get_candidate_neighbor_">
+<a class="viewcode-back" href="../../abc.html#beeoptimal.abc.ArtificialBeeColony.get_candidate_neighbor_">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_candidate_neighbor_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">bee</span><span class="p">,</span><span class="n">bee_idx</span><span class="p">,</span><span class="n">population</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates a candidate neighbor solution for a given bee based on the chosen mutation strategy.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            bee (Bee)         : The bee for which a candidate neighbor is generated.</span>
+<span class="sd">            bee_idx (int)     : The index of the bee in the population.</span>
+<span class="sd">            population (list) : The population of bees from which donors are selected (i.e., employed or onlooker bees).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Bee: A new candidate bee solution.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mutation</span> <span class="o">==</span> <span class="s1">&#39;StandardABC&#39;</span><span class="p">:</span>
+            <span class="n">phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">sf</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">sf</span><span class="p">)</span>
+            <span class="n">donor_bee</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_donor_bees_</span><span class="p">(</span><span class="n">n_donors</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">bee_idx</span><span class="o">=</span><span class="n">bee_idx</span><span class="p">,</span><span class="n">population</span><span class="o">=</span><span class="n">population</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">candidate_bee</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">bee</span><span class="p">)</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span>
+            <span class="n">candidate_bee</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">bee</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">phi</span><span class="o">*</span><span class="p">(</span><span class="n">bee</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">donor_bee</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+            <span class="n">candidate_bee</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">candidate_bee</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+            
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mutation</span> <span class="o">==</span> <span class="s1">&#39;ModifiedABC&#39;</span><span class="p">:</span>
+            <span class="n">donor_bee</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_donor_bees_</span><span class="p">(</span><span class="n">n_donors</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">bee_idx</span><span class="o">=</span><span class="n">bee_idx</span><span class="p">,</span><span class="n">population</span><span class="o">=</span><span class="n">population</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">candidate_bee</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">bee</span><span class="p">)</span>
+            <span class="n">phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">sf</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">sf</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span>
+            <span class="n">mutation_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mr</span>
+            <span class="n">candidate_bee</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">mutation_mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">bee</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">mutation_mask</span><span class="p">]</span> <span class="o">+</span> <span class="n">phi</span><span class="p">[</span><span class="n">mutation_mask</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">bee</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">mutation_mask</span><span class="p">]</span> <span class="o">-</span> <span class="n">donor_bee</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">mutation_mask</span><span class="p">])</span>
+            <span class="n">candidate_bee</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">candidate_bee</span><span class="o">.</span><span class="n">position</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+            
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mutation</span> <span class="o">==</span> <span class="s1">&#39;ABC/best/1&#39;</span><span class="p">:</span>
+            <span class="n">phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">sf</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">sf</span><span class="p">)</span>
+            <span class="n">donor1</span><span class="p">,</span><span class="n">donor2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_donor_bees_</span><span class="p">(</span><span class="n">n_donors</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">bee_idx</span><span class="o">=</span><span class="n">bee_idx</span><span class="p">,</span><span class="n">population</span><span class="o">=</span><span class="n">population</span><span class="p">)</span>
+            <span class="n">candidate_bee</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">bee</span><span class="p">)</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span>
+            <span class="n">candidate_bee</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimal_bee</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">phi</span><span class="o">*</span><span class="p">(</span><span class="n">donor1</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">donor2</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+            <span class="n">candidate_bee</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">candidate_bee</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+            
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mutation</span> <span class="o">==</span> <span class="s1">&#39;ABC/best/2&#39;</span><span class="p">:</span>
+            <span class="n">phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">sf</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">sf</span><span class="p">)</span>
+            <span class="n">donor1</span><span class="p">,</span><span class="n">donor2</span><span class="p">,</span><span class="n">donor3</span><span class="p">,</span><span class="n">donor4</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_donor_bees_</span><span class="p">(</span><span class="n">n_donors</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">bee_idx</span><span class="o">=</span><span class="n">bee_idx</span><span class="p">,</span><span class="n">population</span><span class="o">=</span><span class="n">population</span><span class="p">)</span>
+            <span class="n">candidate_bee</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">bee</span><span class="p">)</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span>
+            <span class="n">candidate_bee</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimal_bee</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">phi</span><span class="o">*</span><span class="p">(</span><span class="n">donor1</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">donor2</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> \
+                                        <span class="o">+</span> <span class="n">phi</span><span class="o">*</span><span class="p">(</span><span class="n">donor3</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">donor4</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+            <span class="n">candidate_bee</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">candidate_bee</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+        
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mutation</span> <span class="o">==</span> <span class="s1">&#39;DirectedABC&#39;</span><span class="p">:</span>
+            <span class="n">donor_bee</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_donor_bees_</span><span class="p">(</span><span class="n">n_donors</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">bee_idx</span><span class="o">=</span><span class="n">bee_idx</span><span class="p">,</span><span class="n">population</span><span class="o">=</span><span class="n">population</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">candidate_bee</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">bee</span><span class="p">)</span>
+            <span class="n">directions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">directions</span><span class="p">[</span><span class="n">bee_idx</span><span class="p">,:]</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">directions</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>  <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">sf</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">sf</span><span class="p">)</span> <span class="o">+</span> \
+                <span class="p">(</span><span class="n">directions</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>  <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">sf</span><span class="p">)</span>        <span class="o">+</span> \
+                <span class="p">(</span><span class="n">directions</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">sf</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+                
+            <span class="n">candidate_bee</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">bee</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">bee</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">donor_bee</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+            <span class="n">candidate_bee</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">candidate_bee</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">candidate_bee</span></div>
+
+    
+    <span class="c1">#------------------------------------------------------------------------------------------------------------------</span>
+    
+<div class="viewcode-block" id="ArtificialBeeColony.get_donor_bees_">
+<a class="viewcode-back" href="../../abc.html#beeoptimal.abc.ArtificialBeeColony.get_donor_bees_">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_donor_bees_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n_donors</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">bee_idx</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">population</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Selects donor bees from the population (for a given bee)</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            n_donors (int, optional)         : The number of donor bees to return. Defaults to 1.</span>
+<span class="sd">            bee_idx (int, optional)          : The index of the bee for which donors are selected. Defaults to None.</span>
+<span class="sd">            population (list[Bee], optional) : The population of bees from which donors are selected. Defaults to None.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: A list of donor bees (as Bee instances).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">available_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">population</span><span class="p">)),</span> <span class="n">bee_idx</span><span class="p">)</span>
+        <span class="n">k_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">available_indices</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="n">n_donors</span><span class="p">,</span><span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">population</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">k_list</span><span class="p">]</span></div>
+
+    
+    <span class="c1">#------------------------------------------------------------------------------------------------------------------</span>
+    
+<div class="viewcode-block" id="ArtificialBeeColony.update_SF_">
+<a class="viewcode-back" href="../../abc.html#beeoptimal.abc.ArtificialBeeColony.update_SF_">[docs]</a>
+    <span class="k">def</span> <span class="nf">update_SF_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">succesful_mutations_ratio</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Updates the scaling factor (SF) adaptively based on the ratio of successful mutations</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            successful_mutations_ratio(float): The ratio of successful mutations used to update the scaling factor.</span>
+<span class="sd">            </span>
+<span class="sd">        .. note::</span>
+<span class="sd">            Self-adaptiveness is based on the &quot;one-fifth&quot; rule (Rechenberg 1971)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="k">if</span> <span class="n">succesful_mutations_ratio</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">/</span><span class="mi">5</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sf</span> <span class="o">/</span> <span class="mf">0.85</span>
+        <span class="k">elif</span> <span class="n">succesful_mutations_ratio</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">/</span><span class="mi">5</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sf</span> <span class="o">*</span> <span class="mf">0.85</span></div>
+
+    
+    <span class="c1">#------------------------------------------------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="ArtificialBeeColony.reset">
+<a class="viewcode-back" href="../../abc.html#beeoptimal.abc.ArtificialBeeColony.reset">[docs]</a>
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Resets the ABC object to its initial state.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">employed_bees</span>       <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">onlooker_bees</span>       <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">colony_history</span>      <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">optimal_bee</span>         <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">optimal_bee_history</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actual_iters</span>        <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sf</span>                  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_sf</span></div>
+</div>
+
+    <span class="c1">#------------------------------------------------------------------------------------------------------------------</span>
+        
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Giulio Fantuzzi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

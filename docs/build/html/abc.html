@@ -1,0 +1,586 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ArtificialBeeColony &mdash; BeeOptimal documentation 🐝🍯 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/style.css?v=d19441ff" />
+      <link rel="stylesheet" type="text/css" href="_static/dark_mode_css/general.css?v=c0a7eb24" />
+      <link rel="stylesheet" type="text/css" href="_static/dark_mode_css/dark.css?v=70edf1c7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=01f34227"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="_static/dark_mode_js/default_light.js?v=c2e647ce"></script>
+      <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Bee" href="bee.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            BeeOptimal documentation 🐝🍯
+              <img src="_static/logo_BeeOptimal.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ArtificialBeeColony</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#beeoptimal.abc.ArtificialBeeColony"><code class="docutils literal notranslate"><span class="pre">ArtificialBeeColony</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#beeoptimal.abc.ArtificialBeeColony.colony_size"><code class="docutils literal notranslate"><span class="pre">ArtificialBeeColony.colony_size</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beeoptimal.abc.ArtificialBeeColony.n_employed_bees"><code class="docutils literal notranslate"><span class="pre">ArtificialBeeColony.n_employed_bees</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beeoptimal.abc.ArtificialBeeColony.n_onlooker_bees"><code class="docutils literal notranslate"><span class="pre">ArtificialBeeColony.n_onlooker_bees</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beeoptimal.abc.ArtificialBeeColony.max_scouts"><code class="docutils literal notranslate"><span class="pre">ArtificialBeeColony.max_scouts</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beeoptimal.abc.ArtificialBeeColony.dim"><code class="docutils literal notranslate"><span class="pre">ArtificialBeeColony.dim</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beeoptimal.abc.ArtificialBeeColony.function"><code class="docutils literal notranslate"><span class="pre">ArtificialBeeColony.function</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beeoptimal.abc.ArtificialBeeColony.bounds"><code class="docutils literal notranslate"><span class="pre">ArtificialBeeColony.bounds</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beeoptimal.abc.ArtificialBeeColony.employed_bees"><code class="docutils literal notranslate"><span class="pre">ArtificialBeeColony.employed_bees</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beeoptimal.abc.ArtificialBeeColony.onlooker_bees"><code class="docutils literal notranslate"><span class="pre">ArtificialBeeColony.onlooker_bees</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beeoptimal.abc.ArtificialBeeColony.colony_history"><code class="docutils literal notranslate"><span class="pre">ArtificialBeeColony.colony_history</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beeoptimal.abc.ArtificialBeeColony.optimal_bee"><code class="docutils literal notranslate"><span class="pre">ArtificialBeeColony.optimal_bee</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beeoptimal.abc.ArtificialBeeColony.optimal_bee_history"><code class="docutils literal notranslate"><span class="pre">ArtificialBeeColony.optimal_bee_history</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beeoptimal.abc.ArtificialBeeColony.max_iters"><code class="docutils literal notranslate"><span class="pre">ArtificialBeeColony.max_iters</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beeoptimal.abc.ArtificialBeeColony.actual_iters"><code class="docutils literal notranslate"><span class="pre">ArtificialBeeColony.actual_iters</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beeoptimal.abc.ArtificialBeeColony.limit"><code class="docutils literal notranslate"><span class="pre">ArtificialBeeColony.limit</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beeoptimal.abc.ArtificialBeeColony.selection"><code class="docutils literal notranslate"><span class="pre">ArtificialBeeColony.selection</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beeoptimal.abc.ArtificialBeeColony.mutation"><code class="docutils literal notranslate"><span class="pre">ArtificialBeeColony.mutation</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beeoptimal.abc.ArtificialBeeColony.initialization"><code class="docutils literal notranslate"><span class="pre">ArtificialBeeColony.initialization</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beeoptimal.abc.ArtificialBeeColony.stagnation_tol"><code class="docutils literal notranslate"><span class="pre">ArtificialBeeColony.stagnation_tol</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beeoptimal.abc.ArtificialBeeColony.sf"><code class="docutils literal notranslate"><span class="pre">ArtificialBeeColony.sf</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beeoptimal.abc.ArtificialBeeColony.initial_sf"><code class="docutils literal notranslate"><span class="pre">ArtificialBeeColony.initial_sf</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beeoptimal.abc.ArtificialBeeColony.self_adaptive_sf"><code class="docutils literal notranslate"><span class="pre">ArtificialBeeColony.self_adaptive_sf</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beeoptimal.abc.ArtificialBeeColony.mr"><code class="docutils literal notranslate"><span class="pre">ArtificialBeeColony.mr</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beeoptimal.abc.ArtificialBeeColony.employees_phase_"><code class="docutils literal notranslate"><span class="pre">ArtificialBeeColony.employees_phase_()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beeoptimal.abc.ArtificialBeeColony.get_candidate_neighbor_"><code class="docutils literal notranslate"><span class="pre">ArtificialBeeColony.get_candidate_neighbor_()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beeoptimal.abc.ArtificialBeeColony.get_donor_bees_"><code class="docutils literal notranslate"><span class="pre">ArtificialBeeColony.get_donor_bees_()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beeoptimal.abc.ArtificialBeeColony.onlookers_phase_"><code class="docutils literal notranslate"><span class="pre">ArtificialBeeColony.onlookers_phase_()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beeoptimal.abc.ArtificialBeeColony.optimize"><code class="docutils literal notranslate"><span class="pre">ArtificialBeeColony.optimize()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beeoptimal.abc.ArtificialBeeColony.reset"><code class="docutils literal notranslate"><span class="pre">ArtificialBeeColony.reset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beeoptimal.abc.ArtificialBeeColony.scouts_phase_"><code class="docutils literal notranslate"><span class="pre">ArtificialBeeColony.scouts_phase_()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beeoptimal.abc.ArtificialBeeColony.update_SF_"><code class="docutils literal notranslate"><span class="pre">ArtificialBeeColony.update_SF_()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beeoptimal.abc.ArtificialBeeColony.waggle_dance_"><code class="docutils literal notranslate"><span class="pre">ArtificialBeeColony.waggle_dance_()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bee.html">Bee</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benchmarks.html">Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/tutorial1.html">Tutorial 1: introduction to <code class="docutils literal notranslate"><span class="pre">BenchmarkFunction</span></code> class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/tutorial2.html">Tutorial 2: ready-to-use benchmarks and visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/tutorial3.html">Tutorial 3: solving your first optimization problem with ABC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/tutorial4.html">Tutorial 4: visualizing bees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/tutorial5.html">Tutorial 5: ABC for image reconstruction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">BeeOptimal documentation 🐝🍯</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ArtificialBeeColony</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/abc.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-beeoptimal.abc">
+<span id="artificialbeecolony"></span><h1>ArtificialBeeColony<a class="headerlink" href="#module-beeoptimal.abc" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="beeoptimal.abc.ArtificialBeeColony">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">beeoptimal.abc.</span></span><span class="sig-name descname"><span class="pre">ArtificialBeeColony</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">colony_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_employed_bees</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_scouts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/beeoptimal/abc.html#ArtificialBeeColony"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#beeoptimal.abc.ArtificialBeeColony" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Artificial Bee Colony (ABC) class</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="beeoptimal.abc.ArtificialBeeColony.colony_size">
+<span class="sig-name descname"><span class="pre">colony_size</span></span><a class="headerlink" href="#beeoptimal.abc.ArtificialBeeColony.colony_size" title="Link to this definition"></a></dt>
+<dd><p>The total number of bees in the colony.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="beeoptimal.abc.ArtificialBeeColony.n_employed_bees">
+<span class="sig-name descname"><span class="pre">n_employed_bees</span></span><a class="headerlink" href="#beeoptimal.abc.ArtificialBeeColony.n_employed_bees" title="Link to this definition"></a></dt>
+<dd><p>The number of employed bees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="beeoptimal.abc.ArtificialBeeColony.n_onlooker_bees">
+<span class="sig-name descname"><span class="pre">n_onlooker_bees</span></span><a class="headerlink" href="#beeoptimal.abc.ArtificialBeeColony.n_onlooker_bees" title="Link to this definition"></a></dt>
+<dd><p>The number of onlooker bees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="beeoptimal.abc.ArtificialBeeColony.max_scouts">
+<span class="sig-name descname"><span class="pre">max_scouts</span></span><a class="headerlink" href="#beeoptimal.abc.ArtificialBeeColony.max_scouts" title="Link to this definition"></a></dt>
+<dd><p>The maximum number of scout bees per iteration. Defaults to None (will be set to n_employed_bees).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="beeoptimal.abc.ArtificialBeeColony.dim">
+<span class="sig-name descname"><span class="pre">dim</span></span><a class="headerlink" href="#beeoptimal.abc.ArtificialBeeColony.dim" title="Link to this definition"></a></dt>
+<dd><p>The dimensionality of the search space.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="beeoptimal.abc.ArtificialBeeColony.function">
+<span class="sig-name descname"><span class="pre">function</span></span><a class="headerlink" href="#beeoptimal.abc.ArtificialBeeColony.function" title="Link to this definition"></a></dt>
+<dd><p>The objective function to optimize.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>callable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="beeoptimal.abc.ArtificialBeeColony.bounds">
+<span class="sig-name descname"><span class="pre">bounds</span></span><a class="headerlink" href="#beeoptimal.abc.ArtificialBeeColony.bounds" title="Link to this definition"></a></dt>
+<dd><p>The bounds for each dimension of the search space, provided as a 2D array [(lower1, upper1), …, (lowerD, upperD)].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="beeoptimal.abc.ArtificialBeeColony.employed_bees">
+<span class="sig-name descname"><span class="pre">employed_bees</span></span><a class="headerlink" href="#beeoptimal.abc.ArtificialBeeColony.employed_bees" title="Link to this definition"></a></dt>
+<dd><p>The employed bees in the colony.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="bee.html#beeoptimal.bee.Bee" title="beeoptimal.bee.Bee">Bee</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="beeoptimal.abc.ArtificialBeeColony.onlooker_bees">
+<span class="sig-name descname"><span class="pre">onlooker_bees</span></span><a class="headerlink" href="#beeoptimal.abc.ArtificialBeeColony.onlooker_bees" title="Link to this definition"></a></dt>
+<dd><p>The onlooker bees in the colony.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="bee.html#beeoptimal.bee.Bee" title="beeoptimal.bee.Bee">Bee</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="beeoptimal.abc.ArtificialBeeColony.colony_history">
+<span class="sig-name descname"><span class="pre">colony_history</span></span><a class="headerlink" href="#beeoptimal.abc.ArtificialBeeColony.colony_history" title="Link to this definition"></a></dt>
+<dd><p>The history of the employed bees at each iteration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[list[<a class="reference internal" href="bee.html#beeoptimal.bee.Bee" title="beeoptimal.bee.Bee">Bee</a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="beeoptimal.abc.ArtificialBeeColony.optimal_bee">
+<span class="sig-name descname"><span class="pre">optimal_bee</span></span><a class="headerlink" href="#beeoptimal.abc.ArtificialBeeColony.optimal_bee" title="Link to this definition"></a></dt>
+<dd><p>The optimal bee in the colony.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="bee.html#beeoptimal.bee.Bee" title="beeoptimal.bee.Bee">Bee</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="beeoptimal.abc.ArtificialBeeColony.optimal_bee_history">
+<span class="sig-name descname"><span class="pre">optimal_bee_history</span></span><a class="headerlink" href="#beeoptimal.abc.ArtificialBeeColony.optimal_bee_history" title="Link to this definition"></a></dt>
+<dd><p>The history of the optimal bee at each iteration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="bee.html#beeoptimal.bee.Bee" title="beeoptimal.bee.Bee">Bee</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="beeoptimal.abc.ArtificialBeeColony.max_iters">
+<span class="sig-name descname"><span class="pre">max_iters</span></span><a class="headerlink" href="#beeoptimal.abc.ArtificialBeeColony.max_iters" title="Link to this definition"></a></dt>
+<dd><p>The maximum number of iterations. Defaults to 1000.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="beeoptimal.abc.ArtificialBeeColony.actual_iters">
+<span class="sig-name descname"><span class="pre">actual_iters</span></span><a class="headerlink" href="#beeoptimal.abc.ArtificialBeeColony.actual_iters" title="Link to this definition"></a></dt>
+<dd><p>The actual number of iterations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="beeoptimal.abc.ArtificialBeeColony.limit">
+<span class="sig-name descname"><span class="pre">limit</span></span><a class="headerlink" href="#beeoptimal.abc.ArtificialBeeColony.limit" title="Link to this definition"></a></dt>
+<dd><p>The trial limit for scout bees. If ‘default’, it is set to 0.6 * n_employed_bees * dimensionality. Defaults to ‘default’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="beeoptimal.abc.ArtificialBeeColony.selection">
+<span class="sig-name descname"><span class="pre">selection</span></span><a class="headerlink" href="#beeoptimal.abc.ArtificialBeeColony.selection" title="Link to this definition"></a></dt>
+<dd><p>The selection strategy for onlooker bees. Must be one among ‘RouletteWheel’ and ‘Tournament’. Defaults to ‘RouletteWheel’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="beeoptimal.abc.ArtificialBeeColony.mutation">
+<span class="sig-name descname"><span class="pre">mutation</span></span><a class="headerlink" href="#beeoptimal.abc.ArtificialBeeColony.mutation" title="Link to this definition"></a></dt>
+<dd><p>The mutation strategy. Must be one among ‘StandardABC’, ‘ModifiedABC’, ‘ABC/best/1’, ‘ABC/best/2’ and ‘DirectedABC’. Defaults to ‘StandardABC’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="beeoptimal.abc.ArtificialBeeColony.initialization">
+<span class="sig-name descname"><span class="pre">initialization</span></span><a class="headerlink" href="#beeoptimal.abc.ArtificialBeeColony.initialization" title="Link to this definition"></a></dt>
+<dd><p>The initialization strategy for the bee population. Must be one among ‘random’ and ‘cahotic’. Defaults to ‘random’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="beeoptimal.abc.ArtificialBeeColony.stagnation_tol">
+<span class="sig-name descname"><span class="pre">stagnation_tol</span></span><a class="headerlink" href="#beeoptimal.abc.ArtificialBeeColony.stagnation_tol" title="Link to this definition"></a></dt>
+<dd><p>The tolerance for stagnation in fitness values to trigger early termination. Defaults to np.NINF (i.e. stagnation disabled).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="beeoptimal.abc.ArtificialBeeColony.sf">
+<span class="sig-name descname"><span class="pre">sf</span></span><a class="headerlink" href="#beeoptimal.abc.ArtificialBeeColony.sf" title="Link to this definition"></a></dt>
+<dd><p>The scaling factor for mutations. Defaults to 1.0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="beeoptimal.abc.ArtificialBeeColony.initial_sf">
+<span class="sig-name descname"><span class="pre">initial_sf</span></span><a class="headerlink" href="#beeoptimal.abc.ArtificialBeeColony.initial_sf" title="Link to this definition"></a></dt>
+<dd><p>The initial scaling factor. Defaults to 1.0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="beeoptimal.abc.ArtificialBeeColony.self_adaptive_sf">
+<span class="sig-name descname"><span class="pre">self_adaptive_sf</span></span><a class="headerlink" href="#beeoptimal.abc.ArtificialBeeColony.self_adaptive_sf" title="Link to this definition"></a></dt>
+<dd><p>Whether to use a self-adaptive scaling factor. Defaults to False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="beeoptimal.abc.ArtificialBeeColony.mr">
+<span class="sig-name descname"><span class="pre">mr</span></span><a class="headerlink" href="#beeoptimal.abc.ArtificialBeeColony.mr" title="Link to this definition"></a></dt>
+<dd><p>The mutation rate for ‘ModifiedABC’ strategy. Defaults to 0.7.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To ensure compatibility with all the mutation types, the bee colony must have at least 5 employed bees and at least 5 onlokeer bees.</p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="beeoptimal.abc.ArtificialBeeColony.employees_phase_">
+<span class="sig-name descname"><span class="pre">employees_phase_</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/beeoptimal/abc.html#ArtificialBeeColony.employees_phase_"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#beeoptimal.abc.ArtificialBeeColony.employees_phase_" title="Link to this definition"></a></dt>
+<dd><p>Performs the employed bees phase, where each employed bee explores the search space by generating candidate solutions.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Updates the employed bees with better candidate solutions based on the greedy selection.
+Adjusts the scaling factor if self-adaptive scaling is enabled.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="beeoptimal.abc.ArtificialBeeColony.get_candidate_neighbor_">
+<span class="sig-name descname"><span class="pre">get_candidate_neighbor_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bee</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bee_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">population</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/beeoptimal/abc.html#ArtificialBeeColony.get_candidate_neighbor_"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#beeoptimal.abc.ArtificialBeeColony.get_candidate_neighbor_" title="Link to this definition"></a></dt>
+<dd><p>Generates a candidate neighbor solution for a given bee based on the chosen mutation strategy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bee</strong> (<a class="reference internal" href="bee.html#beeoptimal.bee.Bee" title="beeoptimal.bee.Bee"><em>Bee</em></a>) – The bee for which a candidate neighbor is generated.</p></li>
+<li><p><strong>bee_idx</strong> (<em>int</em>) – The index of the bee in the population.</p></li>
+<li><p><strong>population</strong> (<em>list</em>) – The population of bees from which donors are selected (i.e., employed or onlooker bees).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new candidate bee solution.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="bee.html#beeoptimal.bee.Bee" title="beeoptimal.bee.Bee">Bee</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="beeoptimal.abc.ArtificialBeeColony.get_donor_bees_">
+<span class="sig-name descname"><span class="pre">get_donor_bees_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_donors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bee_idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">population</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/beeoptimal/abc.html#ArtificialBeeColony.get_donor_bees_"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#beeoptimal.abc.ArtificialBeeColony.get_donor_bees_" title="Link to this definition"></a></dt>
+<dd><p>Selects donor bees from the population (for a given bee)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_donors</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of donor bees to return. Defaults to 1.</p></li>
+<li><p><strong>bee_idx</strong> (<em>int</em><em>, </em><em>optional</em>) – The index of the bee for which donors are selected. Defaults to None.</p></li>
+<li><p><strong>population</strong> (<em>list</em><em>[</em><a class="reference internal" href="bee.html#beeoptimal.bee.Bee" title="beeoptimal.bee.Bee"><em>Bee</em></a><em>]</em><em>, </em><em>optional</em>) – The population of bees from which donors are selected. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of donor bees (as Bee instances).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="beeoptimal.abc.ArtificialBeeColony.onlookers_phase_">
+<span class="sig-name descname"><span class="pre">onlookers_phase_</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/beeoptimal/abc.html#ArtificialBeeColony.onlookers_phase_"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#beeoptimal.abc.ArtificialBeeColony.onlookers_phase_" title="Link to this definition"></a></dt>
+<dd><p>Performs the onlooker bees phase, where onlookers exploit the information shared by employed bees to explore the search space.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Updates employed bees with better solutions discovered by onlookers.
+Adjusts the scaling factor if self-adaptive scaling is enabled.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="beeoptimal.abc.ArtificialBeeColony.optimize">
+<span class="sig-name descname"><span class="pre">optimize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_iters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'RouletteWheel'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mutation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'StandardABC'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialization</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'random'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tournament_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stagnation_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">self_adaptive_sf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/beeoptimal/abc.html#ArtificialBeeColony.optimize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#beeoptimal.abc.ArtificialBeeColony.optimize" title="Link to this definition"></a></dt>
+<dd><p>Runs the optimization process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>max_iters</strong> (<em>int</em><em>, </em><em>optional</em>) – The maximum number of iterations. Defaults to 1000.</p></li>
+<li><p><strong>limit</strong> (<em>int</em><em> or </em><em>str</em><em>, </em><em>optional</em>) – The trial limit for scout bees. If ‘default’, it is set to 0.6 * n_employed_bees * dimensionality. Defaults to ‘default’.</p></li>
+<li><p><strong>selection</strong> (<em>str</em><em>, </em><em>optional</em>) – The selection strategy for onlooker bees. Must be one among ‘RouletteWheel’ and ‘Tournament’. Defaults to ‘RouletteWheel’.</p></li>
+<li><p><strong>mutation</strong> (<em>str</em><em>, </em><em>optional</em>) – The mutation strategy. Must be one among ‘StandardABC’, ‘ModifiedABC’, ‘ABC/best/1’ and ‘ABC/best/2’. Defaults to ‘StandardABC’.</p></li>
+<li><p><strong>initialization</strong> (<em>str</em><em>, </em><em>optional</em>) – The initialization strategy for the bee population. Must be one among ‘random’ and ‘cahotic’. Defaults to ‘random’.</p></li>
+<li><p><strong>tournament_size</strong> (<em>int</em><em>, </em><em>optional</em>) – The size of the tournament for the ‘Tournament’ selection strategy. Defaults to None.</p></li>
+<li><p><strong>stagnation_tol</strong> (<em>float</em><em>, </em><em>optional</em>) – The tolerance for stagnation in fitness values to trigger early termination. Defaults to np.NINF (i.e. stagnation disabled).</p></li>
+<li><p><strong>sf</strong> (<em>float</em><em>, </em><em>optional</em>) – The scaling factor for mutations. Defaults to 1.0.</p></li>
+<li><p><strong>self_adaptive_sf</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to use a self-adaptive scaling factor. Defaults to False.</p></li>
+<li><p><strong>mr</strong> (<em>float</em><em>, </em><em>optional</em>) – The mutation rate for ‘ModifiedABC’ strategy. Defaults to 1.0.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to display optimization progress. Defaults to False.</p></li>
+<li><p><strong>random_seed</strong> (<em>int</em><em>, </em><em>optional</em>) – The seed for random number generation. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – If <cite>max_iters</cite> is not a positive integer.</p></li>
+<li><p><strong>ValueError</strong> – If <cite>mutation</cite> is not one of [‘StandardABC’, ‘ModifiedABC’, ‘ABC/best/1’, ‘ABC/best/2’, ‘DirectedABC’].</p></li>
+<li><p><strong>ValueError</strong> – If <cite>initialization</cite> is not one of [‘random’, ‘cahotic’].</p></li>
+<li><p><strong>ValueError</strong> – If <cite>selection</cite> is not one of [‘RouletteWheel’, ‘Tournament’].</p></li>
+<li><p><strong>ValueError</strong> – If <cite>mr</cite> is not a float value between 0.0 and 1.0.</p></li>
+<li><p><strong>ValueError</strong> – If <cite>selection</cite> is ‘Tournament’ and <cite>tournament_size</cite> is not an integer between 1 and <cite>n_employed_bees</cite>.</p></li>
+<li><p><strong>ValueError</strong> – If <cite>sf</cite> is not a float value greater than 0.</p></li>
+<li><p><strong>ValueError</strong> – If <cite>limit</cite> is less than or equal to 0.</p></li>
+<li><p><strong>TypeError</strong> – If <cite>self_adaptive_sf</cite> is not a boolean.</p></li>
+<li><p><strong>TypeError</strong> – If <cite>stagnation_tol</cite> is not a float.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="beeoptimal.abc.ArtificialBeeColony.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/beeoptimal/abc.html#ArtificialBeeColony.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#beeoptimal.abc.ArtificialBeeColony.reset" title="Link to this definition"></a></dt>
+<dd><p>Resets the ABC object to its initial state.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="beeoptimal.abc.ArtificialBeeColony.scouts_phase_">
+<span class="sig-name descname"><span class="pre">scouts_phase_</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/beeoptimal/abc.html#ArtificialBeeColony.scouts_phase_"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#beeoptimal.abc.ArtificialBeeColony.scouts_phase_" title="Link to this definition"></a></dt>
+<dd><p>Performs the scout bees phase, where employed bees that exceed the trial limit are forced to explore a new solution</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Depending on the initialization strategy, scouts are reinitialized either randomly or using a chaotic map.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="beeoptimal.abc.ArtificialBeeColony.update_SF_">
+<span class="sig-name descname"><span class="pre">update_SF_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">succesful_mutations_ratio</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/beeoptimal/abc.html#ArtificialBeeColony.update_SF_"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#beeoptimal.abc.ArtificialBeeColony.update_SF_" title="Link to this definition"></a></dt>
+<dd><p>Updates the scaling factor (SF) adaptively based on the ratio of successful mutations</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>successful_mutations_ratio</strong> (<em>float</em>) – The ratio of successful mutations used to update the scaling factor.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Self-adaptiveness is based on the “one-fifth” rule (Rechenberg 1971)</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="beeoptimal.abc.ArtificialBeeColony.waggle_dance_">
+<span class="sig-name descname"><span class="pre">waggle_dance_</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/beeoptimal/abc.html#ArtificialBeeColony.waggle_dance_"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#beeoptimal.abc.ArtificialBeeColony.waggle_dance_" title="Link to this definition"></a></dt>
+<dd><p>Implements the waggle dance, which determines the probability of selecting employed bees for the onlooker phase.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Indices of the selected employed bees (based on the chosen selection strategy).</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bee.html" class="btn btn-neutral float-right" title="Bee" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Giulio Fantuzzi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
