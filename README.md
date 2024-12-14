@@ -1,4 +1,13 @@
 <div align="center">
+
+[![PyPI Version][pypi-version-shield]][pypi-url]
+[![Forks][forks-shield]][forks-url]
+[![Stars][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![License][license-shield]][license-url]
+
+
+
   <img src="https://github.com/giuliofantuzzi/BeeOptimal/raw/main/assets/logo_BeeOptimal.png" alt="Logo" width="250">
   <h3 align="center">BeeOptimal</h3>
   <p align="center">
@@ -71,3 +80,20 @@ pip install beeoptimal[docs,tutorials]
 
 > [!NOTE]
 > The same syntax can be followed when installing from source. Moreover, if you're using the `zsh` shell, you will need to wrap the extras in quotes to prevent conflicts with shell globbing (unquoted square brackets ([ ]) are used for pattern matching in `zsh`).
+
+
+
+<!-- SHIELDS and URLS -->
+[license-shield]: https://img.shields.io/github/license/giuliofantuzzi/BeeOptimal?style=for-the-badge&color=blue
+[license-url]: https://github.com/giuliofantuzzi/BeeOptimal/blob/main/LICENSE
+[forks-shield]: https://img.shields.io/github/forks/giuliofantuzzi/BeeOptimal.svg?style=for-the-badge&color=green
+[forks-url]: https://github.com/giuliofantuzzi/BeeOptimal/network/members
+[stars-shield]: https://img.shields.io/github/stars/giuliofantuzzi/BeeOptimal.svg?style=for-the-badge&color=yellow
+[stars-url]: https://github.com/giuliofantuzzi/BeeOptimal/stargazers
+[issues-shield]: https://img.shields.io/github/issues/giuliofantuzzi/BeeOptimal.svg?style=for-the-badge&color=red
+[issues-url]: https://github.com/giuliofantuzzi/BeeOptimal/issues
+[pypi-version-shield]: https://img.shields.io/pypi/v/BeeOptimal?style=for-the-badge&color=blue
+[pypi-downloads-shield]: https://img.shields.io/pypi/dm/BeeOptimal?style=for-the-badge&color=teal
+[pypi-url]: https://pypi.org/project/BeeOptimal/
+
+
