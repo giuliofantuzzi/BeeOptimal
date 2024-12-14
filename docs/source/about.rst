@@ -33,16 +33,16 @@ observe their dance and use the information to decide which food source to visit
 At the very beginning, a potential forager will start as unemployed forager. That forager bee will have no knowledge about the food sources around the nest. 
 There are two possible options for such a bee:
 
-- It can be a scout (S) and starts searching around the nest spontaneously for food due to some internal motivation or possible external clue;
-- It can be a recruit (R) after watching the waggle dances and starts searching for a food source.
+- It can be a scout (*S*) and starts searching around the nest spontaneously for food due to some internal motivation or possible external clue;
+- It can be a recruit (*R*) after watching the waggle dances and starts searching for a food source.
 
 After finding the food source, the bee utilizes its own capability to memorize the location and then immediately starts
 exploiting it. Hence, the bee will become an employed forager. The foraging bee takes a load of nectar from the source
 and returns to the hive, unloading the nectar to a food store. After unloading the food, the bee has the following options:
 
-- It might become an uncommitted follower after abandoning the food source (UF);
-- It might dance and then recruit nest mates before returning to the same food source (EF1);
-- It might continue to forage at the food source without recruiting bees (EF2).
+- It might become an uncommitted follower after abandoning the food source (*UF*);
+- It might dance and then recruit nest mates before returning to the same food source (*EF1*);
+- It might continue to forage at the food source without recruiting bees (*EF2*).
 
 .. image:: _static/foraging_behaviour.png
    :width: 400
