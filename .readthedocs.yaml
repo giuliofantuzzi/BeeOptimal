@@ -10,5 +10,4 @@ sphinx:
 
 python:
   install:
-    - method: pip
-      path: .  # Install your Python package from the current directory
+    - requirements: docs/requirements.txt
