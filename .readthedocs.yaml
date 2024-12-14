@@ -1,0 +1,13 @@
+version: 2
+
+sphinx:
+  configuration: docs/source/conf.py
+
+python:
+  version: 3.12.1
+  install:
+    - method: pip
+      path: .
+    - method: pip
+      extra_requirements:
+        - docs
