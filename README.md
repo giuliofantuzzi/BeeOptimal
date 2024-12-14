@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/giuliofantuzzi/BeeOptimal/raw/main/assets/LogoBeeOptimal.png" alt="Logo" width="250">
+  <img src="https://github.com/giuliofantuzzi/BeeOptimal/raw/main/assets/logo_BeeOptimal.png" alt="Logo" width="250">
   <h3 align="center">BeeOptimal</h3>
   <p align="center">
     A Python implementation of the Artificial Bee Colony (ABC) optimization algorithm
