@@ -43,7 +43,7 @@ def contourplot(function, title=None, bounds=None,zoom=1.0,figsize=(600,600)):
         if bounds.shape != (2, 2):
             raise ValueError(f"`bounds` must have shape (2, 2), but got {bounds.shape}")
     
-    if not (isinstance(zoom, (int, float)) and zoom <= 0):
+    if not (isinstance(zoom, (int, float)) and zoom > 0):
         raise ValueError(f"`zoom` must be greater than zero, but got {zoom}")
     
     # Determine the bounds (use predefined ones if no custom bounds are provided)
@@ -131,7 +131,7 @@ def surfaceplot(function,title='',bounds=None,zoom=1.0,figsize=(600,600)):
         if bounds.shape != (2, 2):
             raise ValueError("`bounds` must have shape (2, 2).")
     
-    if not (isinstance(zoom, (int, float)) and zoom <= 0):
+    if not (isinstance(zoom, (int, float)) and zoom > 0):
         raise ValueError(f"`zoom` must be greater than zero, but got {zoom}")
     
     # Determine the bounds (use predefined ones if no custom bounds are provided)
