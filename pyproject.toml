@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 #------------------------------------------------------------------------------------------
 [project]
 name            = "beeoptimal"
-version         = "0.1.0"
+version         = "0.1.1"
 license         = {file = "LICENSE"}
 description     = "A Python implementation of the Artificial Bee Colony (ABC) optimization algorithm"
 keywords        = ["metahueristic", "optimization", "artificial bee colony", "swarm intelligence"]
@@ -40,7 +40,7 @@ tutorials = [
 ]
 #------------------------------------------------------------------------------------------
 [project.urls]
-Documentation = "https://readthedocs.org"     # TODO: Add the real link to the documentation
+Documentation = "https://beeoptimal.readthedocs.io/en/latest/"  
 Repository    = "https://github.com/giuliofantuzzi/BeeOptimal"
 Issues        = "https://github.com/giuliofantuzzi/BeeOptimal/issues"
 #------------------------------------------------------------------------------------------
