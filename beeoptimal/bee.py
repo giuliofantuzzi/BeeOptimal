@@ -17,9 +17,6 @@ class Bee():
         function (callable)    : The objective function to evaluate the position.
         bounds (numpy-array)   : Bounds for each dimension of the search space,provided as a numpy array of shape `(D,2)` or `(2,D)`.
         trial (int)            : Counter to track the number of trials or unsuccessful updates for the bee.
-    
-    .. warning::
-        AssertionError: If the length of the position and bounds arrays are not equal.
     """
     #--------------------------------------------------------------------------------
     def __init__(self,position,function,bounds):
